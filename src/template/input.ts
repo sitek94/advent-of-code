@@ -1,2 +1,3 @@
-export const exampleInput = ``;
-export const realInput = ``;
+export const exampleRawInput = ``;
+
+export const realRawInput = ``;
