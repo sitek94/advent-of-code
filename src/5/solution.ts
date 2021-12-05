@@ -1,84 +1,127 @@
-import { createLine, Line, parseInput, Point, realRawInput } from './input';
+import { Line, parseInput } from './input';
+import { abs, max, min } from '../utils';
 
-export function partOne(input: string) {
-  const grid = drawGrid(999);
+export const solvePartOne = (input: string) =>
+  solve(input, drawHorizontalOrVerticalLine);
+export const solvePartTwo = (input: string) => solve(input, drawLine);
+
+export function solve(
+  input: string,
+  drawLineFn: (grid: Grid, line: Line) => void,
+) {
   const lines = parseInput(input);
+  const edges = findEdgePoints(lines);
+  const grid = createGrid(...edges);
 
   lines.forEach(line => {
-    drawLine(grid, line);
+    drawLineFn(grid, line);
   });
 
-  const count = grid.flat().filter(n => n >= 2).length;
-  console.log(count);
+  const overlappingPoints = grid.flat().filter(n => n >= 2);
+
+  return overlappingPoints.length;
 }
 
-partOne(realRawInput);
+/**
+ * Creates a drawLine fn that️ MUTATES the grid
+ */
+const drawLineFactory = (diagonal: boolean) => (grid: Grid, line: Line) => {
+  const points = getPoints(line, { diagonal });
+  points.forEach(([x, y]) => {
+    grid[x][y]++;
+  });
+};
 
-type Grid = number[][];
+export const drawHorizontalOrVerticalLine = drawLineFactory(false);
+export const drawLine = drawLineFactory(true);
 
-export function drawGrid(size: number) {
-  let grid = [];
+type Point = [number, number];
 
-  for (let i = 0; i < size; i++) {
-    grid.push([]);
-    for (let j = 0; j < size; j++) {
-      grid[i].push(0);
-    }
-  }
-
-  return grid;
-}
-
-const s = createLinePoints(createLine('2,0 -> 0,2'));
-console.log(s);
-
-export function createLinePoints(line: Line): Point[] | null {
-  const { a, b } = line;
+export function getPoints(line: Line, config: { diagonal: boolean }): Point[] {
+  const [x0, y0, x1, y1] = line;
 
   const points: Point[] = [];
   // Vertical line
-  if (a.x === b.x) {
-    for (let y = Math.min(a.y, b.y); y <= Math.max(a.y, b.y); y++) {
-      points.push({ x: a.x, y });
-    }
-    return points;
-  }
-  if (a.y === b.y) {
-    for (let x = Math.min(a.x, b.x); x <= Math.max(a.x, b.x); x++) {
-      points.push({ x, y: a.y });
+  if (x0 === x1) {
+    for (let y = min(y0, y1); y <= max(y0, y1); y++) {
+      points.push([x0, y]);
     }
     return points;
   }
 
-  let x0 = a.x;
-  let y0 = a.y;
-  let x1 = b.x;
-  let y1 = b.y;
-  let x = a.x;
-  let y = a.y;
-  for (let i = 0; i <= Math.abs(a.x - b.x); i++) {
-    points.push({ x, y });
-
-    if (x0 < x1) {
-      x++;
-    } else {
-      x--;
+  // Horizontal line
+  if (y0 === y1) {
+    for (let x = min(x0, x1); x <= max(x0, x1); x++) {
+      points.push([x, y0]);
     }
-    if (y0 < y1) {
-      y++;
-    } else {
-      y--;
-    }
+    return points;
   }
 
-  // Skip others
-  return points.length ? points : null;
+  if (config.diagonal) {
+    let x = x0;
+    let y = y0;
+    for (let i = 0; i <= abs(x0 - x1); i++) {
+      points.push([x, y]);
+
+      if (x0 < x1) {
+        x++;
+      } else {
+        x--;
+      }
+      if (y0 < y1) {
+        y++;
+      } else {
+        y--;
+      }
+    }
+    return points;
+  }
+
+  return [];
 }
 
-// Mutate the grid
-export function drawLine(grid: Grid, line: Line) {
-  const points = createLinePoints(line);
-  points?.forEach(point => {
-    grid[point.x][point.y]++;
-  });
+type Grid = number[][];
+
+/**
+ * Creates square grid of given size, including the edges
+ */
+export function createGrid(x0, y0, x1, y1): Grid {
+  let grid = [];
+
+  for (let x = x0; x <= x1; x++) {
+    grid.push([]);
+    for (let y = y0; y <= y1; y++) {
+      grid[x].push(0);
+    }
+  }
+  return grid;
+}
+
+export function findEdgePoints(lines: Line[]) {
+  let edges = {
+    x0: 0,
+    x1: 0,
+    y0: 0,
+    y1: 0,
+  };
+
+  for (const [x0, y0, x1, y1] of lines) {
+    // Left edge
+    if (x0 < edges.x0) edges.x0 = x0;
+    if (x1 < edges.x0) edges.x0 = x1;
+
+    // Right edge
+    if (x0 > edges.x1) edges.x1 = x0;
+    if (x1 > edges.x1) edges.x1 = x1;
+
+    // Top edge
+    if (y0 < edges.y0) edges.y0 = y0;
+    if (y1 < edges.y0) edges.y0 = y1;
+
+    // Bottom edge
+    if (y0 > edges.y1) edges.y1 = y0;
+    if (y1 > edges.y1) edges.y1 = y1;
+  }
+
+  return [edges.x0, edges.y0, edges.x1, edges.y1] as const;
 }

@@ -1,9 +1,4 @@
-export type Point = { x: number; y: number };
-
-export type Line = {
-  a: Point;
-  b: Point;
-};
+export type Line = [number, number, number, number];
 
 export function parseInput(input: string): Line[] {
   return input.split('\n').map(l => createLine(l));
@@ -11,18 +6,14 @@ export function parseInput(input: string): Line[] {
 
 export function createLine(input: string): Line {
   const [a, b] = input.split(' -> ');
-  return {
-    a: createPoint(a),
-    b: createPoint(b),
-  };
+  const [x0, y0] = createPoint(a);
+  const [x1, y1] = createPoint(b);
+  return [x0, y0, x1, y1];
 }
 
-function createPoint(input: string): Point {
+function createPoint(input: string) {
   const [x, y] = input.split(',');
-  return {
-    x: Number(x),
-    y: Number(y),
-  };
+  return [Number(x), Number(y)];
 }
 
 export const exampleRawInput = `0,9 -> 5,9
@@ -35,8 +26,6 @@ export const exampleRawInput = `0,9 -> 5,9
 3,4 -> 1,4
 0,0 -> 8,8
 5,5 -> 8,2`;
-
-// console.log(parseInput(exampleRawInput));
 
 export const realRawInput = `405,945 -> 780,945
 253,100 -> 954,801
