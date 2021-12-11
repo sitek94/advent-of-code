@@ -7,12 +7,12 @@ export function getChallenge(day: number, year: number) {
   let yearStr = String(year);
   let dayStr = `${String(day).padStart(2, '0')}`;
 
-  let templateDir = path.join('src', yearStr, 'template');
+  let templateDir = path.join('src', 'template');
   let dayDir = path.join('src', yearStr, dayStr);
 
   // Create directory if doesn't exist
   if (!fs.existsSync(dayDir)) {
-    fs.mkdirSync(dayDir);
+    fs.mkdirSync(dayDir, { recursive: true });
     log.success(`Created directory ${dayDir}`);
   }
 
@@ -21,8 +21,10 @@ export function getChallenge(day: number, year: number) {
     fs.cpSync(templateDir, dayDir, { recursive: true });
     log.success(`Copied template files to ${dayDir}`);
   } else {
-    log.error(`Template directory ${templateDir} does not exist`);
-    process.exit(1);
+    log.success(`No template found, adding empty files`);
+    fs.writeFileSync(path.join(dayDir, '1.ts'), '');
+    fs.writeFileSync(path.join(dayDir, '2.ts'), '');
+    fs.writeFileSync(path.join(dayDir, 'index.txt'), '');
   }
 
   const inputPath = path.join(dayDir, 'input.txt');
