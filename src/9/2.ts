@@ -1,4 +1,3 @@
-import { range } from '../../utils';
 import { realInput } from './input';
 
 const input = `2199943210
@@ -9,24 +8,17 @@ const input = `2199943210
 
 const G = realInput.split('\n').map(row => row.split('').map(Number));
 
-// console.log(G);
-
 let sizes = [];
 
 for (let y = 0; y < G.length; y++) {
   let row = G[y];
-  let lastX = row.length - 1;
-  let lastY = G.length - 1;
 
   for (let x = 0; x < row.length; x++) {
-    // let sum = s(x - 1, y) + s(x + 1, y) + s(y - 1, x) + s(y + 1, x);
     if (isLow(x, y)) {
       console.log(`(${x},${y}) = ${G[y][x]}`);
 
-      let low = s(x, y);
       let map = {};
       find(x, y, map);
-      // @ts-ignore
       let size = Object.values(map).length;
       sizes.push(size);
 

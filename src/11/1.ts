@@ -1,6 +1,4 @@
-// inc + 1
 export {};
-// more than 9 flash
 
 const input = `2138862165
 2726378448
