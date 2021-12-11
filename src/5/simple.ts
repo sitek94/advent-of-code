@@ -1,5 +1,5 @@
 import { createLine, exampleRawInput, realRawInput } from './input';
-import { abs, max, range } from '../utils';
+import { abs, max, range } from '../../utils';
 
 const p = (x, y) => `${x},${y}`;
 

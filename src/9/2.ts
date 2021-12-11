@@ -1,4 +1,4 @@
-import { range } from '../utils';
+import { range } from '../../utils';
 import { realInput } from './input';
 
 const input = `2199943210
