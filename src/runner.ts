@@ -9,7 +9,7 @@
 
 import stripIndent from 'common-tags/lib/stripIndent';
 import getCallerFile from 'get-caller-file';
-import { log, toFixed } from '../utils';
+import { toFixed } from '../utils';
 import path from 'path';
 import fs from 'fs';
 import kleur from 'kleur';
@@ -30,12 +30,14 @@ export function run(solution: Solution, inputFile?: string) {
 
   if (!fs.existsSync(inputFilePath)) {
     console.log(
-      kleur.red(stripIndent`
+      kleur.red(
+        stripIndent(`
         There is no "input.txt" file in the solution directory!
         
         Please add the file or specify custom file location
         via the second argument of the \`run\` function.
       `),
+      ),
     );
     return;
   }
@@ -76,7 +78,6 @@ type Tests = {
 async function runTests(tests: Tests, solve: SolveFn) {
   for (let i = 0; i < tests.length; i++) {
     const { name, input, expected } = tests[i];
-    const actual = solve(input);
     const data = stripIndent(input);
 
     const result = await solve(data);
