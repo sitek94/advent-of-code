@@ -8,14 +8,9 @@ If you're looking for a solid project setup I recommend you checkout the stuff b
 [caderek](https://github.com/caderek). I've reused some of his code, because I wanted to learn how it works, otherwise
 I would be using [AoC Runner](https://github.com/caderek/aocrunner) myself :)
 
-To run and debug the code I use [WebStorm](https://www.jetbrains.com/help/webstorm/run-debug-configuration.html).
-You can find my config below:
-
-![WebStorm Run Debug Configuration](./docs/webstorm-run-debug-configuration.png)
-
 ## Scripts
 
-Some useful scripts to download the challenges input and copy the template files.
+Scripts to download the challenges input and copy the template files.
 
 ```bash
 # Gets input and creates files for current day
@@ -32,6 +27,11 @@ Created directory src/2020/06
 No template found, adding empty files
 Saved input for AoC 2020 day 6!
 ```
+
+Usually, I run `npm run today`, go to the `1.ts` file, try to solve the challenge, and hit 
+<kbd>ctrl</kbd> + <kbd>R</kbd> to run the current file. Here's my WebStorm config for that:
+
+![WebStorm Run Debug Configuration](./docs/webstorm-run-debug-configuration.png)
 
 ## Tools
 
