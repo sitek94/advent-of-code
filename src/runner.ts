@@ -20,7 +20,7 @@ type Solution = {
   onlyTests?: boolean;
 };
 
-type SolveFn = (input: string) => string | number;
+type SolveFn = (input: string) => string | number | void;
 
 export function run(solution: Solution, inputFile?: string) {
   let currentFile = getCallerFile();
