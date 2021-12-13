@@ -1,4 +1,4 @@
-import { range } from '../../utils';
+import { range } from '../../../utils';
 
 export function partOne(numbers: string[]) {
   let gamma = '';
