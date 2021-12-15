@@ -36,37 +36,8 @@ function solve(input: string) {
     counts = newCounts;
   }
 
-  console.log(counts);
-
-  // for (let step of range(10)) {
-  //   console.log(step, counts);
-  //   let countsCopy = { ...counts };
-  //
-  //   for (let [pair, insertion] of Object.entries(rules)) {
-  //     let newCounts = { ...countsCopy };
-  //
-  //     if (counts[pair]) {
-  //       let [a, b] = pair;
-  //       for (let newPair of [a + insertion, insertion + b]) {
-  //         if (newCounts[newPair]) {
-  //           newCounts[newPair]++;
-  //         } else {
-  //           newCounts[newPair] = 1;
-  //         }
-  //       }
-  //     }
-  //
-  //     for (let [pair, value] of Object.entries(newCounts)) {
-  //       if (counts[pair]) {
-  //         counts[pair] += value;
-  //       } else {
-  //         counts[pair] = value;
-  //       }
-  //     }
-  //   }
-  // }
-
   let C: Record<string, number> = {};
+  // Count first letter of each pair
   for (let [[a], value] of Object.entries(counts)) {
     if (a in C) {
       C[a] += value;
@@ -76,65 +47,45 @@ function solve(input: string) {
   }
   let t = template;
 
+  // Count last letter
   C[t[t.length - 1]] += 1;
-  console.log(C);
 
-  //
   let least = min(...Object.values(C));
   let most = max(...Object.values(C));
-  //
-  console.log(least, most);
+
   let answer = most - least;
-  console.log(answer);
-  //
-  // console.log(counts);
+
   let count = 0;
   let newTemplate = '';
-  // for (let i = 0; i < template.length; i++) {}
 
-  // console.log(insertions);
-
-  // for (let i = 0; i < template.length; i++) {
-  //   let pair = template[i] + template.at(i + 1);
-  // }
-
-  // console.log(template);
-  // console.log(rules);
-
-  return 'solution';
+  return answer;
 }
 
 run({
   solve,
   tests: [
     {
-      input: `NNCB
+      input: `
+        NNCB
 
-CH -> B
-HH -> N
-CB -> H
-NH -> C
-HB -> C
-HC -> B
-HN -> C
-NN -> C
-BH -> H
-NC -> B
-NB -> B
-BN -> B
-BB -> N
-BC -> B
-CC -> N
-CN -> C`,
-      expected: 10,
+        CH -> B
+        HH -> N
+        CB -> H
+        NH -> C
+        HB -> C
+        HC -> B
+        HN -> C
+        NN -> C
+        BH -> H
+        NC -> B
+        NB -> B
+        BN -> B
+        BB -> N
+        BC -> B
+        CC -> N
+        CN -> C`,
+      expected: 2188189693529,
     },
   ],
   onlyTests: false,
 });
-
-function getAllIndexes(substring, string) {
-  let a = [],
-    i = -1;
-  while ((i = string.indexOf(substring, i + 1)) >= 0) a.push(i);
-  return a;
-}

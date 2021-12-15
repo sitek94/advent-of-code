@@ -1,4 +1,4 @@
-function createGrid<T = number>(
+export function createGrid<T = number>(
   rows: number,
   cols: number,
   defaultValue?: T | 0,
