@@ -5,7 +5,7 @@ let data = require('fs')
   .readFileSync(__dirname + '/input.txt', { encoding: 'utf-8' })
   .trim();
 
-type Packet = { type: number; version: number };
+type Packet = { type: number; version: number; data: string };
 
 function parsePacket(data: string, cb: (p: Packet) => void) {
   let bits = data.split('');
@@ -13,8 +13,7 @@ function parsePacket(data: string, cb: (p: Packet) => void) {
   let version = parseInt(readBits(3), 2);
   let type = parseInt(readBits(3), 2);
 
-  console.log({ type, version });
-  cb({ type, version });
+  cb({ type, version, data: '' });
   // Packets with type ID 4 represent a LITERAL VALUE
   if (type === 4) {
     let value = '';
@@ -31,8 +30,12 @@ function parsePacket(data: string, cb: (p: Packet) => void) {
       }
     }
 
-    let packet = { version, type, value: parseInt(value, 2) };
-
+    let packet = {
+      version,
+      type,
+      value: parseInt(value, 2),
+      data: bits.join(''),
+    };
     return packet;
 
     // If the packet is not a literal value it is an OPERATOR
@@ -44,44 +47,36 @@ function parsePacket(data: string, cb: (p: Packet) => void) {
     // bits of the sub-packets contained by this packet.
     if (lengthTypeID === '0') {
       let subpacketsLength = parseInt(readBits(15), 2);
-      console.log('sub-packet length: ', subpacketsLength);
+      let subpacketContent = bits.splice(0, subpacketsLength).join('');
 
-      let parsedSubpacketsLength = 0;
-      let parsedSubpacketsValue = 0;
+      let subpackets = [];
 
       // Parse sub-packets until the length of the sub-packets is reached
-      while (parsedSubpacketsLength < subpacketsLength) {
-        let subpacket = parsePacket(bits.join(''), cb);
-        let groupsCount = subpacket.value.toString(2).length / 4;
-        let headerLength = 6;
-        let len = headerLength + groupsCount * 5;
+      while (subpacketContent.length > 0) {
+        let packet = parsePacket(subpacketContent, cb);
 
-        parsedSubpacketsLength += len;
-        parsedSubpacketsValue += subpacket.value;
-
-        // V += subpacket.version;
+        subpackets.push(packet);
+        subpacketContent = packet.data;
       }
+
+      return { version, type, data: bits.join('') };
 
       // If "1", then the next 11 bits are a number that represents the number
       // of sub-packets immediately contained by this packet.
     } else if (lengthTypeID === '1') {
-      let numberOfSubpackets = parseInt(readBits(11), 2);
+      let numberOfSubpackets = parseInt(bits.splice(0, 11).join(''), 2);
+      let subpacketsData = bits.join('');
+
+      let subpakcets = [];
 
       for (let _ in range(numberOfSubpackets)) {
-        let subpacket = parsePacket(bits.join(''), cb);
-        if (subpacket) {
-          // V += subpacket.version;
-        }
-      }
-      // while (subpackets.length < numberOfSubpackets) {
-      //   let subpacket = parsePacket(bits.join(''));
-      //   subpackets.push(subpacket);
-      //   if (subpacket) {
-      //     V += subpacket?.version;
-      //   }
-      // }
+        let packet = parsePacket(subpacketsData, cb);
 
-      // V += subpacket.version;
+        subpakcets.push(packet);
+        subpacketsData = packet.data;
+      }
+
+      return { version, type, data: subpacketsData };
     }
   }
 
@@ -92,11 +87,10 @@ function parsePacket(data: string, cb: (p: Packet) => void) {
 
 function solve(input) {
   let binaries = toBinary(input);
-  console.log({ binaries });
   let totalVersion = 0;
-  parsePacket(binaries, p => {
-    totalVersion += p.version;
-  });
+
+  parsePacket(binaries, p => (totalVersion += p.version));
+
   return totalVersion;
 }
 
@@ -109,7 +103,15 @@ run({
     },
     {
       input: `620080001611562C8802118E34`,
-      expected: 16,
+      expected: 12,
+    },
+    {
+      input: `C0015000016115A2E0802F182340`,
+      expected: 23,
+    },
+    {
+      input: `A0016C880162017C3686B18A3D4780`,
+      expected: 31,
     },
   ],
   onlyTests: true,
