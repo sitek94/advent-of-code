@@ -5,7 +5,15 @@ let data = require('fs')
   .readFileSync(__dirname + '/input.txt', { encoding: 'utf-8' })
   .trim();
 
-type Packet = { type: number; version: number; data: string };
+type BasePacket = { type: number; version: number; data: string };
+
+type LiteralPacket = BasePacket & { value: number };
+type OperatorPacket = BasePacket & {
+  subpackets: Packet[];
+};
+type Packet = LiteralPacket | OperatorPacket;
+
+const isLiteralPacket = (p): p is LiteralPacket => 'value' in p;
 
 function parsePacket(data: string, cb: (p: Packet) => void) {
   let bits = data.split('');
@@ -13,7 +21,6 @@ function parsePacket(data: string, cb: (p: Packet) => void) {
   let version = parseInt(readBits(3), 2);
   let type = parseInt(readBits(3), 2);
 
-  cb({ type, version, data: '' });
   // Packets with type ID 4 represent a LITERAL VALUE
   if (type === 4) {
     let value = '';
@@ -30,12 +37,15 @@ function parsePacket(data: string, cb: (p: Packet) => void) {
       }
     }
 
-    let packet = {
+    let packet: LiteralPacket = {
       version,
       type,
       value: parseInt(value, 2),
       data: bits.join(''),
     };
+
+    cb(packet);
+
     return packet;
 
     // If the packet is not a literal value it is an OPERATOR
@@ -58,8 +68,15 @@ function parsePacket(data: string, cb: (p: Packet) => void) {
         subpackets.push(packet);
         subpacketContent = packet.data;
       }
+      let packet: OperatorPacket = {
+        version,
+        type,
+        data: bits.join(''),
+        subpackets,
+      };
+      cb(packet);
 
-      return { version, type, data: bits.join('') };
+      return packet;
 
       // If "1", then the next 11 bits are a number that represents the number
       // of sub-packets immediately contained by this packet.
@@ -67,16 +84,24 @@ function parsePacket(data: string, cb: (p: Packet) => void) {
       let numberOfSubpackets = parseInt(bits.splice(0, 11).join(''), 2);
       let subpacketsData = bits.join('');
 
-      let subpakcets = [];
+      let subpackets = [];
 
       for (let _ in range(numberOfSubpackets)) {
         let packet = parsePacket(subpacketsData, cb);
 
-        subpakcets.push(packet);
+        subpackets.push(packet);
         subpacketsData = packet.data;
       }
 
-      return { version, type, data: subpacketsData };
+      let packet: OperatorPacket = {
+        version,
+        type,
+        data: subpacketsData,
+        subpackets,
+      };
+      cb(packet);
+
+      return packet;
     }
   }
 
@@ -87,39 +112,163 @@ function parsePacket(data: string, cb: (p: Packet) => void) {
 
 function solve(input) {
   let binaries = toBinary(input);
-  let totalVersion = 0;
 
-  parsePacket(binaries, p => {
-    switch (p.type) {
-      case 0:
-    }
-  });
-
-  return totalVersion;
+  const packet = parsePacket(binaries, p => {});
+  if (isLiteralPacket(packet)) {
+    return packet.value;
+  } else {
+    return calcValue(packet);
+  }
 }
 
 run({
   solve,
   tests: [
     {
-      input: `8A004A801A8002F478`,
-      expected: 16,
+      input: `C200B40A82r`,
+      expected: 3,
     },
     {
-      input: `620080001611562C8802118E34`,
-      expected: 12,
+      input: `04005AC33890`,
+      expected: 54,
     },
     {
-      input: `C0015000016115A2E0802F182340`,
-      expected: 23,
+      input: `880086C3E88112`,
+      expected: 7,
     },
     {
-      input: `A0016C880162017C3686B18A3D4780`,
-      expected: 31,
+      input: `CE00C43D881120`,
+      expected: 9,
+    },
+    {
+      input: `D8005AC2A8F0`,
+      expected: 1,
+    },
+    {
+      input: `F600BC2D8F`,
+      expected: 0,
+    },
+    {
+      input: `9C005AC2F8F0`,
+      expected: 0,
+    },
+    {
+      input: `9C0141080250320F1802104A08`,
+      expected: 1,
     },
   ],
-  onlyTests: true,
+  // onlyTests: true,
 });
+
+function getValue(p: Packet) {
+  if (isLiteralPacket(p)) {
+    return p.value;
+  } else {
+    return calcValue(p);
+  }
+}
+
+function calcValue(p: OperatorPacket) {
+  let value = 0;
+
+  // Sum packet
+  if (p.type === 0) {
+    let sum = 0;
+    for (let subpacket of p.subpackets) {
+      sum += getValue(subpacket);
+    }
+    return sum;
+  }
+
+  // Product packets
+  if (p.type === 1) {
+    let product = 1;
+    for (let subpacket of p.subpackets) {
+      let subpacketValue = getValue(subpacket);
+      product *= subpacketValue;
+    }
+    return product;
+  }
+
+  // Minimum packet
+  if (p.type === 2) {
+    let min = null;
+    for (let subpacket of p.subpackets) {
+      for (let subpacket of p.subpackets) {
+        let subpacketValue = getValue(subpacket);
+        if (min) {
+          if (subpacketValue < min) {
+            min = subpacketValue;
+          }
+        } else {
+          min = subpacketValue;
+        }
+      }
+    }
+    return min;
+  }
+
+  // Maximum packet
+  if (p.type === 3) {
+    let max = null;
+    for (let subpacket of p.subpackets) {
+      for (let subpacket of p.subpackets) {
+        let subpacketValue = getValue(subpacket);
+        if (max) {
+          if (subpacketValue > max) {
+            max = subpacketValue;
+          }
+        } else {
+          max = subpacketValue;
+        }
+      }
+    }
+    return max;
+  }
+
+  // Greater than packet
+  if (p.type === 5) {
+    let greaterThan = null;
+    let [p1, p2] = p.subpackets;
+    let v1 = getValue(p1);
+    let v2 = getValue(p2);
+    if (v1 > v2) {
+      greaterThan = 1;
+    } else {
+      greaterThan = 0;
+    }
+    return greaterThan;
+  }
+
+  // Less than packet
+  if (p.type === 6) {
+    let lessThan = null;
+
+    let [p1, p2] = p.subpackets;
+    let v1 = getValue(p1);
+    let v2 = getValue(p2);
+    if (v1 < v2) {
+      lessThan = 1;
+    } else {
+      lessThan = 0;
+    }
+    return lessThan;
+  }
+
+  // Equal to packet
+  if (p.type === 7) {
+    let [p1, p2] = p.subpackets;
+    let v1 = getValue(p1);
+    let v2 = getValue(p2);
+    if (v1 === v2) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  return value;
+}
 
 function toBinary(input: string): string {
   return (
