@@ -25,8 +25,8 @@ describe('DefaultObj', () => {
 
     // Can't use to equal because "o" is a Proxy and has additional properties
     expect(o).toMatchObject({
-      a: ['a'],
-      b: ['b'],
+      left: ['a'],
+      right: ['b'],
       c: ['c'],
     });
   });
