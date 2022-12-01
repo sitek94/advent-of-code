@@ -1,6 +1,6 @@
-# Advent of Code 2021
+# Advent of Code
 
-My [Advent of Code 2021](https://adventofcode.com/2021) solutions.
+My [Advent of Code](https://adventofcode.com) solutions.
 
 ## Project setup
 
