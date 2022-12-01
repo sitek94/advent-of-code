@@ -1,7 +1,7 @@
-import { run } from '../runner';
+import { run } from '../../runner'
 
 function solve(input: string) {
-  return 'solution';
+  return 'solution'
 }
 
 run({
@@ -13,4 +13,4 @@ run({
     },
   ],
   onlyTests: true,
-});
+})
