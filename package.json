@@ -3,13 +3,18 @@
   "scripts": {
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "test": "jest",
-    "today": "ts-node scripts/today.ts",
-    "day": "ts-node scripts/day.ts"
+    "start": "ts-node scripts/start.ts",
+    "today": "npm run start --init",
+    "day": "npm run start -- --init --day",
+    "one": "npm run start -- --partOne",
+    "one:day": "npm run one -- --day",
+    "two": "npm run start -- --partTwo",
+    "two:day": "npm run two -- --day"
   },
   "dependencies": {
     "@types/jest": "^27.0.3",
     "@types/lodash.countby": "^4.6.6",
-    "@types/node": "^16.11.11",
+    "@types/node": "^16.18",
     "@types/prompts": "^2.0.14",
     "common-tags": "^1.8.2",
     "dotenv": "^10.0.0",
@@ -23,8 +28,8 @@
     "prettier": "^2.5.1",
     "prompts": "^2.4.2",
     "ts-jest": "^27.0.7",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.2"
+    "ts-node": "^10.9.1",
+    "typescript": "^4.9.3"
   },
   "author": "Maciek Sitkowski <msitkowski94@gmail.com> (https://github.com/sitek94)"
 }

@@ -3,9 +3,10 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ESNext",
+    "target": "es2022",
     "noImplicitAny": false,
     "moduleResolution": "node",
-    "sourceMap": true
+    "sourceMap": true,
+    "resolveJsonModule": true
   }
 }

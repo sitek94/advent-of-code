@@ -1,39 +1,39 @@
-import kleur from 'kleur';
-import fetch from 'node-fetch';
-import dotenv from 'dotenv';
-import { existsSync, statSync, writeFileSync } from 'fs';
+import kleur from 'kleur'
+import fetch from 'node-fetch'
+import dotenv from 'dotenv'
+import { existsSync, statSync, writeFileSync } from 'fs'
 
-dotenv.config();
+dotenv.config()
 
 export const fetchInput = async (year: number, day: number, path: string) => {
-  const API_URL = process.env.AOC_API ?? 'https://adventofcode.com';
+  const API_URL = process.env.AOC_API ?? 'https://adventofcode.com'
 
   if (existsSync(path) && statSync(path).size > 0) {
     console.log(
       kleur.yellow(`Input for AoC ${year} day ${day} already fetched!`),
-    );
+    )
 
-    return;
+    return
   }
 
-  fetch(`${API_URL}/${year}/day/${day}/input`, {
-    headers: {
-      cookie: `session=${process.env.AOC_SESSION_KEY}`,
-    },
-  })
-    .then(res => {
-      if (res.status !== 200) {
-        throw new Error(String(res.status));
-      }
+  try {
+    const res = await fetch(`${API_URL}/${year}/day/${day}/input`, {
+      headers: {
+        cookie: `session=${process.env.AOC_SESSION_KEY}`,
+      },
+    })
 
-      return res.text();
-    })
-    .then(body => {
-      writeFileSync(path, body.replace(/\n$/, ''));
-      console.log(kleur.green(`Saved input for AoC ${year} day ${day}!`));
-    })
-    .catch(handleErrors);
-};
+    if (res.status !== 200) {
+      throw new Error(String(res.status))
+    }
+
+    const body = await res.text()
+    writeFileSync(path, body.replace(/\n$/, ''))
+    console.log(kleur.green(`Saved input for AoC ${year} day ${day}!`))
+  } catch (e) {
+    handleErrors(e)
+  }
+}
 
 const handleErrors = (e: Error) => {
   if (e.message === '400' || e.message === '500') {
@@ -45,16 +45,16 @@ const handleErrors = (e: Error) => {
           'https://adventofcode.com\n\n' +
           kleur.bold('Restart the script after changing the .env file.\n'),
       ),
-    );
+    )
   } else if (e.message.startsWith('5')) {
-    console.log(kleur.red('SERVER ERROR'));
+    console.log(kleur.red('SERVER ERROR'))
   } else if (e.message === '404') {
-    console.log(kleur.yellow('CHALLENGE NOT YET AVAILABLE'));
+    console.log(kleur.yellow('CHALLENGE NOT YET AVAILABLE'))
   } else {
     console.log(
       kleur.red(
         "UNEXPECTED ERROR\nPlease check your internet connection.\n\nIf you think it's a bug, create an issue on github.\nHere are some details to include:\n",
       ),
-    );
+    )
   }
-};
+}
