@@ -63,16 +63,21 @@ function solve(input: string) {
         HEAD.x = HEAD.x + DIR_MAP[dir]
       }
 
+      // Iterate over the line starting with H as currentHead
+      // and 1 as currentTail. The tail is moving based on the knot
+      // in front of it.
       let currentHead = HEAD
       for (let i = 0; i < LINE.length; i++) {
-        let nextKnot = LINE[i]
+        let currentTail = LINE[i]
 
-        moveTail(nextKnot, currentHead)
+        moveTail(currentTail, currentHead)
 
+        // Keep tracker of the actual tail - the last knot of the line.
         if (i === LINE.length - 1) {
-          tailMap.set(`${nextKnot.x},${nextKnot.y}`, true)
+          tailMap.set(`${currentTail.x},${currentTail.y}`, true)
         }
-        currentHead = nextKnot
+
+        currentHead = currentTail
       }
     }
   }
