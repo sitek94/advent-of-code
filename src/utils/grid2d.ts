@@ -1,3 +1,20 @@
+export type Coords = {
+  x: number
+  y: number
+}
+
+const UP = 'up'
+const DOWN = 'down'
+const LEFT = 'left'
+const RIGHT = 'right'
+export type Direction = typeof UP | typeof DOWN | typeof LEFT | typeof RIGHT
+
+export const DIRECTIONS: Direction[] = [UP, DOWN, LEFT, RIGHT]
+
+export type Point<T> = {
+  value: T
+} & Coords
+
 /**
  * Creates a 2D grid from given array of arrays and exposes some useful methods.
  *
@@ -21,10 +38,10 @@ export class Grid2d<T = any> {
     this.lastY = height - 1
   }
 
-  forEachCell(callbackFn: (value: T, x: number, y: number) => void) {
+  forEachPoint(callbackFn: (point: Point<T>) => void) {
     this.forEachRow((row, y) => {
       row.forEach((value, x) => {
-        callbackFn(value, x, y)
+        callbackFn({ x, y, value })
       })
     })
   }
@@ -43,6 +60,47 @@ export class Grid2d<T = any> {
       }
       callbackFn(column, x)
     }
+  }
+
+  forEachPointInDirection(
+    direction: Direction,
+    start: Coords,
+    callbackFn: (point: Point<T>) => void,
+    { includeStart = true } = {},
+  ) {
+    let coords = includeStart
+      ? start
+      : this.getCoordsInDirection(start, direction)
+
+    while (this.isWithinGrid(coords)) {
+      callbackFn({ ...coords, value: this.getValue(coords) })
+      coords = this.getCoordsInDirection(coords, direction)
+    }
+  }
+
+  getCoordsInDirection(from: Coords, direction: Direction, distance = 1) {
+    switch (direction) {
+      case UP:
+        return { x: from.x, y: from.y - distance }
+      case DOWN:
+        return { x: from.x, y: from.y + distance }
+      case LEFT:
+        return { x: from.x - distance, y: from.y }
+      case RIGHT:
+        return { x: from.x + distance, y: from.y }
+    }
+  }
+
+  isPointEdge({ x, y }: Coords) {
+    return x === 0 || x === this.lastX || y === 0 || y === this.lastY
+  }
+
+  isWithinGrid({ x, y }: Coords) {
+    return this.grid[y]?.[x] !== undefined
+  }
+
+  getValue({ x, y }: Coords) {
+    return this.grid[y][x]
   }
 
   print() {
