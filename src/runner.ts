@@ -7,26 +7,26 @@
  * https://github.com/caderek/aocrunner
  */
 
-import stripIndent from 'common-tags/lib/stripIndent';
-import getCallerFile from 'get-caller-file';
-import { toFixed } from '../utils';
-import path from 'path';
-import fs from 'fs';
-import kleur from 'kleur';
+import stripIndent from 'common-tags/lib/stripIndent'
+import getCallerFile from 'get-caller-file'
+import { toFixed } from '../utils'
+import path from 'path'
+import fs from 'fs'
+import kleur from 'kleur'
 
 type Solution = {
-  tests?: Tests;
-  solve: SolveFn;
-  onlyTests?: boolean;
-};
+  tests?: Test[]
+  solve: SolveFn
+  onlyTests?: boolean
+}
 
-type SolveFn = (input: string) => string | number | void;
+type SolveFn = (input: string) => string | number | void
 
 export function run(solution: Solution, inputFile?: string) {
-  let currentFile = getCallerFile();
-  let currentDir = path.dirname(currentFile);
+  let currentFile = getCallerFile()
+  let currentDir = path.dirname(currentFile)
 
-  let inputFilePath = path.join(currentDir, inputFile || 'input.txt');
+  let inputFilePath = path.join(currentDir, inputFile || 'input.txt')
 
   if (!fs.existsSync(inputFilePath)) {
     console.log(
@@ -38,68 +38,74 @@ export function run(solution: Solution, inputFile?: string) {
         via the second argument of the \`run\` function.
       `),
       ),
-    );
-    return;
+    )
+    return
   }
 
-  runAsync(solution, inputFilePath);
+  runAsync(solution, inputFilePath)
 }
 
 async function runAsync(solution: Solution, inputFilePath: string) {
-  await runTests(solution.tests, solution.solve);
+  await runTests(solution.tests, solution.solve, inputFilePath)
 
   if (solution.onlyTests) {
-    return;
+    return
   }
 
-  const input = fs.readFileSync(inputFilePath).toString();
+  const input = fs.readFileSync(inputFilePath).toString()
 
-  let output = await runSolve(solution.solve, input);
+  await runSolve(solution.solve, input)
 }
 
 async function runSolve(solve: SolveFn, input: string) {
-  const t0 = process.hrtime.bigint();
-  const result = await solve(input);
-  const t1 = process.hrtime.bigint();
-  const time = Number(t1 - t0) / 1e6;
+  const t0 = process.hrtime.bigint()
+  const result = await solve(input)
+  const t1 = process.hrtime.bigint()
+  const time = Number(t1 - t0) / 1e6
 
-  console.log(`\nSolved in ${toFixed(time)}ms:`);
-  console.dir(result);
+  console.log(`\nSolved in ${toFixed(time)}ms:`)
+  console.dir(result)
 
-  return { result, time };
+  return { result, time }
 }
 
-type Tests = {
-  name?: string;
-  input: string;
-  expected: string | number | bigint | void;
-}[];
+type Test = {
+  name?: string
+  expected: string | number | bigint | void
+} & TestInput
 
-async function runTests(tests: Tests, solve: SolveFn) {
+type TestInput =
+  | {
+      input: string
+      useOriginalInput?: boolean
+    }
+  | {
+      input?: undefined
+      useOriginalInput: true
+    }
+
+async function runTests(tests: Test[], solve: SolveFn, inputFilePath) {
   for (let i = 0; i < tests.length; i++) {
-    const { name, input, expected } = tests[i];
-    const data = stripIndent(input);
+    let { name, input, expected, useOriginalInput } = tests[i]
+    if (useOriginalInput) {
+      input = fs.readFileSync(inputFilePath).toString()
+    }
 
-    const result = await solve(data);
+    const data = stripIndent(input)
 
-    const testName = `Test ${i + 1}${name ? `, ${name}` : ''}`;
+    const result = await solve(data)
+
+    const testName = `Test ${i + 1}${name ? `, ${name}` : ''}`
 
     if (result === expected) {
-      console.log(kleur.green(`${testName} - passed`));
+      console.log(kleur.green(`${testName} - passed`))
     } else {
-      console.log(kleur.red(`${testName} - failed`));
-      console.log(`\nResult:`);
-      console.dir(result);
-      console.log(`\nExpected:`);
-      console.dir(expected);
-      console.log();
+      console.log(kleur.red(`${testName} - failed`))
+      console.log(`\nResult:`)
+      console.dir(result)
+      console.log(`\nExpected:`)
+      console.dir(expected)
+      console.log()
     }
   }
-}
-
-function getPartFromCurrentFile() {
-  let currentFile = getCallerFile();
-  let fileName = currentFile.split('/').pop();
-  let part = fileName.split('.').shift();
-  return part;
 }
