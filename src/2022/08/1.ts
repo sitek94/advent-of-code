@@ -1,62 +1,37 @@
 import { run } from '../../runner'
+import { Direction, Grid2d, Point, DIRECTIONS } from '../../utils/grid2d'
 
 function solve(input: string) {
-  let GRID = input.split('\n').map(l => l.split('').map(Number))
-  let WIDTH = GRID[0].length
-  let HEIGHT = GRID.length
-  let LAST_X = WIDTH - 1
-  let LAST_Y = HEIGHT - 1
+  const grid = new Grid2d(input.split('\n').map(l => l.split('').map(Number)))
 
   let count = 0
 
-  for (let x = 0; x < WIDTH; x++) {
-    for (let y = 0; y < HEIGHT; y++) {
-      if (
-        isEdge(x, y) ||
-        isVisFromBottom(x, y) ||
-        isVisFromTop(x, y) ||
-        isVisFromLeft(x, y) ||
-        isVisFromRight(x, y)
-      ) {
-        count++
-      }
+  grid.forEachPoint(point => {
+    if (
+      grid.isPointEdge(point) ||
+      DIRECTIONS.some(direction => isVisible(direction, point))
+    ) {
+      count++
     }
-  }
+  })
 
-  function isEdge(x: number, y: number) {
-    return x === 0 || x === LAST_X || y === 0 || y === LAST_Y
-  }
+  function isVisible(direction: Direction, point: Point<number>) {
+    let visible = true
 
-  function isVisFromTop(x, y) {
-    let value = GRID[y][x]
-    for (let i = 0; i < y; i++) {
-      if (value <= GRID[i][x]) return false
-    }
-    return true
-  }
+    grid.forEachPointInDirection(
+      direction,
+      point,
+      ({ value }) => {
+        if (point.value <= value) {
+          visible = false
+        }
+      },
+      {
+        includeStart: false,
+      },
+    )
 
-  function isVisFromBottom(x, y) {
-    let value = GRID[y][x]
-    for (let i = y + 1; i < HEIGHT; i++) {
-      if (value <= GRID[i][x]) return false
-    }
-    return true
-  }
-
-  function isVisFromLeft(x, y) {
-    let value = GRID[y][x]
-    for (let i = 0; i < x; i++) {
-      if (value <= GRID[y][i]) return false
-    }
-    return true
-  }
-
-  function isVisFromRight(x, y) {
-    let value = GRID[y][x]
-    for (let i = x + 1; i < WIDTH; i++) {
-      if (value <= GRID[y][i]) return false
-    }
-    return true
+    return visible
   }
 
   return count
@@ -73,6 +48,10 @@ run({
 35390`,
       expected: 21,
     },
+    {
+      useOriginalInput: true,
+      expected: 1543,
+    },
   ],
-  // onlyTests: true,
+  onlyTests: true,
 })
