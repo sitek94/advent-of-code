@@ -32,4 +32,22 @@ describe(`${Grid2d.name}`, () => {
       expect(callback).toHaveBeenNthCalledWith(3, [7, 8, 9], 2)
     })
   })
+
+  describe(`${grid.forEachCell.name}`, () => {
+    it('invokes callback function with value, x and y per each cell of the grid', () => {
+      const callback = jest.fn()
+      grid.forEachCell(callback)
+
+      expect(callback).toHaveBeenCalledTimes(9)
+      expect(callback).toHaveBeenNthCalledWith(1, 1, 0, 0)
+      expect(callback).toHaveBeenNthCalledWith(2, 2, 1, 0)
+      expect(callback).toHaveBeenNthCalledWith(3, 3, 2, 0)
+      expect(callback).toHaveBeenNthCalledWith(4, 4, 0, 1)
+      expect(callback).toHaveBeenNthCalledWith(5, 5, 1, 1)
+      expect(callback).toHaveBeenNthCalledWith(6, 6, 2, 1)
+      expect(callback).toHaveBeenNthCalledWith(7, 7, 0, 2)
+      expect(callback).toHaveBeenNthCalledWith(8, 8, 1, 2)
+      expect(callback).toHaveBeenNthCalledWith(9, 9, 2, 2)
+    })
+  })
 })

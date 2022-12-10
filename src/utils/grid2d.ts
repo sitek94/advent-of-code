@@ -1,3 +1,8 @@
+/**
+ * Creates a 2D grid from given array of arrays and exposes some useful methods.
+ *
+ * Top left corner is (0, 0). X-axis goes right, Y-axis goes down.
+ */
 export class Grid2d<T = any> {
   private readonly grid: T[][]
   readonly width: number
@@ -14,6 +19,14 @@ export class Grid2d<T = any> {
     this.height = height
     this.lastX = width - 1
     this.lastY = height - 1
+  }
+
+  forEachCell(callbackFn: (value: T, x: number, y: number) => void) {
+    this.forEachRow((row, y) => {
+      row.forEach((value, x) => {
+        callbackFn(value, x, y)
+      })
+    })
   }
 
   forEachRow(callbackFn: (row: T[], index: number) => void) {
