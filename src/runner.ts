@@ -42,11 +42,15 @@ export function run(solution: Solution, inputFile?: string) {
     return
   }
 
-  runAsync(solution, inputFilePath)
+  runAsync(solution, inputFilePath, currentDir)
 }
 
-async function runAsync(solution: Solution, inputFilePath: string) {
-  await runTests(solution.tests, solution.solve, inputFilePath)
+async function runAsync(
+  solution: Solution,
+  inputFilePath: string,
+  currentDir: string,
+) {
+  await runTests(solution.tests, solution.solve, inputFilePath, currentDir)
 
   if (solution.onlyTests) {
     return
@@ -83,10 +87,25 @@ type TestInput =
       input?: undefined
       useOriginalInput: true
     }
+  | {
+      input?: undefined
+      useOriginalInput?: false
+    }
 
-async function runTests(tests: Test[], solve: SolveFn, inputFilePath) {
+async function runTests(
+  tests: Test[],
+  solve: SolveFn,
+  inputFilePath,
+  currentDir: string,
+) {
   for (let i = 0; i < tests.length; i++) {
     let { name, input, expected, useOriginalInput } = tests[i]
+    const useTestTxt = !useOriginalInput && !input
+
+    if (useTestTxt) {
+      input = fs.readFileSync(path.join(currentDir, 'test.txt')).toString()
+    }
+
     if (useOriginalInput) {
       input = fs.readFileSync(inputFilePath).toString()
     }
