@@ -9,7 +9,6 @@ const MONKEYS = [
     ifFalse: 7,
     inspectionsCount: 0,
   },
-
   {
     startingItems: [99, 77, 79],
     operation: old => old + 8,
@@ -18,7 +17,6 @@ const MONKEYS = [
     ifFalse: 0,
     inspectionsCount: 0,
   },
-
   {
     startingItems: [64, 67, 50, 96, 89, 82, 82],
     operation: old => old + 1,
@@ -27,7 +25,6 @@ const MONKEYS = [
     ifFalse: 3,
     inspectionsCount: 0,
   },
-
   {
     startingItems: [88],
     operation: old => old * 7,
@@ -36,7 +33,6 @@ const MONKEYS = [
     ifFalse: 4,
     inspectionsCount: 0,
   },
-
   {
     startingItems: [80, 66, 98, 83, 70, 63, 57, 66],
     operation: old => old + 4,
@@ -54,7 +50,6 @@ const MONKEYS = [
     ifFalse: 4,
     inspectionsCount: 0,
   },
-
   {
     startingItems: [69, 97, 88, 93],
     operation: old => old * old,
@@ -63,7 +58,6 @@ const MONKEYS = [
     ifFalse: 2,
     inspectionsCount: 0,
   },
-
   {
     startingItems: [59, 80],
     operation: old => old + 6,
