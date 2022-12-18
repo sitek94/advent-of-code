@@ -18,6 +18,10 @@ export class PriorityQueue<T> {
     }
   }
 
+  has(item: T) {
+    return this.collection.includes(item)
+  }
+
   dequeue() {
     return this.collection.shift()
   }
