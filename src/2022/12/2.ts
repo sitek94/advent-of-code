@@ -15,37 +15,17 @@ type Point = {
 const getValue = (lowercaseLetter: string) => lowercaseLetter.charCodeAt(0) - 97
 const manhattanDistance = (current: Point, goal: Point) =>
   abs(current.x - goal.x) + abs(current.y - goal.y)
+const canMove = (current: Point, target: Point) =>
+  target.value - current.value <= 1
 
-function solve(input: string) {
-  const lowestPoints = input
-    .split('\n')
-    .map((row, y) => {
-      return row.split('').map((letter, x) => {
-        const point = {
-          x,
-          y,
-          value: getValue(letter),
-        }
-
-        return point
-      })
-    })
-    .flat()
-    .filter(p => p.value === 0)
-
-  let steps = []
-
-  for (let point of lowestPoints) {
-    steps.push(findSteps(point, input))
+const tracePath = (point: Point) => {
+  if (!point) {
+    return []
   }
-
-  steps = steps.filter(s => s !== -1)
-  steps.sort((a, b) => a - b)
-
-  return steps[0]
+  return [point.id, ...tracePath(point.cameFrom)]
 }
 
-function findSteps(startPos: Position, input: string) {
+function solve(input: string) {
   let END: Point
 
   // Init grid
@@ -68,6 +48,7 @@ function findSteps(startPos: Position, input: string) {
     })
   })
 
+  // Grid constants
   const WIDTH = GRID[0].length
   const HEIGHT = GRID.length
   const EDGE_WEIGHT = 1
@@ -78,20 +59,21 @@ function findSteps(startPos: Position, input: string) {
     { x: 1, y: 0 },
   ]
 
+  // Grid based utils
   const heuristic = (point: Point) => manhattanDistance(point, END)
   const getPoint = (p: Position) => GRID[p.y]?.[p.x]
   const isWithinGrid = (p: Position) =>
     p?.x >= 0 && p?.x < WIDTH && p?.y >= 0 && p?.y < HEIGHT
   const isEnd = (p: Point) => p.x === END.x && p.y === END.y
-  const canMove = (current: Point, target: Point) =>
-    target.value - current.value <= 1
-
-  const tracePath = (point: Point) => {
-    if (!point) {
-      return []
+  const resetGrid = () => {
+    for (let y = 0; y < HEIGHT; y++) {
+      for (let x = 0; x < WIDTH; x++) {
+        const point = getPoint({ x, y })
+        point.fScore = Infinity
+        point.gScore = Infinity
+        point.cameFrom = undefined
+      }
     }
-
-    return [point.id, ...tracePath(point.cameFrom)]
   }
 
   // Add neighbours for each point
@@ -107,12 +89,8 @@ function findSteps(startPos: Position, input: string) {
     }
   }
 
-  const START = getPoint(startPos)
-
-  /**
-   * A* search algorithm based on [pseudocode from Wikipedia](https://en.wikipedia.org/wiki/A*_search_algorithm)
-   */
-  const aStarSearch = () => {
+  const aStarSearch = (startPosition: Position) => {
+    const START = getPoint(startPosition)
     START.fScore = heuristic(START)
     START.gScore = 0
 
@@ -141,18 +119,43 @@ function findSteps(startPos: Position, input: string) {
     }
   }
 
-  const winner = aStarSearch()
+  const getStepsFromPosition = (position: Position) => {
+    const winner = aStarSearch(position)
+    const path = tracePath(winner)
 
-  const path = tracePath(winner)
+    // Grid is mutable, so after finding each path, reset values of each point
+    resetGrid()
 
-  // Don't count START point
-  const steps = path.length - 1
+    // Don't count START point
+    return path.length - 1
+  }
 
-  return steps
+  const possibleLowestPoints = GRID.flat().filter(
+    p =>
+      p.value === 0 &&
+      // I only now this condition because I noticed that there is a "wall" of "b" letters,
+      // so the starting point will have to be one of the points next to it.
+      p.neighbours.some(n => n.value === 1),
+  )
+
+  let bestSteps = Infinity
+  for (let point of possibleLowestPoints) {
+    const steps = getStepsFromPosition(point)
+    if (steps < bestSteps) {
+      bestSteps = steps
+    }
+  }
+
+  return bestSteps
 }
 
 run({
   solve,
-  tests: [],
+  tests: [
+    {
+      expected: 454,
+      useOriginalInput: true,
+    },
+  ],
   // onlyTests: true,
 })

@@ -129,7 +129,8 @@ run({
   solve,
   tests: [
     {
-      expected: 31,
+      expected: 456,
+      useOriginalInput: true,
     },
   ],
   // onlyTests: true,
