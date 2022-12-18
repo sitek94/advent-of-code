@@ -21,7 +21,7 @@ export type Point<T> = {
  * Top left corner is (0, 0). X-axis goes right, Y-axis goes down.
  */
 export class Grid2d<T = any> {
-  private readonly grid: T[][]
+  readonly grid: T[][]
   readonly width: number
   readonly height: number
   readonly lastX: number
@@ -76,6 +76,19 @@ export class Grid2d<T = any> {
       callbackFn({ ...coords, value: this.getValue(coords) })
       coords = this.getCoordsInDirection(coords, direction)
     }
+  }
+
+  forEachDirection(
+    from: Coords,
+    callbackFn: (point: Point<T>) => void,
+    distance = 1,
+  ) {
+    DIRECTIONS.forEach(direction => {
+      const coords = this.getCoordsInDirection(from, direction, distance)
+      if (this.isWithinGrid(coords)) {
+        callbackFn({ ...coords, value: this.getValue(coords) })
+      }
+    })
   }
 
   getCoordsInDirection(from: Coords, direction: Direction, distance = 1) {
