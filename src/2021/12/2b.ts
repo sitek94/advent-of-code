@@ -9,52 +9,52 @@
  * it.
  */
 
-import { run } from '../../runner';
+import { run } from '../../runner'
 
 function solve(input) {
-  let graph = {};
+  let graph = {}
   input
     .split('\n')
     .map(line => line.split('-'))
     .forEach(([from, to]) => {
       if (graph[from]) {
-        graph[from].push(to);
+        graph[from].push(to)
       } else {
-        graph[from] = [to];
+        graph[from] = [to]
       }
 
       if (graph[to]) {
-        graph[to].push(from);
+        graph[to].push(from)
       } else {
-        graph[to] = [from];
+        graph[to] = [from]
       }
-    });
+    })
 
-  let paths = 0;
-  findPaths('start', [], null);
+  let paths = 0
+  findPaths('start', [], null)
 
-  const answer = paths;
+  const answer = paths
 
   function findPaths(cave, visited, revisit) {
     if (cave === cave.toLowerCase()) {
-      visited.push(cave);
+      visited.push(cave)
     }
 
     graph[cave].forEach(c => {
       if (c === 'end') {
-        paths += 1;
+        paths += 1
       } else {
-        const isVisited = visited.includes(c);
+        const isVisited = visited.includes(c)
         if (isVisited && !revisit && c !== 'start') {
-          findPaths(c, [...visited], c);
+          findPaths(c, [...visited], c)
         } else if (!isVisited && c !== revisit) {
-          findPaths(c, [...visited], revisit);
+          findPaths(c, [...visited], revisit)
         }
       }
-    });
+    })
   }
 
-  return answer;
+  return answer
 }
 
 const testInput1 = `
@@ -64,7 +64,7 @@ const testInput1 = `
   A-b
   b-d
   A-end
-  b-end`;
+  b-end`
 
 const testInput2 = `
   dc-end
@@ -76,7 +76,7 @@ const testInput2 = `
   HN-end
   kj-sa
   kj-HN
-  kj-dc`;
+  kj-dc`
 
 const testInput3 = `
   fs-end
@@ -96,7 +96,7 @@ const testInput3 = `
   he-WI
   zg-he
   pj-fs
-  start-RW`;
+  start-RW`
 
 run({
   solve,
@@ -118,4 +118,4 @@ run({
     },
   ],
   onlyTests: false,
-});
+})

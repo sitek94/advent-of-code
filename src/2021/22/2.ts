@@ -1,46 +1,46 @@
-import { run } from '../../runner';
+import { run } from '../../runner'
 
 function solve(input: string) {
-  type Step = [boolean, number, number, number, number, number, number];
-  const steps: Step[] = [];
+  type Step = [boolean, number, number, number, number, number, number]
+  const steps: Step[] = []
 
-  let xMax = 0;
-  let yMax = 0;
-  let xMin = 0;
-  let yMin = 0;
-  let zMax = 0;
-  let zMin = 0;
+  let xMax = 0
+  let yMax = 0
+  let xMin = 0
+  let yMin = 0
+  let zMax = 0
+  let zMin = 0
 
   for (let line of input.split('\n')) {
-    let [on, coords] = line.split(' ');
+    let [on, coords] = line.split(' ')
     let [x, y, z] = line
       .split(',')
-      .map(s => s.split('=')[1].split('..').map(Number));
-    let [x1, x2] = x;
-    let [y1, y2] = y;
-    let [z1, z2] = z;
-    if (x1 < xMin) xMin = x1;
-    if (x2 > xMax) xMax = x2;
-    if (y1 < yMin) yMin = y1;
-    if (y2 > yMax) yMax = y2;
-    if (z1 < zMin) zMin = z1;
-    if (z2 > zMax) zMax = z2;
-    steps.push([on === 'on', x1, x2, y1, y2, z1, z2]);
+      .map(s => s.split('=')[1].split('..').map(Number))
+    let [x1, x2] = x
+    let [y1, y2] = y
+    let [z1, z2] = z
+    if (x1 < xMin) xMin = x1
+    if (x2 > xMax) xMax = x2
+    if (y1 < yMin) yMin = y1
+    if (y2 > yMax) yMax = y2
+    if (z1 < zMin) zMin = z1
+    if (z2 > zMax) zMax = z2
+    steps.push([on === 'on', x1, x2, y1, y2, z1, z2])
   }
 
-  const Cubes = new Map();
-  console.log(xMin, xMax, yMin, yMax, zMin, zMax);
+  const Cubes = new Map()
+  console.log(xMin, xMax, yMin, yMax, zMin, zMax)
 
-  type Coords = [number, number, number];
-  const p = (c: Coords) => c.join(',');
+  type Coords = [number, number, number]
+  const p = (c: Coords) => c.join(',')
 
   function switchCube(coords: Coords, on: boolean) {
-    let point = p(coords);
-    Cubes.set(point, on);
+    let point = p(coords)
+    Cubes.set(point, on)
   }
-  const limit = 50;
+  const limit = 50
   function runStep(step: Step) {
-    let [on, x1, x2, y1, y2, z1, z2] = step;
+    let [on, x1, x2, y1, y2, z1, z2] = step
 
     if (
       x1 < -limit ||
@@ -50,14 +50,14 @@ function solve(input: string) {
       z1 < -limit ||
       z2 > limit
     ) {
-      return;
+      return
     }
 
     for (let x = x1; x <= x2; x++) {
       for (let y = y1; y <= y2; y++) {
         for (let z = z1; z <= z2; z++) {
-          let coords: Coords = [x, y, z];
-          switchCube(coords, on);
+          let coords: Coords = [x, y, z]
+          switchCube(coords, on)
         }
       }
     }
@@ -73,7 +73,7 @@ function solve(input: string) {
   //   }
   // });
 
-  return 'count';
+  return 'count'
 }
 
 run({
@@ -90,4 +90,4 @@ run({
     },
   ],
   // onlyTests: true,
-});
+})

@@ -1,7 +1,7 @@
-import { getChallenge } from './get-challenge';
+import { getChallenge } from './get-challenge'
 
-let today = new Date();
-let day = today.getDate();
-let year = today.getFullYear();
+let today = new Date()
+let day = today.getDate()
+let year = today.getFullYear()
 
-getChallenge(day, year);
+getChallenge(day, year)

@@ -1,14 +1,14 @@
-import { run } from '../../runner';
+import { run } from '../../runner'
 
 function solve(input: string) {
-  let lines = input.split('\n');
+  let lines = input.split('\n')
 
-  let validCount = 0;
+  let validCount = 0
 
   for (let line of lines) {
-    let [rule, password] = line.split(': ');
-    let [positions, letter] = rule.split(' ');
-    let [pos1, pos2] = positions.split('-').map(Number);
+    let [rule, password] = line.split(': ')
+    let [positions, letter] = rule.split(' ')
+    let [pos1, pos2] = positions.split('-').map(Number)
 
     let count = password
       .split('')
@@ -18,14 +18,14 @@ function solve(input: string) {
             ? count + 1
             : count,
         0,
-      );
+      )
 
     if (count === 1) {
-      validCount++;
+      validCount++
     }
   }
 
-  return validCount;
+  return validCount
 }
 
 run({
@@ -41,4 +41,4 @@ run({
     },
   ],
   // onlyTests: true,
-});
+})

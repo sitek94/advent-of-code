@@ -1,19 +1,19 @@
-export type Line = [number, number, number, number];
+export type Line = [number, number, number, number]
 
 export function parseInput(input: string): Line[] {
-  return input.split('\n').map(l => createLine(l));
+  return input.split('\n').map(l => createLine(l))
 }
 
 export function createLine(input: string): Line {
-  const [a, b] = input.split(' -> ');
-  const [x0, y0] = createPoint(a);
-  const [x1, y1] = createPoint(b);
-  return [x0, y0, x1, y1];
+  const [a, b] = input.split(' -> ')
+  const [x0, y0] = createPoint(a)
+  const [x1, y1] = createPoint(b)
+  return [x0, y0, x1, y1]
 }
 
 function createPoint(input: string) {
-  const [x, y] = input.split(',');
-  return [Number(x), Number(y)];
+  const [x, y] = input.split(',')
+  return [Number(x), Number(y)]
 }
 
 export const exampleRawInput = `0,9 -> 5,9
@@ -25,7 +25,7 @@ export const exampleRawInput = `0,9 -> 5,9
 0,9 -> 2,9
 3,4 -> 1,4
 0,0 -> 8,8
-5,5 -> 8,2`;
+5,5 -> 8,2`
 
 export const realRawInput = `405,945 -> 780,945
 253,100 -> 954,801
@@ -526,4 +526,4 @@ export const realRawInput = `405,945 -> 780,945
 102,203 -> 102,123
 518,338 -> 518,360
 819,263 -> 328,754
-952,242 -> 178,242`;
+952,242 -> 178,242`

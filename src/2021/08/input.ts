@@ -1,4 +1,4 @@
-export const exampleRawInput = ``;
+export const exampleRawInput = ``
 
 export const realRawInput = `cg fadegbc ecfadb acdbeg abgfe dcegfb gcad bceag debca bgc | ceafbd gfedcb cabedf dbace
 bgeacd ea dfcab fcdgbae ecbgf gbcadf defa cae dcaefb fabce | ea fdae daecgb cea
@@ -199,4 +199,4 @@ bafce adcfeg caegfb cefga fb fab bdcagfe dabgef bgcf ebdac | gface bcaef fab fca
 gcedab facgbd efadg edacg bdafecg fedgb fda af aefc gafcde | dgecfa ebdgac fa bdfeg
 gdba gedfb egfbad fegadc ecgfba dfbec gd cbedfga abefg fdg | fcadge gdbef fegbac agbef
 fbdec fdbceag feacb fbcgd dcbfge dec efgadc dcbafg ed dbge | cabgdf ceafb afgdec de
-cbgaed fbagc cbfd bdaegf bdcag egdbfac afgce bcfadg baf bf | fb baf edgafb cbgda`;
+cbgaed fbagc cbfd bdaegf bdcag egdbfac afgce bcfadg baf bf | fb baf edgafb cbgda`

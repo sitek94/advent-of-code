@@ -1,50 +1,50 @@
-import { run } from '../../runner';
-import { abs, max, range } from '../../../utils';
+import { run } from '../../runner'
+import { abs, max, range } from '../../../utils'
 
 function solve(input: string) {
-  let [dotsInput, instructionsInput] = input.split('\n\n');
+  let [dotsInput, instructionsInput] = input.split('\n\n')
 
   let instructions = instructionsInput
     .split('\n')
-    .map(l => l.split(' ').at(-1).split('='));
+    .map(l => l.split(' ').at(-1).split('='))
 
-  let dots = dotsInput.split('\n').map(l => l.split(',').map(Number));
+  let dots = dotsInput.split('\n').map(l => l.split(',').map(Number))
 
-  const G = new Set();
+  const G = new Set()
 
-  dots.forEach(([x, y]) => G.add([x, y]));
+  dots.forEach(([x, y]) => G.add([x, y]))
 
-  const maxX = max(...[...G].map(([x]) => x));
-  const maxY = max(...[...G].map(([_, y]) => y));
+  const maxX = max(...[...G].map(([x]) => x))
+  const maxY = max(...[...G].map(([_, y]) => y))
 
   instructions.forEach(([dir, val]) => {
-    let foldPos = Number(val);
+    let foldPos = Number(val)
 
     G.forEach(([x, y]) => {
       if (dir === 'x' && x > foldPos) {
-        G.add([abs(x - 2 * foldPos), y]);
+        G.add([abs(x - 2 * foldPos), y])
       }
       if (dir === 'y' && y > foldPos) {
-        G.add([x, abs(y - 2 * foldPos)]);
+        G.add([x, abs(y - 2 * foldPos)])
       }
-    });
-  });
+    })
+  })
 
   function print(width: number, height: number) {
     for (let y of range(height)) {
       for (let x of range(width)) {
         if (G.has([x, y])) {
-          process.stdout.write('#');
+          process.stdout.write('#')
         } else {
-          process.stdout.write('.');
+          process.stdout.write('.')
         }
       }
-      process.stdout.write('\n');
+      process.stdout.write('\n')
     }
   }
 
-  print(maxX, maxY);
-  console.log(maxX, maxY);
+  print(maxX, maxY)
+  console.log(maxX, maxY)
 }
 
 run({
@@ -77,17 +77,17 @@ run({
     },
   ],
   onlyTests: true,
-});
+})
 
 function print(grid: string[][], h: number, w: number) {
-  let toPrint = '';
+  let toPrint = ''
   for (let y = 0; y < h; y++) {
-    let line = '';
+    let line = ''
     for (let x = 0; x < w; x++) {
-      line += grid[y][x];
+      line += grid[y][x]
     }
-    line += '\n';
-    toPrint += line;
+    line += '\n'
+    toPrint += line
   }
-  console.log(toPrint);
+  console.log(toPrint)
 }

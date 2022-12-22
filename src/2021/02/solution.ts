@@ -1,41 +1,41 @@
-import type { Action } from './input';
+import type { Action } from './input'
 
 export function partOne(actions: Action[]) {
-  let position = 0;
-  let depth = 0;
+  let position = 0
+  let depth = 0
 
   for (const { type, value } of actions) {
     if (type === 'down') {
-      depth += value;
+      depth += value
     }
     if (type === 'up') {
-      depth -= value;
+      depth -= value
     }
     if (type === 'forward') {
-      position += value;
+      position += value
     }
   }
 
-  return position * depth;
+  return position * depth
 }
 
 export function partTwo(actions: Action[]) {
-  let position = 0;
-  let depth = 0;
-  let aim = 0;
+  let position = 0
+  let depth = 0
+  let aim = 0
 
   for (const { type, value } of actions) {
     if (type === 'down') {
-      aim += value;
+      aim += value
     }
     if (type === 'up') {
-      aim -= value;
+      aim -= value
     }
     if (type === 'forward') {
-      position += value;
-      depth += aim * value;
+      position += value
+      depth += aim * value
     }
   }
 
-  return position * depth;
+  return position * depth
 }

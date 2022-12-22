@@ -1,32 +1,32 @@
-import { run } from '../../runner';
-import { max, min, range } from '../../../utils';
-import countBy from 'lodash/countby';
+import { run } from '../../runner'
+import { max, min, range } from '../../../utils'
+import countBy from 'lodash/countby'
 
 function solve(input: string) {
-  let [start, rulesInput] = input.split('\n\n');
-  let rulesLines = rulesInput.split('\n');
+  let [start, rulesInput] = input.split('\n\n')
+  let rulesLines = rulesInput.split('\n')
 
-  const rules = {};
+  const rules = {}
   for (let line of rulesLines) {
-    let [pair, x] = line.split(' -> ');
-    rules[pair] = x;
+    let [pair, x] = line.split(' -> ')
+    rules[pair] = x
   }
 
-  let S = start;
+  let S = start
   for (let step in range(10)) {
-    let T = '';
+    let T = ''
     for (let i = 0; i < S.length; i++) {
-      T += S[i];
+      T += S[i]
       if (i + 1 < S.length) {
-        T += rules[S[i] + S[i + 1]];
+        T += rules[S[i] + S[i + 1]]
       }
     }
-    S = T;
+    S = T
   }
-  let counts = countBy(S.split(''));
-  let answer = max(...Object.values(counts)) - min(...Object.values(counts));
+  let counts = countBy(S.split(''))
+  let answer = max(...Object.values(counts)) - min(...Object.values(counts))
 
-  return answer;
+  return answer
 }
 
 run({
@@ -56,4 +56,4 @@ run({
     },
   ],
   onlyTests: true,
-});
+})

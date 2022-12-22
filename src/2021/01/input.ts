@@ -1,5 +1,5 @@
 export function parseInput(input: string): number[] {
-  return input.split('\n').map(Number);
+  return input.split('\n').map(Number)
 }
 
 export const exampleRawInput = `199
@@ -11,7 +11,7 @@ export const exampleRawInput = `199
 240
 269
 260
-263`;
+263`
 
 export const realRawInput = `198
 208
@@ -2012,4 +2012,4 @@ export const realRawInput = `198
 10902
 10903
 10931
-10930`;
+10930`

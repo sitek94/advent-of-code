@@ -5,10 +5,10 @@
  * It takes nearly 3 minutes to solve the actual challenge input, but it works!
  */
 
-import { createQueue } from '../../utils/collections';
-import { getInput } from '../../../utils';
+import { createQueue } from '../../utils/collections'
+import { getInput } from '../../../utils'
 
-const realInput = getInput();
+const realInput = getInput()
 
 const testInput = `start-A
 start-b
@@ -16,7 +16,7 @@ A-c
 A-b
 b-d
 A-end
-b-end`;
+b-end`
 
 const testInput2 = `dc-end
 HN-start
@@ -27,7 +27,7 @@ LN-dc
 HN-end
 kj-sa
 kj-HN
-kj-dc`;
+kj-dc`
 
 const testInput3 = `fs-end
 he-DX
@@ -46,85 +46,85 @@ start-pj
 he-WI
 zg-he
 pj-fs
-start-RW`;
+start-RW`
 
 function run() {
-  const lines = realInput.split('\n').map(l => l.split('-'));
+  const lines = realInput.split('\n').map(l => l.split('-'))
 
   const AdjacencyList = lines.reduce((acc, [a, b]) => {
     if (acc[a]) {
-      acc[a].push(b);
+      acc[a].push(b)
     } else {
-      acc[a] = [b];
+      acc[a] = [b]
     }
     if (acc[b]) {
-      acc[b].push(a);
+      acc[b].push(a)
     } else {
-      acc[b] = [a];
+      acc[b] = [a]
     }
-    return acc;
-  }, {});
+    return acc
+  }, {})
 
-  console.log(AdjacencyList);
+  console.log(AdjacencyList)
 
   const Queue = createQueue([
     { node: 'start', smallNodes: ['start'], smallNodeThatAppearedTwice: null },
-  ]);
+  ])
 
-  let count = 0;
+  let count = 0
 
   while (Queue.isNotEmpty()) {
     let {
       node: currentNode,
       smallNodes,
       smallNodeThatAppearedTwice,
-    } = Queue.dequeue();
+    } = Queue.dequeue()
     if (currentNode === 'end') {
       if (count % 1000 === 0) {
-        console.log(count);
+        console.log(count)
       }
-      count++;
-      continue;
+      count++
+      continue
     }
 
-    const adjacentNodes = AdjacencyList[currentNode];
+    const adjacentNodes = AdjacencyList[currentNode]
 
     for (let node of adjacentNodes) {
       // Copy small nodes, so that they're not shared between the paths
-      let smallNodesCopy = smallNodes.slice();
+      let smallNodesCopy = smallNodes.slice()
 
       if (!smallNodes.includes(node)) {
         // Append small node to the list of all small nodes encountered
         if (isSmall(node)) {
-          smallNodesCopy.push(node);
+          smallNodesCopy.push(node)
         }
 
         Queue.enqueue({
           node,
           smallNodes: smallNodesCopy,
           smallNodeThatAppearedTwice,
-        });
+        })
       } else if (isNotStartOrEnd(node) && !smallNodeThatAppearedTwice) {
         Queue.enqueue({
           node,
           smallNodes: smallNodesCopy,
           smallNodeThatAppearedTwice: node,
-        });
+        })
       }
     }
   }
 
   function isSmall(node) {
-    return node === node.toLowerCase();
+    return node === node.toLowerCase()
   }
 
   function isNotStartOrEnd(node) {
-    return node !== 'start' && node !== 'end';
+    return node !== 'start' && node !== 'end'
   }
 
-  console.log(count);
+  console.log(count)
 }
 
-console.time('test');
-run();
-console.timeEnd('test');
+console.time('test')
+run()
+console.timeEnd('test')

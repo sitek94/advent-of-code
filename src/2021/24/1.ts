@@ -1,14 +1,14 @@
-import { run } from '../../runner';
+import { run } from '../../runner'
 
 function solve(input: string) {
-  type Instr = 'inp' | 'add' | 'mul' | 'div' | 'mod' | 'eql';
+  type Instr = 'inp' | 'add' | 'mul' | 'div' | 'mod' | 'eql'
 
   let vars = {
     w: 0,
     x: 0,
     y: 0,
     z: 0,
-  };
+  }
 
   // for (let line of input.split('\n')) {
   //
@@ -19,7 +19,7 @@ function solve(input: string) {
   //
   // }
 
-  return 'solution';
+  return 'solution'
 }
 
 run({
@@ -34,4 +34,4 @@ run({
     },
   ],
   onlyTests: true,
-});
+})

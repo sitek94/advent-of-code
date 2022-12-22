@@ -1,5 +1,5 @@
 function solve(input: string) {
-  return 'solution';
+  return 'solution'
 }
 
 // run({

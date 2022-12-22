@@ -1,5 +1,5 @@
 export function parseInput(input: string) {
-  return input.split('\n');
+  return input.split('\n')
 }
 
 export const exampleRawInput = `00100
@@ -13,7 +13,7 @@ export const exampleRawInput = `00100
 10000
 11001
 00010
-01010`;
+01010`
 
 export const realRawInput = `010001110001
 110100000001
@@ -1014,4 +1014,4 @@ export const realRawInput = `010001110001
 001011111100
 100110001001
 101000011000
-011100110101`;
+011100110101`

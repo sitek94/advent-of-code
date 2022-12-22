@@ -5,7 +5,7 @@
 
 // when created two more days
 
-import { range } from '../../../utils';
+import { range } from '../../../utils'
 
 let fish = [
   2, 1, 1, 4, 4, 1, 3, 4, 2, 4, 2, 1, 1, 4, 3, 5, 1, 1, 5, 1, 1, 5, 4, 5, 4, 1,
@@ -20,20 +20,20 @@ let fish = [
   2, 5, 5, 3, 1, 3, 3, 1, 4, 1, 1, 5, 5, 1, 5, 4, 1, 1, 1, 1, 2, 3, 3, 1, 2, 3,
   1, 5, 1, 3, 1, 1, 3, 1, 1, 1, 1, 1, 1, 5, 1, 1, 5, 5, 2, 1, 1, 5, 2, 4, 5, 5,
   1, 1, 5, 1, 5, 5, 1, 1, 3, 3, 1, 1, 3, 1,
-];
+]
 
-let map: Record<string, number> = {};
+let map: Record<string, number> = {}
 for (let i = 0; i < fish.length; i++) {
-  let value = fish[i];
+  let value = fish[i]
 
   if (map[value] === undefined) {
-    map[value] = 1;
+    map[value] = 1
   } else {
-    map[value]++;
+    map[value]++
   }
 }
 
-console.log(map);
+console.log(map)
 
 // console.log(map);
 // let newMap = {};
@@ -52,25 +52,25 @@ for (let day of range(256)) {
     6: 0,
     7: 0,
     8: 0,
-  };
+  }
 
   for (let [left, count] of Object.entries(map)) {
-    let daysLeft = Number(left);
+    let daysLeft = Number(left)
     // console.log(currentMap);
     // console.log(daysLeft, count);
 
     if (daysLeft === 0) {
-      currentMap['8'] += count;
-      currentMap['6'] += count;
+      currentMap['8'] += count
+      currentMap['6'] += count
     } else {
-      currentMap[daysLeft - 1] += count;
+      currentMap[daysLeft - 1] += count
     }
   }
-  map = currentMap;
+  map = currentMap
 }
 
-const sum = Object.values(map).reduce((a, b) => a + b);
-console.log(sum);
+const sum = Object.values(map).reduce((a, b) => a + b)
+console.log(sum)
 
 // console.log('Part one: ', fish.length);
 //

@@ -1,22 +1,22 @@
-import { run } from '../../runner';
+import { run } from '../../runner'
 
 function solve(input: string) {
-  let lines = input.split('\n');
+  let lines = input.split('\n')
 
-  let validCount = 0;
+  let validCount = 0
 
   for (let line of lines) {
-    let [rule, password] = line.split(': ');
-    let [counts, letter] = rule.split(' ');
-    let [min, max] = counts.split('-').map(Number);
+    let [rule, password] = line.split(': ')
+    let [counts, letter] = rule.split(' ')
+    let [min, max] = counts.split('-').map(Number)
 
-    let count = password.split('').filter(x => x === letter).length;
+    let count = password.split('').filter(x => x === letter).length
     if (count >= min && count <= max) {
-      validCount++;
+      validCount++
     }
   }
 
-  return validCount;
+  return validCount
 }
 
 run({
@@ -32,4 +32,4 @@ run({
     },
   ],
   // onlyTests: true,
-});
+})

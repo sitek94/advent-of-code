@@ -1,5 +1,5 @@
 // import { createLinePoints, drawGrid, drawLine, partTwo } from './solution';
-import { createLine, exampleRawInput, parseInput, realRawInput } from './input';
+import { createLine, exampleRawInput, parseInput, realRawInput } from './input'
 import {
   createGrid,
   drawHorizontalOrVerticalLine,
@@ -8,101 +8,101 @@ import {
   getPoints,
   solvePartOne,
   solvePartTwo,
-} from './solution';
+} from './solution'
 
 describe('Part one:', () => {
   it('works with example data', () => {
-    expect(solvePartOne(exampleRawInput)).toBe(5);
-  });
+    expect(solvePartOne(exampleRawInput)).toBe(5)
+  })
 
   it('works with real data', () => {
-    expect(solvePartOne(realRawInput)).toBe(7438);
-  });
-});
+    expect(solvePartOne(realRawInput)).toBe(7438)
+  })
+})
 
 describe('Part two:', () => {
   it('works with example data', () => {
-    expect(solvePartTwo(exampleRawInput)).toBe(12);
-  });
+    expect(solvePartTwo(exampleRawInput)).toBe(12)
+  })
 
   it('works with real data', () => {
-    expect(solvePartTwo(realRawInput)).toBe(21406);
-  });
-});
+    expect(solvePartTwo(realRawInput)).toBe(21406)
+  })
+})
 
 test('drawHorizontalOrVerticalLine works', () => {
-  const grid = createGrid(0, 0, 2, 2);
-  const horizontal = createLine(`0,0 -> 0,2`);
-  const vertical = createLine(`2,2 -> 0,2`);
+  const grid = createGrid(0, 0, 2, 2)
+  const horizontal = createLine(`0,0 -> 0,2`)
+  const vertical = createLine(`2,2 -> 0,2`)
   // Shouldn't draw this one
-  const diagonal = createLine(`2,0 -> 0,2`);
+  const diagonal = createLine(`2,0 -> 0,2`)
 
-  drawHorizontalOrVerticalLine(grid, horizontal);
-  drawHorizontalOrVerticalLine(grid, vertical);
-  drawHorizontalOrVerticalLine(grid, diagonal);
+  drawHorizontalOrVerticalLine(grid, horizontal)
+  drawHorizontalOrVerticalLine(grid, vertical)
+  drawHorizontalOrVerticalLine(grid, diagonal)
 
   expect(grid).toEqual([
     [1, 1, 2],
     [0, 0, 1],
     [0, 0, 1],
-  ]);
-});
+  ])
+})
 
 test('drawLine works', () => {
-  const grid = createGrid(0, 0, 2, 2);
-  const horizontal = createLine(`0,0 -> 0,2`);
-  const vertical = createLine(`2,2 -> 0,2`);
-  const diagonal = createLine(`2,0 -> 0,2`);
+  const grid = createGrid(0, 0, 2, 2)
+  const horizontal = createLine(`0,0 -> 0,2`)
+  const vertical = createLine(`2,2 -> 0,2`)
+  const diagonal = createLine(`2,0 -> 0,2`)
 
-  drawLine(grid, horizontal);
-  drawLine(grid, vertical);
-  drawLine(grid, diagonal);
+  drawLine(grid, horizontal)
+  drawLine(grid, vertical)
+  drawLine(grid, diagonal)
 
   expect(grid).toEqual([
     [1, 1, 3],
     [0, 1, 1],
     [1, 0, 1],
-  ]);
-});
+  ])
+})
 
 describe('getPoints', () => {
   it('works with horizontal and vertical lines', () => {
-    expect(getPoints([0, 0, 2, 2], { diagonal: false })).toEqual([]);
+    expect(getPoints([0, 0, 2, 2], { diagonal: false })).toEqual([])
 
     expect(getPoints([2, 2, 2, 0], { diagonal: false })).toEqual([
       [2, 0],
       [2, 1],
       [2, 2],
-    ]);
-  });
+    ])
+  })
 
   it('works for diagonal lines', () => {
     expect(getPoints([0, 0, 2, 2], { diagonal: true })).toEqual([
       [0, 0],
       [1, 1],
       [2, 2],
-    ]);
+    ])
 
     expect(getPoints([2, 2, 0, 0], { diagonal: true })).toEqual([
       [2, 2],
       [1, 1],
       [0, 0],
-    ]);
-  });
-});
+    ])
+  })
+})
 
 test('createGrid works', () => {
   expect(createGrid(0, 0, 2, 2)).toEqual([
     [0, 0, 0],
     [0, 0, 0],
     [0, 0, 0],
-  ]);
-});
+  ])
+})
 
 describe('findEdgePoints', () => {
   it('works for single line', () => {
-    expect(findEdgePoints([[0, 0, 9, 9]])).toEqual([0, 0, 9, 9]);
-  });
+    expect(findEdgePoints([[0, 0, 9, 9]])).toEqual([0, 0, 9, 9])
+  })
 
   it('works for multiple lines', () => {
     expect(
@@ -110,8 +110,8 @@ describe('findEdgePoints', () => {
         [0, 0, 9, 9],
         [-1, -5, 10, 5],
       ]),
-    ).toEqual([-1, -5, 10, 9]);
-  });
+    ).toEqual([-1, -5, 10, 9])
+  })
 
   it('works with AoC example data', () => {
     expect(
@@ -127,16 +127,16 @@ describe('findEdgePoints', () => {
         [0, 0, 8, 8],
         [5, 5, 8, 2],
       ]),
-    ).toEqual([0, 0, 9, 9]);
-  });
-});
+    ).toEqual([0, 0, 9, 9])
+  })
+})
 
 test('parseInput works', () => {
   const input = `0,9 -> 5,9
-8,0 -> 0,8`;
+8,0 -> 0,8`
 
   expect(parseInput(input)).toEqual([
     [0, 9, 5, 9],
     [8, 0, 0, 8],
-  ]);
-});
+  ])
+})

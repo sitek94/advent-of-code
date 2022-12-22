@@ -1,38 +1,38 @@
 export function partOne(numbers: number[]) {
-  let last = null;
-  let current = 0;
-  let count = 0;
+  let last = null
+  let current = 0
+  let count = 0
 
   for (let i = 0; i < numbers.length; i++) {
-    current = numbers[i];
+    current = numbers[i]
 
     if (last && current > last) {
-      count++;
+      count++
     }
 
-    last = current;
+    last = current
   }
 
-  return count;
+  return count
 }
 
 export function partTwo(numbers: number[]) {
-  let last = null;
-  let current = 0;
-  let count = 0;
+  let last = null
+  let current = 0
+  let count = 0
 
   for (let i = 0; i < numbers.length; i++) {
-    let [a, b, c] = numbers.slice(i, i + 3);
+    let [a, b, c] = numbers.slice(i, i + 3)
     if (!a || !b || !c) {
-      continue;
+      continue
     }
 
-    current = a + b + c;
+    current = a + b + c
     if (last && current > last) {
-      count++;
+      count++
     }
-    last = current;
+    last = current
   }
 
-  return count;
+  return count
 }

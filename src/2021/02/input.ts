@@ -1,7 +1,7 @@
 export type Action = {
-  type: 'down' | 'up' | 'forward';
-  value: number;
-};
+  type: 'down' | 'up' | 'forward'
+  value: number
+}
 
 export function parseInput(input: string) {
   return input
@@ -10,7 +10,7 @@ export function parseInput(input: string) {
     .map(([type, value]) => ({
       type: type as Action['type'],
       value: Number(value),
-    }));
+    }))
 }
 
 export const exampleRawInput = `forward 5
@@ -18,7 +18,7 @@ down 5
 forward 8
 up 3
 down 8
-forward 2`;
+forward 2`
 
 export const realRawInput = `forward 3
 down 7
@@ -1019,4 +1019,4 @@ forward 8
 up 3
 up 6
 up 3
-forward 1`;
+forward 1`

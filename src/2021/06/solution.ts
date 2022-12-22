@@ -1,5 +1,5 @@
 export function partOne() {
-  return true;
+  return true
 }
 
 // day % 7 === 0
@@ -22,22 +22,20 @@ let fish = [
   2, 5, 5, 3, 1, 3, 3, 1, 4, 1, 1, 5, 5, 1, 5, 4, 1, 1, 1, 1, 2, 3, 3, 1, 2, 3,
   1, 5, 1, 3, 1, 1, 3, 1, 1, 1, 1, 1, 1, 5, 1, 1, 5, 5, 2, 1, 1, 5, 2, 4, 5, 5,
   1, 1, 5, 1, 5, 5, 1, 1, 3, 3, 1, 1, 3, 1,
-];
+]
 
 for (let day = 0; day < 80; day++) {
   for (let i = 0; i < fish.length; i++) {
-    fish[i]--;
+    fish[i]--
 
-    let value = fish[i];
+    let value = fish[i]
 
     // Reset
     if (value === -1) {
-      fish[i] = 6;
-      fish.push(9);
+      fish[i] = 6
+      fish.push(9)
     }
   }
 }
 
-console.log('Part one: ', fish.length);
-
-
+console.log('Part one: ', fish.length)

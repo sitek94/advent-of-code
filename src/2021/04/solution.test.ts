@@ -4,29 +4,29 @@ import {
   hasWinningCol,
   toNumbers,
   partTwo,
-} from './solution';
+} from './solution'
 import {
   exampleNumbersToDraw,
   exampleRawInput,
   realNumbersToDraw,
   realRawInput,
-} from './input';
+} from './input'
 
 test('partTwo works with real data', () => {
-  expect(partTwo(realNumbersToDraw, realRawInput)).toBe(3178);
-});
+  expect(partTwo(realNumbersToDraw, realRawInput)).toBe(3178)
+})
 
 test('partTwo works with example data', () => {
-  expect(partTwo(exampleNumbersToDraw, exampleRawInput)).toBe(1924);
-});
+  expect(partTwo(exampleNumbersToDraw, exampleRawInput)).toBe(1924)
+})
 
 test('partOne works with real data', () => {
-  expect(partOne(realNumbersToDraw, realRawInput)).toBe(41503);
-});
+  expect(partOne(realNumbersToDraw, realRawInput)).toBe(41503)
+})
 
 test('partOne works with example data', () => {
-  expect(partOne(exampleNumbersToDraw, exampleRawInput)).toBe(4512);
-});
+  expect(partOne(exampleNumbersToDraw, exampleRawInput)).toBe(4512)
+})
 
 test('hasWinningRow', () => {
   expect(
@@ -38,7 +38,7 @@ test('hasWinningRow', () => {
       98, 63, 42, 84, 37,
       87, 28, 97, 66, 79,
     ]),
-  ).toBe(true);
+  ).toBe(true)
 
   expect(
     // prettier-ignore
@@ -50,7 +50,7 @@ test('hasWinningRow', () => {
       87, 28, 97, 66, 79
       -1, -1, -1, -1, -1,
     ]),
-  ).toBe(true);
+  ).toBe(true)
 
   expect(
     // prettier-ignore
@@ -61,7 +61,7 @@ test('hasWinningRow', () => {
       98, 63, 42, 84, 37,
       87, 28, 97, 66, 79
     ]),
-  ).toBe(true);
+  ).toBe(true)
 
   expect(
     // prettier-ignore
@@ -72,8 +72,8 @@ test('hasWinningRow', () => {
       98, 63, 42, 84, 37,
       87, 28, 97, 66, 79,
     ]),
-  ).toBe(false);
-});
+  ).toBe(false)
+})
 
 test('hasWinningCol', () => {
   expect(
@@ -85,7 +85,7 @@ test('hasWinningCol', () => {
       -1, 63, 42, 84, 37,
       -1, 28, 97, 66, 79,
     ]),
-  ).toBe(true);
+  ).toBe(true)
 
   expect(
     // prettier-ignore
@@ -96,7 +96,7 @@ test('hasWinningCol', () => {
       98, 63, -1, 84, 37,
       87, 28, -1, 66, 79,
     ]),
-  ).toBe(true);
+  ).toBe(true)
 
   expect(
     // prettier-ignore
@@ -107,7 +107,7 @@ test('hasWinningCol', () => {
       98, 63, 42, 84, -1,
       87, 28, 97, 66, -1,
     ]),
-  ).toBe(true);
+  ).toBe(true)
 
   expect(
     // prettier-ignore
@@ -118,9 +118,9 @@ test('hasWinningCol', () => {
       98, 63, 42, 84, 37,
       87, 28, 97, 66, 79,
     ]),
-  ).toBe(false);
-});
+  ).toBe(false)
+})
 
 test('toNumbers', () => {
-  expect(toNumbers(exampleRawInput)).toHaveLength(75);
-});
+  expect(toNumbers(exampleRawInput)).toHaveLength(75)
+})

@@ -1,4 +1,4 @@
-import { run } from '../../runner';
+import { run } from '../../runner'
 
 // function solve(input: string) {
 //   let lines = input.split('\n');
@@ -57,9 +57,9 @@ import { run } from '../../runner';
 //   return R;
 // }
 
-const parse = input => input.split('\n').map(row => row.split('').map(Number));
+const parse = input => input.split('\n').map(row => row.split('').map(Number))
 
-export const solve = input => (map => shortestPath(map))(parse(input));
+export const solve = input => (map => shortestPath(map))(parse(input))
 
 const shortestPath = (map, startPos = [0, 0]) => {
   const ADJ = [
@@ -67,26 +67,26 @@ const shortestPath = (map, startPos = [0, 0]) => {
     [0, 1],
     [-1, 0],
     [0, -1],
-  ];
-  const queue = [{ pos: startPos, cost: 0 }];
-  const visited = new Set();
+  ]
+  const queue = [{ pos: startPos, cost: 0 }]
+  const visited = new Set()
   while (queue.length) {
     const {
       pos: [x, y],
       cost,
-    } = queue.shift();
-    if (y === map.length - 1 && x === map[0].length - 1) return cost;
+    } = queue.shift()
+    if (y === map.length - 1 && x === map[0].length - 1) return cost
 
     ADJ.map(([dx, dy]) => [dx + x, dy + y])
       .filter(([x, y]) => map[y]?.[x] && map[y]?.[x])
       .filter(pos => !visited.has(pos + ''))
       .forEach(pos => {
-        visited.add(pos + '');
-        queue.push({ pos, cost: cost + map[pos[1]][pos[0]] });
-      });
-    queue.sort((a, b) => a.cost - b.cost);
+        visited.add(pos + '')
+        queue.push({ pos, cost: cost + map[pos[1]][pos[0]] })
+      })
+    queue.sort((a, b) => a.cost - b.cost)
   }
-};
+}
 
 run({
   solve,
@@ -107,4 +107,4 @@ run({
     },
   ],
   onlyTests: false,
-});
+})

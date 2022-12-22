@@ -1,64 +1,64 @@
-import { run } from '../../runner';
-import { max, min, range } from '../../../utils';
+import { run } from '../../runner'
+import { max, min, range } from '../../../utils'
 
 function solve(input: string) {
-  let [template, rulesInput] = input.split('\n\n');
-  let rulesLines = rulesInput.split('\n');
+  let [template, rulesInput] = input.split('\n\n')
+  let rulesLines = rulesInput.split('\n')
 
-  const rules = {};
+  const rules = {}
 
   for (let line of rulesLines) {
-    let [pair, x] = line.split(' -> ');
-    rules[pair] = x;
+    let [pair, x] = line.split(' -> ')
+    rules[pair] = x
   }
 
-  let counts: Record<string, number> = {};
+  let counts: Record<string, number> = {}
   template.split('').forEach((letter, i) => {
-    let a = letter;
-    let b = template[i + 1];
+    let a = letter
+    let b = template[i + 1]
     if (b) {
-      let pair = a + b;
-      counts[pair] = 1;
+      let pair = a + b
+      counts[pair] = 1
     }
-  });
+  })
 
   for (let i of range(40)) {
-    let newCounts = {};
+    let newCounts = {}
     for (let [pair, x] of Object.entries(rules)) {
       if (pair in counts) {
-        let [a, b] = pair;
-        let newPairs = [a + x, x + b];
+        let [a, b] = pair
+        let newPairs = [a + x, x + b]
         for (let newPair of newPairs) {
-          newCounts[newPair] = (newCounts[newPair] || 0) + counts[pair];
+          newCounts[newPair] = (newCounts[newPair] || 0) + counts[pair]
         }
       }
     }
-    counts = newCounts;
+    counts = newCounts
   }
 
-  let C: Record<string, number> = {};
+  let C: Record<string, number> = {}
   // Count first letter of each pair
   for (let [[a], value] of Object.entries(counts)) {
     if (a in C) {
-      C[a] += value;
+      C[a] += value
     } else {
-      C[a] = value;
+      C[a] = value
     }
   }
-  let t = template;
+  let t = template
 
   // Count last letter
-  C[t[t.length - 1]] += 1;
+  C[t[t.length - 1]] += 1
 
-  let least = min(...Object.values(C));
-  let most = max(...Object.values(C));
+  let least = min(...Object.values(C))
+  let most = max(...Object.values(C))
 
-  let answer = most - least;
+  let answer = most - least
 
-  let count = 0;
-  let newTemplate = '';
+  let count = 0
+  let newTemplate = ''
 
-  return answer;
+  return answer
 }
 
 run({
@@ -88,4 +88,4 @@ run({
     },
   ],
   onlyTests: false,
-});
+})

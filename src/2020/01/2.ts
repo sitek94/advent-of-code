@@ -1,20 +1,20 @@
-import { run } from '../../runner';
+import { run } from '../../runner'
 
 function solve(input: string) {
-  let numbers = input.split('\n').map(Number);
+  let numbers = input.split('\n').map(Number)
 
-  let answer;
+  let answer
   for (let a of numbers) {
     for (let b of numbers) {
       for (let c of numbers) {
         if (a + b + c === 2020) {
-          answer = a * b * c;
+          answer = a * b * c
         }
       }
     }
   }
 
-  return answer;
+  return answer
 }
 
 run({
@@ -33,4 +33,4 @@ run({
     },
   ],
   // onlyTests: true,
-});
+})

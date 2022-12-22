@@ -1,60 +1,60 @@
-import { run } from '../../runner';
+import { run } from '../../runner'
 
 function solve(input: string) {
-  let lines = input.split('\n');
-  let w = lines[0].length;
-  let h = lines.length;
+  let lines = input.split('\n')
+  let w = lines[0].length
+  let h = lines.length
 
-  let G = new Map();
+  let G = new Map()
 
   for (let y = 0; y < h; y++) {
     for (let x = 0; x < w; x++) {
-      G.set(p(x, y), Number(lines[y][x]));
+      G.set(p(x, y), Number(lines[y][x]))
     }
   }
 
-  console.log(G);
-  let count = 0;
-  let R = null;
-  go(p(0, 0), ['00']);
+  console.log(G)
+  let count = 0
+  let R = null
+  go(p(0, 0), ['00'])
 
   function go(start, path) {
     if (!G.has(start)) {
-      return;
+      return
     }
-    let [x, y] = get(start);
+    let [x, y] = get(start)
 
-    let r = p(x + 1, y);
-    let d = p(x, y + 1);
+    let r = p(x + 1, y)
+    let d = p(x, y + 1)
 
     for (let next of [r, d]) {
       if (!G.has(next) || path.includes(next)) {
-        return;
+        return
       }
 
       if (next === p(w - 1, h - 1)) {
-        console.log('FOUND');
-        let risk = path.map(p => G.get(p)).reduce((a, b) => a + b);
+        console.log('FOUND')
+        let risk = path.map(p => G.get(p)).reduce((a, b) => a + b)
         if (!R || risk < R) {
-          R = risk;
+          R = risk
         }
       }
 
-      go(next, [...path, next]);
+      go(next, [...path, next])
     }
   }
 
-  console.log(R);
+  console.log(R)
   function p(x, y) {
-    return `${x}${y}`;
+    return `${x}${y}`
   }
   function get(p) {
-    return p.split('').map(Number);
+    return p.split('').map(Number)
   }
 
-  let lowestRisk = null;
+  let lowestRisk = null
 
-  return R;
+  return R
 }
 
 run({
@@ -76,4 +76,4 @@ run({
     },
   ],
   onlyTests: true,
-});
+})

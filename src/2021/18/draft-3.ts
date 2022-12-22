@@ -97,17 +97,17 @@
 //   return result;
 // }
 
-import * as util from 'util';
+import * as util from 'util'
 
-let data = [[[[[9, 8], 1], 2], 3], 4];
+let data = [[[[[9, 8], 1], 2], 3], 4]
 
 type Node = {
-  left: Node | null;
-  right: Node | null;
-  value: number | null;
-  parent: Node | null;
-  depth: number;
-};
+  left: Node | null
+  right: Node | null
+  value: number | null
+  parent: Node | null
+  depth: number
+}
 
 function createNode(n: any, parent: Node, depth = 0): Node {
   if (typeof n === 'number') {
@@ -117,70 +117,70 @@ function createNode(n: any, parent: Node, depth = 0): Node {
       parent,
       value: n,
       depth,
-    };
-    return node;
+    }
+    return node
   } else {
-    let [a, b] = n;
+    let [a, b] = n
     let node: Node = {
       left: null,
       right: null,
       value: null,
       parent,
       depth: depth,
-    };
+    }
 
-    node.left = createNode(a, node, depth + 1);
-    node.right = createNode(b, node, depth + 1);
+    node.left = createNode(a, node, depth + 1)
+    node.right = createNode(b, node, depth + 1)
 
-    return node;
+    return node
   }
 }
 
 function tryToExplode(node: Node, state: { hasExploded: boolean }) {
   if (state.hasExploded) {
-    return true;
+    return true
   }
   if (node.depth === 4) {
-    let [a, b] = explode(node.parent);
+    let [a, b] = explode(node.parent)
 
-    node.parent.left = createNode(a, node.parent, node.parent.depth + 1);
-    node.parent.right = createNode(b, node.parent, node.parent.depth + 1);
+    node.parent.left = createNode(a, node.parent, node.parent.depth + 1)
+    node.parent.right = createNode(b, node.parent, node.parent.depth + 1)
 
-    state.hasExploded = true;
-    console.log('TRUE');
-    return true;
+    state.hasExploded = true
+    console.log('TRUE')
+    return true
   }
 
-  tryToExplode(node.left, state);
-  tryToExplode(node.right, state);
+  tryToExplode(node.left, state)
+  tryToExplode(node.right, state)
 
-  return false;
+  return false
 }
 
 function log(sth: any) {
-  console.log(util.inspect(sth, { depth: 5, colors: true }));
+  console.log(util.inspect(sth, { depth: 5, colors: true }))
 }
 
-export {};
+export {}
 
 function explode(node: Node) {
-  let result = [0, 0];
+  let result = [0, 0]
 
   if (node.left.value) {
-    result[0] += node.left.value + node.right.left.value;
+    result[0] += node.left.value + node.right.left.value
   }
   if (node.right.value) {
-    result[1] += node.right.value + node.left.right.value;
+    result[1] += node.right.value + node.left.right.value
   }
 
-  return result;
+  return result
 }
-const rootNode = createNode(data, null);
-log(rootNode);
-const hasExploded = tryToExplode(rootNode, { hasExploded: false });
-log(rootNode);
-console.log({ hasExploded });
+const rootNode = createNode(data, null)
+log(rootNode)
+const hasExploded = tryToExplode(rootNode, { hasExploded: false })
+log(rootNode)
+console.log({ hasExploded })
 if (hasExploded) {
-  let again = tryToExplode(rootNode, { hasExploded: false });
-  console.log({ again });
+  let again = tryToExplode(rootNode, { hasExploded: false })
+  console.log({ again })
 }

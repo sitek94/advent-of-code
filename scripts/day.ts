@@ -1,6 +1,6 @@
-import { getChallenge } from './get-challenge';
+import { getChallenge } from './get-challenge'
 
-const prompts = require('prompts');
+const prompts = require('prompts')
 
 const questions = [
   {
@@ -13,11 +13,11 @@ const questions = [
     name: 'year',
     message: 'Year',
   },
-];
+]
 
-(async () => {
-  const response = await prompts(questions);
-  const { day, year } = response;
+;(async () => {
+  const response = await prompts(questions)
+  const { day, year } = response
 
-  getChallenge(day, year);
-})();
+  getChallenge(day, year)
+})()

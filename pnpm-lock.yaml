@@ -10,6 +10,7 @@ specifiers:
   get-caller-file: ^2.0.5
   jest: ^27.4.3
   just-clone: ^5.0.1
+  just-range: ^4.2.0
   just-split: ^3.0.1
   kleur: ^4.1.4
   lodash.countby: ^4.6.0
@@ -30,6 +31,7 @@ dependencies:
   get-caller-file: 2.0.5
   jest: 27.5.1_ts-node@10.9.1
   just-clone: 5.1.0
+  just-range: 4.2.0
   just-split: 3.1.1
   kleur: 4.1.5
   lodash.countby: 4.6.0
@@ -2083,6 +2085,10 @@ packages:
 
   /just-clone/5.1.0:
     resolution: {integrity: sha512-LiIL2BG6WIjSMo0HI5/LD2iuXoQj9nh+cZgaaxR538z53XM+g/M2Yra+o9dz/s6cRSnghwENrE8zDEfsOPduOg==}
+    dev: false
+
+  /just-range/4.2.0:
+    resolution: {integrity: sha512-z2Ip8H2j7a9Vr8rKFi0IZf4IXn2Yuq2lGZFS41GjfPwksoHWTaTx1xIjU6C0HyQ1jBXEoz/FzjS5eyVXeW19tg==}
     dev: false
 
   /just-split/3.1.1:

@@ -1,54 +1,54 @@
-import { run } from '../../runner';
+import { run } from '../../runner'
 
 function solve(input: string) {
-  let paths = input.split('\n').map(line => line.split('-'));
-  const P = {};
+  let paths = input.split('\n').map(line => line.split('-'))
+  const P = {}
 
   for (let [from, to] of paths) {
     if (!P[from]) {
-      P[from] = [to];
+      P[from] = [to]
     } else {
-      P[from].push(to);
+      P[from].push(to)
     }
     if (!P[to]) {
-      P[to] = [from];
+      P[to] = [from]
     } else {
-      P[to].push(from);
+      P[to].push(from)
     }
   }
 
-  let answer = 0;
+  let answer = 0
 
-  go('start', [], null);
+  go('start', [], null)
 
   function go(to: string, path: string[], twice: null | string) {
     if (isSmall(to) && path.includes(to) && !twice && isNotStartOrEnd(to)) {
-      twice = to;
+      twice = to
     } else if (isSmall(to) && path.includes(to)) {
-      return;
+      return
     }
-    let newPath = [...path];
-    newPath.push(to);
+    let newPath = [...path]
+    newPath.push(to)
     if (to === 'end') {
-      answer++;
-      return;
+      answer++
+      return
     } else {
-      let paths = P[to];
+      let paths = P[to]
       for (let p of paths) {
-        go(p, newPath, twice);
+        go(p, newPath, twice)
       }
     }
   }
 
   function isSmall(cave: string) {
-    return cave === cave.toLowerCase();
+    return cave === cave.toLowerCase()
   }
 
   function isNotStartOrEnd(cave: string) {
-    return cave !== 'start' && cave !== 'end';
+    return cave !== 'start' && cave !== 'end'
   }
 
-  return answer;
+  return answer
 }
 
 run({
@@ -66,4 +66,4 @@ run({
       expected: 36,
     },
   ],
-});
+})

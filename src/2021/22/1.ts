@@ -1,34 +1,34 @@
-import { run } from '../../runner';
+import { run } from '../../runner'
 
 function solve(input: string) {
-  type Step = [boolean, number, number, number, number, number, number];
-  const steps: Step[] = [];
+  type Step = [boolean, number, number, number, number, number, number]
+  const steps: Step[] = []
 
   for (let line of input.split('\n')) {
-    let [on, coords] = line.split(' ');
+    let [on, coords] = line.split(' ')
     let [x, y, z] = line
       .split(',')
-      .map(s => s.split('=')[1].split('..').map(Number));
-    let [x1, x2] = x;
-    let [y1, y2] = y;
-    let [z1, z2] = z;
-    steps.push([on === 'on', x1, x2, y1, y2, z1, z2]);
+      .map(s => s.split('=')[1].split('..').map(Number))
+    let [x1, x2] = x
+    let [y1, y2] = y
+    let [z1, z2] = z
+    steps.push([on === 'on', x1, x2, y1, y2, z1, z2])
   }
 
-  const Cubes = new Map();
+  const Cubes = new Map()
 
-  type Coords = [number, number, number];
-  const p = (c: Coords) => c.join(',');
+  type Coords = [number, number, number]
+  const p = (c: Coords) => c.join(',')
 
   function switchCube(coords: Coords, on: boolean) {
-    let point = p(coords);
-    Cubes.set(point, on);
+    let point = p(coords)
+    Cubes.set(point, on)
   }
 
-  const limit = 50;
+  const limit = 50
 
   function runStep(step: Step) {
-    let [on, x1, x2, y1, y2, z1, z2] = step;
+    let [on, x1, x2, y1, y2, z1, z2] = step
 
     if (
       x1 < -limit ||
@@ -38,30 +38,30 @@ function solve(input: string) {
       z1 < -limit ||
       z2 > limit
     ) {
-      return;
+      return
     }
 
     for (let x = x1; x <= x2; x++) {
       for (let y = y1; y <= y2; y++) {
         for (let z = z1; z <= z2; z++) {
-          let coords: Coords = [x, y, z];
-          switchCube(coords, on);
+          let coords: Coords = [x, y, z]
+          switchCube(coords, on)
         }
       }
     }
   }
 
   for (let step of steps) {
-    runStep(step);
+    runStep(step)
   }
-  let count = 0;
+  let count = 0
   Cubes.forEach(v => {
     if (v) {
-      count++;
+      count++
     }
-  });
+  })
 
-  return count;
+  return count
 }
 
 run({
@@ -78,4 +78,4 @@ run({
     },
   ],
   // onlyTests: true,
-});
+})

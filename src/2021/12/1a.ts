@@ -1,5 +1,5 @@
-import { createDefaultObj, createQueue } from '../../utils/collections';
-import { run } from '../../runner';
+import { createDefaultObj, createQueue } from '../../utils/collections'
+import { run } from '../../runner'
 
 // Test data
 const testInput = `start-A
@@ -8,51 +8,51 @@ A-c
 A-b
 b-d
 A-end
-b-end`;
+b-end`
 
 function solve(input: string) {
-  const lines = input.split('\n').map(l => l.split('-'));
+  const lines = input.split('\n').map(l => l.split('-'))
 
-  const AdjacencyList = createDefaultObj([]);
+  const AdjacencyList = createDefaultObj([])
 
   for (let [a, b] of lines) {
-    AdjacencyList[a].push(b);
-    AdjacencyList[b].push(a);
+    AdjacencyList[a].push(b)
+    AdjacencyList[b].push(a)
   }
 
-  const Queue = createQueue([{ node: 'start', smallNodes: ['start'] }]);
+  const Queue = createQueue([{ node: 'start', smallNodes: ['start'] }])
 
-  let answer = 0;
+  let answer = 0
 
   while (Queue.isNotEmpty()) {
-    let { node: currentNode, smallNodes } = Queue.dequeue();
+    let { node: currentNode, smallNodes } = Queue.dequeue()
     if (currentNode === 'end') {
-      answer++;
-      continue;
+      answer++
+      continue
     }
 
-    const adjacentNodes = AdjacencyList[currentNode];
+    const adjacentNodes = AdjacencyList[currentNode]
 
     for (let node of adjacentNodes) {
       if (smallNodes.includes(node)) {
-        continue;
+        continue
       }
 
-      let smallNodesCopy = smallNodes.slice();
+      let smallNodesCopy = smallNodes.slice()
 
       if (isSmall(node)) {
-        smallNodesCopy.push(node);
+        smallNodesCopy.push(node)
       }
 
-      Queue.enqueue({ node, smallNodes: smallNodesCopy });
+      Queue.enqueue({ node, smallNodes: smallNodesCopy })
     }
   }
 
-  return answer;
+  return answer
 }
 
 function isSmall(node) {
-  return node === node.toLowerCase();
+  return node === node.toLowerCase()
 }
 
 run({
@@ -70,4 +70,4 @@ run({
       expected: 10,
     },
   ],
-});
+})
