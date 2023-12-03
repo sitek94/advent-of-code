@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import getCallerFile from 'get-caller-file'
+import util from 'util'
 
 export function range(n: number) {
   return Array.from({ length: n }, (_, i) => i)
@@ -38,4 +39,10 @@ export function isNumber(x: any): x is number {
 
 export function isArray(x: any): x is any[] {
   return Array.isArray(x)
+}
+
+export const log = (...args: any[]) => {
+  console.log(
+    util.inspect(args, { showHidden: false, depth: null, colors: true }),
+  )
 }

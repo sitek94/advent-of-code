@@ -16,6 +16,7 @@
     "get-caller-file": "^2.0.5",
     "jest": "^27.4.3",
     "just-clone": "^5.0.1",
+    "just-group-by": "^2.2.0",
     "just-range": "^4.2.0",
     "just-split": "^3.0.1",
     "kleur": "^4.1.4",
