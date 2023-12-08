@@ -11,7 +11,7 @@ export function createDefaultObj<T>(defaultValue: T) {
   const ignoredProps = ['toJSON']
 
   const handler = {
-    get: (obj: object, prop: string) => {
+    get: (obj: Record<string, any>, prop: string) => {
       const value = obj[prop]
       if (prop in obj) {
         return value
@@ -48,6 +48,6 @@ export function createQueue<T>(initialValue: T[]) {
     isNotEmpty: () => q.length > 0,
     isEmpty: () => q.length === 0,
     dequeue: () => q.shift(),
-    enqueue: sth => q.push(sth),
+    enqueue: (item: T) => q.push(item),
   }
 }

@@ -24,3 +24,10 @@ const cmd = command({
 })
 
 run(cmd, process.argv.slice(2))
+
+
+
+
+
+
+

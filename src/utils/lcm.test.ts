@@ -1,4 +1,5 @@
-import { lcm, lcms } from './lcm'
+import {lcm, lcms} from './lcm'
+import {describe, expect, it} from 'bun:test'
 
 describe(`${lcm.name}`, () => {
   const cases: [[number, number], number][] = [

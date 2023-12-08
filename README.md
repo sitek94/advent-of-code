@@ -1,40 +1,34 @@
 # Advent of Code
 
-My [Advent of Code](https://adventofcode.com) solutions.
-
-## Project setup
-
-If you're looking for a solid project setup I recommend you checkout the stuff built by
-[caderek](https://github.com/caderek). I've reused some of his code, because I wanted to learn how it works, otherwise
-I would be using [AoC Runner](https://github.com/caderek/aocrunner) myself :)
+My [Advent of Code](https://adventofcode.com) solutions 🎄
 
 ## Scripts
 
-Scripts to download the challenges input and copy the template files.
+Generate challenge files:
 
-```bash
-# Gets input and creates files for current day
-npm run today
+```shell
+bun g [day] [year]
+
+# Example
+bun g # Generate today's challenge files
+bun g 12 # Generate day 12 of this year's challenge files
+bun g 8 2019 # Generate day 8 of 2019's challenge files
 ```
 
-```bash
-# Gets input and creates files for selected day
-npm run day
+Run challenge:
 
-✔ Day … 6
-✔ Year … 2020
-Created directory src/2020/06
-No template found, adding empty files
-Saved input for AoC 2020 day 6!
+```shell
+bun <part> [day] [year]
+
+# Example
+bun 1 # Run part 1 of today's challenge
+bun 2 # Run part 2 of day 1 of this year
+bun 1 12 # Run part 1 of day 12 of this year
+bun 2 8 2019 # Run part 2 of day 8 of 2019
 ```
 
-Usually, I run `npm run today`, go to the `1.ts` file, try to solve the challenge, and hit
-<kbd>ctrl</kbd> + <kbd>R</kbd> to run the current file. Here's my WebStorm config for that:
+Run tests for some utility functions:
 
-![WebStorm Run Debug Configuration](./docs/webstorm-run-debug-configuration.png)
-
-## Tools
-
-- TypeScript
-- Jest
-- Prettier
+```shell
+bun test
+```

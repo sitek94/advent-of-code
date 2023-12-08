@@ -1,4 +1,5 @@
-import { createDefaultObj } from './collections'
+import {describe, expect, it} from 'bun:test'
+import {createDefaultObj} from './collections'
 
 describe('DefaultObj', () => {
   it('works with integers', () => {
@@ -17,7 +18,7 @@ describe('DefaultObj', () => {
   })
 
   it('works with arrays', () => {
-    const o = createDefaultObj([])
+    const o = createDefaultObj<string[]>([])
 
     o.a.push('a')
     o.b.push('b')
@@ -25,8 +26,8 @@ describe('DefaultObj', () => {
 
     // Can't use to equal because "o" is a Proxy and has additional properties
     expect(o).toMatchObject({
-      left: ['a'],
-      right: ['b'],
+      a: ['a'],
+      b: ['b'],
       c: ['c'],
     })
   })

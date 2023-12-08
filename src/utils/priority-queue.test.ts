@@ -1,4 +1,5 @@
-import { PriorityQueue } from './priority-queue'
+import {describe, expect, it} from 'bun:test'
+import {PriorityQueue} from './priority-queue'
 
 describe(`${PriorityQueue.name}`, () => {
   it('enqueues items in correct order with default `compare` function', () => {
@@ -18,16 +19,16 @@ describe(`${PriorityQueue.name}`, () => {
     }
     const pq = new PriorityQueue((a: Item, b: Item) => a.priority < b.priority)
 
-    pq.enqueue({ priority: 1 })
-    pq.enqueue({ priority: 5 })
-    pq.enqueue({ priority: 3 })
-    pq.enqueue({ priority: 7 })
+    pq.enqueue({priority: 1})
+    pq.enqueue({priority: 5})
+    pq.enqueue({priority: 3})
+    pq.enqueue({priority: 7})
 
     expect(pq.copy()).toEqual([
-      { priority: 1 },
-      { priority: 3 },
-      { priority: 5 },
-      { priority: 7 },
+      {priority: 1},
+      {priority: 3},
+      {priority: 5},
+      {priority: 7},
     ])
   })
 })

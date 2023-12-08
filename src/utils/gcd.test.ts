@@ -1,4 +1,5 @@
-import { gcd } from './gcd'
+import {describe, expect, it} from 'bun:test'
+import {gcd} from './gcd'
 
 describe(`${gcd.name}`, () => {
   it('works', () => {

@@ -1,4 +1,5 @@
-import { Grid2d } from './grid2d'
+import {Grid2d} from './grid2d'
+import {describe, expect, it, jest} from 'bun:test'
 
 describe(`${Grid2d.name}`, () => {
   const input = [
@@ -39,15 +40,15 @@ describe(`${Grid2d.name}`, () => {
       grid.forEachPoint(callback)
 
       expect(callback).toHaveBeenCalledTimes(9)
-      expect(callback).toHaveBeenNthCalledWith(1, { value: 1, x: 0, y: 0 })
-      expect(callback).toHaveBeenNthCalledWith(2, { value: 2, x: 1, y: 0 })
-      expect(callback).toHaveBeenNthCalledWith(3, { value: 3, x: 2, y: 0 })
-      expect(callback).toHaveBeenNthCalledWith(4, { value: 4, x: 0, y: 1 })
-      expect(callback).toHaveBeenNthCalledWith(5, { value: 5, x: 1, y: 1 })
-      expect(callback).toHaveBeenNthCalledWith(6, { value: 6, x: 2, y: 1 })
-      expect(callback).toHaveBeenNthCalledWith(7, { value: 7, x: 0, y: 2 })
-      expect(callback).toHaveBeenNthCalledWith(8, { value: 8, x: 1, y: 2 })
-      expect(callback).toHaveBeenNthCalledWith(9, { value: 9, x: 2, y: 2 })
+      expect(callback).toHaveBeenNthCalledWith(1, {value: 1, x: 0, y: 0})
+      expect(callback).toHaveBeenNthCalledWith(2, {value: 2, x: 1, y: 0})
+      expect(callback).toHaveBeenNthCalledWith(3, {value: 3, x: 2, y: 0})
+      expect(callback).toHaveBeenNthCalledWith(4, {value: 4, x: 0, y: 1})
+      expect(callback).toHaveBeenNthCalledWith(5, {value: 5, x: 1, y: 1})
+      expect(callback).toHaveBeenNthCalledWith(6, {value: 6, x: 2, y: 1})
+      expect(callback).toHaveBeenNthCalledWith(7, {value: 7, x: 0, y: 2})
+      expect(callback).toHaveBeenNthCalledWith(8, {value: 8, x: 1, y: 2})
+      expect(callback).toHaveBeenNthCalledWith(9, {value: 9, x: 2, y: 2})
     })
   })
 
@@ -55,45 +56,45 @@ describe(`${Grid2d.name}`, () => {
     it('invokes callback function for each point in UP direction, when invoked at bottom edge', () => {
       const callback = jest.fn()
 
-      grid.forEachPointInDirection('up', { x: 1, y: 2 }, callback)
+      grid.forEachPointInDirection('up', {x: 1, y: 2}, callback)
 
       expect(callback).toHaveBeenCalledTimes(3)
-      expect(callback).toHaveBeenNthCalledWith(1, { value: 8, x: 1, y: 2 })
-      expect(callback).toHaveBeenNthCalledWith(2, { value: 5, x: 1, y: 1 })
-      expect(callback).toHaveBeenNthCalledWith(3, { value: 2, x: 1, y: 0 })
+      expect(callback).toHaveBeenNthCalledWith(1, {value: 8, x: 1, y: 2})
+      expect(callback).toHaveBeenNthCalledWith(2, {value: 5, x: 1, y: 1})
+      expect(callback).toHaveBeenNthCalledWith(3, {value: 2, x: 1, y: 0})
     })
 
     it('invokes callback function for each point in DOWN direction, when invoked at top edge', () => {
       const callback = jest.fn()
 
-      grid.forEachPointInDirection('down', { x: 1, y: 0 }, callback)
+      grid.forEachPointInDirection('down', {x: 1, y: 0}, callback)
 
       expect(callback).toHaveBeenCalledTimes(3)
-      expect(callback).toHaveBeenNthCalledWith(1, { value: 2, x: 1, y: 0 })
-      expect(callback).toHaveBeenNthCalledWith(2, { value: 5, x: 1, y: 1 })
-      expect(callback).toHaveBeenNthCalledWith(3, { value: 8, x: 1, y: 2 })
+      expect(callback).toHaveBeenNthCalledWith(1, {value: 2, x: 1, y: 0})
+      expect(callback).toHaveBeenNthCalledWith(2, {value: 5, x: 1, y: 1})
+      expect(callback).toHaveBeenNthCalledWith(3, {value: 8, x: 1, y: 2})
     })
 
     it('invokes callback function for each point in LEFT direction, when invoked at right edge', () => {
       const callback = jest.fn()
 
-      grid.forEachPointInDirection('left', { x: 2, y: 1 }, callback)
+      grid.forEachPointInDirection('left', {x: 2, y: 1}, callback)
 
       expect(callback).toHaveBeenCalledTimes(3)
-      expect(callback).toHaveBeenNthCalledWith(1, { value: 6, x: 2, y: 1 })
-      expect(callback).toHaveBeenNthCalledWith(2, { value: 5, x: 1, y: 1 })
-      expect(callback).toHaveBeenNthCalledWith(3, { value: 4, x: 0, y: 1 })
+      expect(callback).toHaveBeenNthCalledWith(1, {value: 6, x: 2, y: 1})
+      expect(callback).toHaveBeenNthCalledWith(2, {value: 5, x: 1, y: 1})
+      expect(callback).toHaveBeenNthCalledWith(3, {value: 4, x: 0, y: 1})
     })
 
     it('invokes callback function for each point in RIGHT direction, when invoked at left edge', () => {
       const callback = jest.fn()
 
-      grid.forEachPointInDirection('right', { x: 0, y: 1 }, callback)
+      grid.forEachPointInDirection('right', {x: 0, y: 1}, callback)
 
       expect(callback).toHaveBeenCalledTimes(3)
-      expect(callback).toHaveBeenNthCalledWith(1, { value: 4, x: 0, y: 1 })
-      expect(callback).toHaveBeenNthCalledWith(2, { value: 5, x: 1, y: 1 })
-      expect(callback).toHaveBeenNthCalledWith(3, { value: 6, x: 2, y: 1 })
+      expect(callback).toHaveBeenNthCalledWith(1, {value: 4, x: 0, y: 1})
+      expect(callback).toHaveBeenNthCalledWith(2, {value: 5, x: 1, y: 1})
+      expect(callback).toHaveBeenNthCalledWith(3, {value: 6, x: 2, y: 1})
     })
   })
 })
