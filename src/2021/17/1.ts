@@ -1,5 +1,5 @@
-import { run } from '../../runner'
-import { max, range } from '../../../utils'
+import { run } from '~/runner'
+import { max, range } from '../../utils'
 
 function solve(input: string) {
   let [_, coords] = input.split(': ')

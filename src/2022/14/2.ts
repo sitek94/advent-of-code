@@ -1,6 +1,6 @@
 import range from 'just-range'
 
-import { run } from '../../runner'
+import { run } from '~/runner'
 
 type Coords = {
   x: number

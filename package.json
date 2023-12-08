@@ -3,6 +3,9 @@
   "scripts": {
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "test": "jest",
+    "1": "./scripts/cli.sh 1",
+    "2": "./scripts/cli.sh 2",
+    "g": "bun ./scripts/day.ts",
     "today": "ts-node scripts/today.ts",
     "day": "ts-node scripts/day.ts"
   },
@@ -11,6 +14,7 @@
     "@types/lodash.countby": "^4.6.6",
     "@types/node": "^16.11.11",
     "@types/prompts": "^2.0.14",
+    "cmd-ts": "^0.13.0",
     "common-tags": "^1.8.2",
     "dotenv": "^10.0.0",
     "get-caller-file": "^2.0.5",
@@ -30,5 +34,15 @@
     "ts-node": "^10.4.0",
     "typescript": "^4.5.2"
   },
-  "author": "Maciek Sitkowski <msitkowski94@gmail.com> (https://github.com/sitek94)"
+  "devDependencies": {
+    "@types/common-tags": "^1.8.4",
+    "bun-types": "latest",
+    "plop": "^4.0.0"
+  },
+  "author": "Maciek Sitkowski <msitkowski94@gmail.com> (https://github.com/sitek94)",
+  "module": "index.ts",
+  "type": "module",
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
 }

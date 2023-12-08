@@ -1,6 +1,6 @@
 // ONLY HORIZONTALLY
 
-import { abs, max, min } from '../../../utils'
+import { abs, max, min } from '../../utils'
 
 import { realInput } from './input'
 

@@ -1,7 +1,7 @@
 /**
  * Greatest Common Divisor (GCD) for two numbers
  */
-export const gcd = (a: number, b: number) => {
+export const gcd = (a: number, b: number): number => {
   if (a === 0) {
     return b
   }

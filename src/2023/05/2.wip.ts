@@ -1,6 +1,6 @@
 import split from 'just-split'
-import { log } from '../../../utils'
-import { run } from '../../runner'
+import { log } from '../../utils'
+import { run } from '~/runner'
 import unique from 'just-unique'
 
 function solve(input: string) {

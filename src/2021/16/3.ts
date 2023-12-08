@@ -1,5 +1,5 @@
-import { run } from '../../runner'
-import { range } from '../../../utils'
+import { run } from '~/runner'
+import { range } from '~/utils'
 
 let data = require('fs')
   .readFileSync(__dirname + '/input.txt', { encoding: 'utf-8' })

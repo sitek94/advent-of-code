@@ -1,13 +1,19 @@
 import kleur from 'kleur'
-import fetch from 'node-fetch'
-import dotenv from 'dotenv'
 import { existsSync, statSync, writeFileSync } from 'fs'
 
-dotenv.config()
+const AOC_API_URL = 'https://adventofcode.com'
+const AOC_SESSION_KEY = Bun.env.AOC_SESSION_KEY
+
+if (!AOC_SESSION_KEY) {
+  console.log(
+    kleur.red(
+      'MISSING SESSION KEY in .env file!\nPlease add it and try again.',
+    ),
+  )
+  process.exit(1)
+}
 
 export const fetchInput = async (year: number, day: number, path: string) => {
-  const API_URL = process.env.AOC_API ?? 'https://adventofcode.com'
-
   if (existsSync(path) && statSync(path).size > 0) {
     console.log(
       kleur.yellow(`Input for AoC ${year} day ${day} already fetched!`),
@@ -16,9 +22,9 @@ export const fetchInput = async (year: number, day: number, path: string) => {
     return
   }
 
-  fetch(`${API_URL}/${year}/day/${day}/input`, {
+  fetch(`${AOC_API_URL}/${year}/day/${day}/input`, {
     headers: {
-      cookie: `session=${process.env.AOC_SESSION_KEY}`,
+      cookie: `session=${AOC_SESSION_KEY}`,
     },
   })
     .then(res => {

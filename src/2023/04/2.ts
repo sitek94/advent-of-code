@@ -1,5 +1,5 @@
-import { range } from '../../../utils'
-import { run } from '../../runner'
+import { range } from '~/utils'
+import { run } from '~/runner'
 
 function solve(input: string) {
   let cards = {} as Record<string, number>

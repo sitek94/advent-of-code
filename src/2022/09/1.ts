@@ -1,4 +1,4 @@
-import { run } from '../../runner'
+import { run } from '~/runner'
 
 const { abs, sign } = Math
 

@@ -1,4 +1,4 @@
-import { run } from '../../runner'
+import { run } from '~/runner'
 import { isNumber } from '../../utils'
 
 function solve(input: string) {

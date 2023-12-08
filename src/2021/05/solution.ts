@@ -1,5 +1,5 @@
 import { Line, parseInput } from './input'
-import { abs, max, min } from '../../../utils'
+import { abs, max, min } from '../../utils'
 
 export const solvePartOne = (input: string) =>
   solve(input, drawHorizontalOrVerticalLine)

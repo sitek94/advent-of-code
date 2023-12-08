@@ -1,5 +1,5 @@
-import { log } from '../../../utils'
-import { run } from '../../runner'
+import { log } from '../../utils'
+import { run } from '~/runner'
 
 function solve(input: string) {
   const seeds = input.split('\n')[0].split('seeds: ')[1].split(' ').map(Number)

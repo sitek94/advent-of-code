@@ -1,4 +1,4 @@
-import { run } from '../../runner'
+import { run } from '~/runner'
 
 function solve(input: string) {
   let elves = input.split('\n\n')

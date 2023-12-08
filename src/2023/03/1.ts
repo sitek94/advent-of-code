@@ -1,4 +1,4 @@
-import { run } from '../../runner'
+import { run } from '~/runner'
 import util from 'util'
 
 const isDigit = (c: string) => c >= '0' && c <= '9'

@@ -1,4 +1,4 @@
-import { run } from '../../runner'
+import { run } from '~/runner'
 import groupBy from 'just-group-by'
 
 const isDigit = (c: string) => c >= '0' && c <= '9'

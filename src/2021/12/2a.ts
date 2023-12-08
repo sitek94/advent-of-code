@@ -6,7 +6,7 @@
  */
 
 import { createQueue } from '../../utils/collections'
-import { getInput } from '../../../utils'
+import { getInput } from '../../utils'
 
 const realInput = getInput()
 

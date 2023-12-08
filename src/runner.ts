@@ -7,9 +7,9 @@
  * https://github.com/caderek/aocrunner
  */
 
-import stripIndent from 'common-tags/lib/stripIndent'
+import { stripIndent } from 'common-tags'
 import getCallerFile from 'get-caller-file'
-import { toFixed } from '../utils'
+import { toFixed } from './utils'
 import path from 'path'
 import fs from 'fs'
 import kleur from 'kleur'
@@ -50,7 +50,12 @@ async function runAsync(
   inputFilePath: string,
   currentDir: string,
 ) {
-  await runTests(solution.tests, solution.solve, inputFilePath, currentDir)
+  await runTests(
+    solution.tests || [],
+    solution.solve,
+    inputFilePath,
+    currentDir,
+  )
 
   if (solution.onlyTests) {
     return
@@ -95,7 +100,7 @@ type TestInput =
 async function runTests(
   tests: Test[],
   solve: SolveFn,
-  inputFilePath,
+  inputFilePath: string,
   currentDir: string,
 ) {
   for (let i = 0; i < tests.length; i++) {
@@ -110,7 +115,7 @@ async function runTests(
       input = fs.readFileSync(inputFilePath).toString()
     }
 
-    const data = stripIndent(input)
+    const data = stripIndent(input!)
 
     const result = await solve(data)
 

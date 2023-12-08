@@ -1,5 +1,5 @@
 import { createDefaultObj, createQueue } from '../../utils/collections'
-import { run } from '../../runner'
+import { run } from '~/runner'
 
 // Test data
 const testInput = `start-A

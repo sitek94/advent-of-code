@@ -1,6 +1,6 @@
 import { isNumber } from '../../utils'
 import util from 'util'
-import { run } from '../../runner'
+import { run } from '~/runner'
 
 type Node = {
   left: Node | null

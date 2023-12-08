@@ -1,5 +1,5 @@
-import { run } from '../../runner'
-import { abs, max, range } from '../../../utils'
+import { run } from '~/runner'
+import { abs, max, range } from '../../utils'
 
 function solve(input: string) {
   let [dotsInput, instructionsInput] = input.split('\n\n')

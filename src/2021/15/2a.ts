@@ -1,5 +1,5 @@
-import { run } from '../../runner'
-import { range } from '../../../utils'
+import { run } from '~/runner'
+import { range } from '~/utils'
 
 const parse = input => input.split('\n').map(row => row.split('').map(Number))
 

@@ -1,5 +1,5 @@
-import { run } from '../../runner'
-import { abs } from '../../../utils'
+import { run } from '~/runner'
+import { abs } from '../../utils'
 import { PriorityQueue } from '../../utils/priority-queue'
 
 type Position = { x: number; y: number }

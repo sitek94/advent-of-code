@@ -1,4 +1,4 @@
-import { run } from '../../runner'
+import { run } from '~/runner'
 
 function solve() {
   const time = 61709066

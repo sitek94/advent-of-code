@@ -1,4 +1,4 @@
-import { run } from '../../runner'
+import { run } from '~/runner'
 import * as util from 'util'
 
 const isNumber = (n): n is number => typeof n === 'number'

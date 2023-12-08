@@ -1,4 +1,4 @@
-import { run } from '../../runner'
+import { run } from '~/runner'
 
 function solve(input: string) {
   const MONKEYS = input.split('\n\n').map(monkey => {

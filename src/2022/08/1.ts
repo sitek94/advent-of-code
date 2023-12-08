@@ -1,4 +1,4 @@
-import { run } from '../../runner'
+import { run } from '~/runner'
 import { Direction, Grid2d, Point, DIRECTIONS } from '../../utils/grid2d'
 
 function solve(input: string) {
