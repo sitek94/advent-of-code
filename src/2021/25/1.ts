@@ -1,5 +1,5 @@
-import { run } from '~/runner'
-import { range } from '~/utils'
+import {run} from '~/runner'
+import {range} from '~/utils'
 
 const EMPTY = '.'
 
@@ -8,7 +8,7 @@ enum Direction {
   EAST = '>',
 }
 
-const { SOUTH, EAST } = Direction
+const {SOUTH, EAST} = Direction
 
 function solve(input: string) {
   const lines = input.split('\n')
@@ -56,7 +56,7 @@ function solve(input: string) {
         continue
       }
 
-      const { x, y } = fromKey(key)
+      const {x, y} = fromKey(key)
 
       const nextFieldKey = getNextFieldKey(grid, x, y)
       const nextFieldValue = grid[nextFieldKey]
@@ -101,7 +101,7 @@ function solve(input: string) {
 
 function fromKey(key: string) {
   const [x, y] = key.split(',')
-  return { x: parseInt(x), y: parseInt(y) }
+  return {x: parseInt(x), y: parseInt(y)}
 }
 
 function toKey(x: number, y: number) {

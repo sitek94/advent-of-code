@@ -5,8 +5,8 @@
  * It takes nearly 3 minutes to solve the actual challenge input, but it works!
  */
 
-import { createQueue } from '../../utils/collections'
-import { getInput } from '../../utils'
+import {createQueue} from '../../utils/collections'
+import {getInput} from '../../utils'
 
 const realInput = getInput()
 
@@ -68,7 +68,7 @@ function run() {
   console.log(AdjacencyList)
 
   const Queue = createQueue([
-    { node: 'start', smallNodes: ['start'], smallNodeThatAppearedTwice: null },
+    {node: 'start', smallNodes: ['start'], smallNodeThatAppearedTwice: null},
   ])
 
   let count = 0

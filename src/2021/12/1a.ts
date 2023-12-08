@@ -1,5 +1,5 @@
-import { createDefaultObj, createQueue } from '../../utils/collections'
-import { run } from '~/runner'
+import {createDefaultObj, createQueue} from '../../utils/collections'
+import {run} from '~/runner'
 
 // Test data
 const testInput = `start-A
@@ -20,12 +20,12 @@ function solve(input: string) {
     AdjacencyList[b].push(a)
   }
 
-  const Queue = createQueue([{ node: 'start', smallNodes: ['start'] }])
+  const Queue = createQueue([{node: 'start', smallNodes: ['start']}])
 
   let answer = 0
 
   while (Queue.isNotEmpty()) {
-    let { node: currentNode, smallNodes } = Queue.dequeue()
+    let {node: currentNode, smallNodes} = Queue.dequeue()
     if (currentNode === 'end') {
       answer++
       continue
@@ -44,7 +44,7 @@ function solve(input: string) {
         smallNodesCopy.push(node)
       }
 
-      Queue.enqueue({ node, smallNodes: smallNodesCopy })
+      Queue.enqueue({node, smallNodes: smallNodesCopy})
     }
   }
 

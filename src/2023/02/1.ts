@@ -1,4 +1,4 @@
-import { run } from '~/runner'
+import {run} from '~/runner'
 
 function solve(input: string) {
   let score = 0
@@ -14,7 +14,7 @@ function solve(input: string) {
         continue
       }
 
-      const values = { blue: 0, red: 0, green: 0 }
+      const values = {blue: 0, red: 0, green: 0}
 
       set.split(', ').flatMap(cube => {
         const [value, color] = cube.split(' ')

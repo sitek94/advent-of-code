@@ -1,4 +1,4 @@
-import { run } from '~/runner'
+import {run} from '~/runner'
 
 function solve(input: string) {
   type Instr = 'inp' | 'add' | 'mul' | 'div' | 'mod' | 'eql'

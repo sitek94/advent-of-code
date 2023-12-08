@@ -1,6 +1,6 @@
-import { isNumber } from '../../utils'
+import {isNumber} from '../../utils'
 import util from 'util'
-import { run } from '~/runner'
+import {run} from '~/runner'
 
 type Node = {
   left: Node | null
@@ -54,10 +54,10 @@ function parse(input) {
 function reduce(root: Node) {
   let done = true
 
-  let stack = [{ node: root, depth: 0 }]
+  let stack = [{node: root, depth: 0}]
 
   while (stack.length > 0) {
-    const { node, depth } = stack.pop()
+    const {node, depth} = stack.pop()
 
     if (!node) {
       continue
@@ -127,8 +127,8 @@ function reduce(root: Node) {
       break
     }
 
-    stack.push({ node: node.right, depth: depth + 1 })
-    stack.push({ node: node.left, depth: depth + 1 })
+    stack.push({node: node.right, depth: depth + 1})
+    stack.push({node: node.left, depth: depth + 1})
   }
 
   if (!done) {
@@ -136,10 +136,10 @@ function reduce(root: Node) {
     return
   }
 
-  stack = [{ node: root, depth: null }]
+  stack = [{node: root, depth: null}]
 
   while (stack.length > 0) {
-    const { node } = stack.pop()
+    const {node} = stack.pop()
     if (!node) {
       continue
     }
@@ -158,8 +158,8 @@ function reduce(root: Node) {
       }
     }
 
-    stack.push({ node: node.right, depth: null })
-    stack.push({ node: node.left, depth: null })
+    stack.push({node: node.right, depth: null})
+    stack.push({node: node.left, depth: null})
   }
 
   if (!done) {
@@ -168,7 +168,7 @@ function reduce(root: Node) {
 }
 
 function log(sth: any) {
-  console.log(util.inspect(sth, { depth: 5, colors: true }))
+  console.log(util.inspect(sth, {depth: 5, colors: true}))
 }
 
 function solve(input) {

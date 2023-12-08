@@ -1,5 +1,5 @@
-import { run } from '~/runner'
-import { max, min, range } from '../../utils'
+import {run} from '~/runner'
+import {max, min, range} from '../../utils'
 
 function solve(input: string) {
   let [template, rulesInput] = input.split('\n\n')

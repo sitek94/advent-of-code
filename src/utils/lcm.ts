@@ -1,4 +1,4 @@
-import { gcd } from './gcd'
+import {gcd} from './gcd'
 
 /**
  * Least Common Multiple (LCM) for two numbers

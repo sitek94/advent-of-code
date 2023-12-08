@@ -1,5 +1,5 @@
-import { log } from 'console'
-import { run } from '~/runner'
+import {log} from 'console'
+import {run} from '~/runner'
 import zip from 'just-zip-it'
 
 function solve(input: string) {

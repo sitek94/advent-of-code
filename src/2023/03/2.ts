@@ -1,4 +1,4 @@
-import { run } from '~/runner'
+import {run} from '~/runner'
 import groupBy from 'just-group-by'
 
 const isDigit = (c: string) => c >= '0' && c <= '9'
@@ -9,8 +9,8 @@ function solve(input: string) {
 
   type PotentialPart = {
     number: string
-    coords: { x: number; y: number }[]
-    gear: { x: number; y: number } | null
+    coords: {x: number; y: number}[]
+    gear: {x: number; y: number} | null
   }
 
   const grid = []
@@ -20,7 +20,7 @@ function solve(input: string) {
     const value = grid[y]?.[x]
     return {
       isSymbol: isSymbol(value),
-      gear: value === '*' ? { x, y } : null,
+      gear: value === '*' ? {x, y} : null,
     }
   }
 
@@ -32,15 +32,15 @@ function solve(input: string) {
     line.split('').forEach((char, x) => {
       if (isDigit(char)) {
         number += char
-        coords.push({ x, y })
+        coords.push({x, y})
       } else if (number.length) {
-        parts.push({ number, coords, gear: null })
+        parts.push({number, coords, gear: null})
         number = ''
         coords = []
       }
       // Consider last number in line
       if (x === line.length - 1 && number.length) {
-        parts.push({ number, coords, gear: null })
+        parts.push({number, coords, gear: null})
         number = ''
         coords = []
       }
@@ -49,11 +49,11 @@ function solve(input: string) {
 
   const withGear = [] as PotentialPart[]
 
-  parts.forEach(({ coords, number }) => {
+  parts.forEach(({coords, number}) => {
     let isValid = false
     let gear: PotentialPart['gear'] = null
 
-    coords.forEach(({ x, y }, i) => {
+    coords.forEach(({x, y}, i) => {
       if (isValid) return
 
       // first coord
@@ -96,18 +96,18 @@ function solve(input: string) {
     })
 
     if (gear) {
-      withGear.push({ number, coords, gear })
+      withGear.push({number, coords, gear})
     }
   })
 
   const grouped = Object.values(
-    groupBy(withGear, ({ gear: { x, y } }) => `${x},${y}`),
+    groupBy(withGear, ({gear: {x, y}}) => `${x},${y}`),
   )
 
   const atLeastTwo = grouped.filter(group => group.length > 1)
 
   const score2 = atLeastTwo.reduce((sum, parts) => {
-    return sum + parts.reduce((result, { number }) => result * +number, 1)
+    return sum + parts.reduce((result, {number}) => result * +number, 1)
   }, 0)
 
   return score2

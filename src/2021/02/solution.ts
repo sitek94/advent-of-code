@@ -1,10 +1,10 @@
-import type { Action } from './input'
+import type {Action} from './input'
 
 export function partOne(actions: Action[]) {
   let position = 0
   let depth = 0
 
-  for (const { type, value } of actions) {
+  for (const {type, value} of actions) {
     if (type === 'down') {
       depth += value
     }
@@ -24,7 +24,7 @@ export function partTwo(actions: Action[]) {
   let depth = 0
   let aim = 0
 
-  for (const { type, value } of actions) {
+  for (const {type, value} of actions) {
     if (type === 'down') {
       aim += value
     }

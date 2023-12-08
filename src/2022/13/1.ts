@@ -1,5 +1,5 @@
-import { run } from '~/runner'
-import { isArray, isNumber, max } from '../../utils'
+import {run} from '~/runner'
+import {isArray, isNumber, max} from '../../utils'
 
 /**
  * If both values are integers, the lower integer should come first. If the left integer is lower than the right integer,

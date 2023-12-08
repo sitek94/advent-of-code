@@ -1,5 +1,5 @@
-import { run } from '~/runner'
-import { isArray, isNumber, max } from '../../utils'
+import {run} from '~/runner'
+import {isArray, isNumber, max} from '../../utils'
 
 function solve(input: string) {
   type Value = number | number[] | Value[]

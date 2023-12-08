@@ -1,6 +1,6 @@
 // @ts-nocheck */
 let data = require('fs')
-  .readFileSync(__dirname + '/input.txt', { encoding: 'utf-8' })
+  .readFileSync(__dirname + '/input.txt', {encoding: 'utf-8'})
   .trim()
 
 let bits = []
@@ -35,7 +35,7 @@ function readPacket(o, cb) {
       cb(version)
       let length = readBits(o, 15)
       let sub = o.bits.slice(o.pos, o.pos + length)
-      let state = { bits: sub, pos: 0 }
+      let state = {bits: sub, pos: 0}
       while (readPacket(state, cb));
       o.pos += length
     } else {
@@ -48,7 +48,7 @@ function readPacket(o, cb) {
   return true
 }
 
-let state = { bits, pos: 0 }
+let state = {bits, pos: 0}
 let sum = 0
 while (readPacket(state, version => (sum += version)));
 console.log(sum)

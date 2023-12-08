@@ -1,7 +1,7 @@
 import path from 'path'
 import fs from 'fs'
-import { green } from 'kleur'
-import { fetchInput } from './fetch-input'
+import {green} from 'kleur'
+import {fetchInput} from './fetch-input'
 
 export function getChallenge(day: number, year: number) {
   let yearStr = String(year)
@@ -12,13 +12,13 @@ export function getChallenge(day: number, year: number) {
 
   // Create directory if doesn't exist
   if (!fs.existsSync(dayDir)) {
-    fs.mkdirSync(dayDir, { recursive: true })
+    fs.mkdirSync(dayDir, {recursive: true})
     console.log(green(`Created directory ${dayDir}`))
   }
 
   // Copy template files to day directory
   if (fs.existsSync(templateDir)) {
-    fs.cpSync(templateDir, dayDir, { recursive: true })
+    fs.cpSync(templateDir, dayDir, {recursive: true})
     console.log(green(`Copied template files to ${dayDir}`))
   } else {
     console.log(green(`No template found, adding empty files`))

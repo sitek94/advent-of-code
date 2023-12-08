@@ -1,4 +1,4 @@
-import { run } from '~/runner'
+import {run} from '~/runner'
 
 const CARDS = ['J', '2', '3', '4', '5', '6', '7', '8', '9', 'T', 'Q', 'K', 'A']
 
@@ -9,14 +9,17 @@ type Line = {
 }
 
 const getCounts = (cards: string[]) => {
-  const cardCounts = cards.reduce((acc, card) => {
-    if (card === 'J') {
-      acc[card] = 0
+  const cardCounts = cards.reduce(
+    (acc, card) => {
+      if (card === 'J') {
+        acc[card] = 0
+        return acc
+      }
+      acc[card] = acc[card] ? acc[card] + 1 : 1
       return acc
-    }
-    acc[card] = acc[card] ? acc[card] + 1 : 1
-    return acc
-  }, {} as Record<string, number>)
+    },
+    {} as Record<string, number>,
+  )
 
   return cardCounts
 }
@@ -168,7 +171,7 @@ function solve(input: string) {
     .map(line => {
       const [hand, bid] = line
 
-      return { hand: hand.split(''), bid: +bid }
+      return {hand: hand.split(''), bid: +bid}
     })
 
   const converted = lines.map(line => {

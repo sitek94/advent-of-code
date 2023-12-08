@@ -1,25 +1,25 @@
-import { run } from '~/runner'
+import {run} from '~/runner'
 
-const { abs, sign } = Math
+const {abs, sign} = Math
 
 function solve(input: string) {
   const moves = input
     .split('\n')
     .map(m => m.split(' ').map((item, i) => (i === 1 ? Number(item) : item)))
 
-  type Point = { x: number; y: number }
+  type Point = {x: number; y: number}
 
   const [HEAD, ...LINE] = [
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
-    { x: 0, y: 0 },
+    {x: 0, y: 0},
+    {x: 0, y: 0},
+    {x: 0, y: 0},
+    {x: 0, y: 0},
+    {x: 0, y: 0},
+    {x: 0, y: 0},
+    {x: 0, y: 0},
+    {x: 0, y: 0},
+    {x: 0, y: 0},
+    {x: 0, y: 0},
   ] as Point[]
 
   const areTouching = (t: Point, h: Point) =>

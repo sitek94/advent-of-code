@@ -1,5 +1,5 @@
-import { realRawInput } from './input'
-import { assert } from '../../utils'
+import {realRawInput} from './input'
+import {assert} from '../../utils'
 
 const shortInput = realRawInput.split('\n').map(l => l.split(' | ')[1])
 

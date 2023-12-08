@@ -1,4 +1,4 @@
-import { realRawInput } from './input'
+import {realRawInput} from './input'
 
 const lines = realRawInput.split('\n').map(l => l.split(' | '))
 

@@ -1,5 +1,5 @@
-import { run } from '~/runner'
-import { range } from '~/utils'
+import {run} from '~/runner'
+import {range} from '~/utils'
 
 const parse = input => input.split('\n').map(row => row.split('').map(Number))
 
@@ -57,7 +57,7 @@ const shortestPath = (map, startPos = [0, 0]) => {
     [-1, 0],
     [0, -1],
   ]
-  const queue = [{ pos: startPos, cost: 0 }]
+  const queue = [{pos: startPos, cost: 0}]
   const visited = new Set()
   while (queue.length) {
     const {
@@ -71,7 +71,7 @@ const shortestPath = (map, startPos = [0, 0]) => {
       .filter(pos => !visited.has(pos + ''))
       .forEach(pos => {
         visited.add(pos + '')
-        queue.push({ pos, cost: cost + map[pos[1]][pos[0]] })
+        queue.push({pos, cost: cost + map[pos[1]][pos[0]]})
       })
     queue.sort((a, b) => a.cost - b.cost)
   }

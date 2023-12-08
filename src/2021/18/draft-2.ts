@@ -1,4 +1,4 @@
-import { run } from '~/runner'
+import {run} from '~/runner'
 import * as util from 'util'
 
 const isNumber = (n): n is number => typeof n === 'number'
@@ -20,7 +20,7 @@ function solve() {}
 let input: SnailNumber = [[[[[9, 8], 1], 2], 3], 4]
 
 const tree = createNode(input, null, 0)
-console.log(util.inspect(tree, { depth: 5 }))
+console.log(util.inspect(tree, {depth: 5}))
 tryExplode(tree)
 
 function tryExplode(node: Node | [number, number] | number | null) {

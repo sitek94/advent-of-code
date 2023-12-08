@@ -1,11 +1,11 @@
-import { run } from '~/runner'
-import { range } from '~/utils'
+import {run} from '~/runner'
+import {range} from '~/utils'
 
 let data = require('fs')
-  .readFileSync(__dirname + '/input.txt', { encoding: 'utf-8' })
+  .readFileSync(__dirname + '/input.txt', {encoding: 'utf-8'})
   .trim()
 
-type Packet = { type: number; version: number; data: string }
+type Packet = {type: number; version: number; data: string}
 
 function parsePacket(data: string, cb: (p: Packet) => void) {
   let bits = data.split('')
@@ -13,7 +13,7 @@ function parsePacket(data: string, cb: (p: Packet) => void) {
   let version = parseInt(readBits(3), 2)
   let type = parseInt(readBits(3), 2)
 
-  cb({ type, version, data: '' })
+  cb({type, version, data: ''})
   // Packets with type ID 4 represent a LITERAL VALUE
   if (type === 4) {
     let value = ''
@@ -59,7 +59,7 @@ function parsePacket(data: string, cb: (p: Packet) => void) {
         subpacketContent = packet.data
       }
 
-      return { version, type, data: bits.join('') }
+      return {version, type, data: bits.join('')}
 
       // If "1", then the next 11 bits are a number that represents the number
       // of sub-packets immediately contained by this packet.
@@ -76,7 +76,7 @@ function parsePacket(data: string, cb: (p: Packet) => void) {
         subpacketsData = packet.data
       }
 
-      return { version, type, data: subpacketsData }
+      return {version, type, data: subpacketsData}
     }
   }
 

@@ -1,13 +1,13 @@
-import { run } from '~/runner'
-import { range } from '~/utils'
+import {run} from '~/runner'
+import {range} from '~/utils'
 
 let data = require('fs')
-  .readFileSync(__dirname + '/input.txt', { encoding: 'utf-8' })
+  .readFileSync(__dirname + '/input.txt', {encoding: 'utf-8'})
   .trim()
 
-type BasePacket = { type: number; version: number; data: string }
+type BasePacket = {type: number; version: number; data: string}
 
-type LiteralPacket = BasePacket & { value: number }
+type LiteralPacket = BasePacket & {value: number}
 type OperatorPacket = BasePacket & {
   subpackets: Packet[]
 }

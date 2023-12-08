@@ -1,4 +1,4 @@
-import { run } from '~/runner'
+import {run} from '~/runner'
 
 function solve(input: string) {
   const instructions = input
@@ -14,15 +14,15 @@ function solve(input: string) {
     return !instruction
       ? null
       : instruction === 'noop'
-      ? {
-          tick: 0,
-        }
-      : {
-          tick: 1,
-          exec: () => {
-            X += Number(instruction)
-          },
-        }
+        ? {
+            tick: 0,
+          }
+        : {
+            tick: 1,
+            exec: () => {
+              X += Number(instruction)
+            },
+          }
   }
   let current = next()
   let cycle = 1

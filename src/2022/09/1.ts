@@ -1,6 +1,6 @@
-import { run } from '~/runner'
+import {run} from '~/runner'
 
-const { abs, sign } = Math
+const {abs, sign} = Math
 
 function solve(input: string) {
   const moves = input
@@ -8,9 +8,9 @@ function solve(input: string) {
     .map(m => m.split(' ').map((item, i) => (i === 1 ? Number(item) : item)))
 
   // head
-  const h = { x: 0, y: 0 }
+  const h = {x: 0, y: 0}
   // tail
-  const t = { x: 0, y: 0 }
+  const t = {x: 0, y: 0}
 
   const areTouching = () =>
     (h.y === t.y && h.x === t.x) ||

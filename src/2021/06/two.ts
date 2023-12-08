@@ -5,7 +5,7 @@
 
 // when created two more days
 
-import { range } from '~/utils'
+import {range} from '~/utils'
 
 let fish = [
   2, 1, 1, 4, 4, 1, 3, 4, 2, 4, 2, 1, 1, 4, 3, 5, 1, 1, 5, 1, 1, 5, 4, 5, 4, 1,

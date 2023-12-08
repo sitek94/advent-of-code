@@ -1,6 +1,6 @@
 import range from 'just-range'
 
-import { run } from '~/runner'
+import {run} from '~/runner'
 
 type Coords = {
   x: number
@@ -41,9 +41,9 @@ const parseRocksInput = (input: string) => {
             current.x,
             next.x + Math.sign(next.x - current.x),
           )) {
-            const node = { x, y: current.y }
+            const node = {x, y: current.y}
             const id = getId(node)
-            initialMap.set(id, { ...node, id })
+            initialMap.set(id, {...node, id})
           }
         }
         if (current.x === next.x) {
@@ -51,9 +51,9 @@ const parseRocksInput = (input: string) => {
             current.y,
             next.y + Math.sign(next.y - current.y),
           )) {
-            const node = { x: current.x, y }
+            const node = {x: current.x, y}
             const id = getId(node)
-            initialMap.set(id, { ...node, id })
+            initialMap.set(id, {...node, id})
           }
         }
       }
@@ -74,7 +74,7 @@ const parseRocksInput = (input: string) => {
 
   const rocksMap = new Map<string, Node>()
 
-  for (let { x, y } of initialMap.values()) {
+  for (let {x, y} of initialMap.values()) {
     const node = createNode({
       x: x - minX + paddingX,
       y: y,
@@ -83,7 +83,7 @@ const parseRocksInput = (input: string) => {
   }
 
   for (let x of range(-paddingX, width + paddingX)) {
-    const node = createNode({ x, y: floorY })
+    const node = createNode({x, y: floorY})
     rocksMap.set(node.id, node)
   }
 
@@ -98,9 +98,9 @@ const parseRocksInput = (input: string) => {
 }
 
 function solve(input: string) {
-  const { map: rocksMap, width, height, minX } = parseRocksInput(input)
+  const {map: rocksMap, width, height, minX} = parseRocksInput(input)
 
-  const sandStart = { x: 500 - minX + paddingX, y: 0 }
+  const sandStart = {x: 500 - minX + paddingX, y: 0}
   const createStartSand = () => createNode(sandStart)
 
   const sandsMap = new Map<string, Node>()
@@ -115,9 +115,9 @@ function solve(input: string) {
     !isOutside(node) && !isRock(node) && !isSand(node)
 
   const gravity = (sand: Node) => {
-    const below = createNode({ x: sand.x, y: sand.y + 1 })
-    const belowLeft = createNode({ x: sand.x - 1, y: sand.y + 1 })
-    const belowRight = createNode({ x: sand.x + 1, y: sand.y + 1 })
+    const below = createNode({x: sand.x, y: sand.y + 1})
+    const belowLeft = createNode({x: sand.x - 1, y: sand.y + 1})
+    const belowRight = createNode({x: sand.x + 1, y: sand.y + 1})
 
     if (isOutside(below)) {
       return null

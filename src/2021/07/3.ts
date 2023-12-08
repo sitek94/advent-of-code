@@ -1,6 +1,6 @@
-import { abs } from '../../utils'
+import {abs} from '../../utils'
 
-import { realInput } from './input'
+import {realInput} from './input'
 
 const input = realInput.sort((a, b) => a - b)
 

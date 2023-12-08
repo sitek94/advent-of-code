@@ -1,11 +1,11 @@
-import { range } from '~/utils'
+import {range} from '~/utils'
 
 export function partOne(numbers: string[]) {
   let gamma = ''
   let epsilon = ''
 
   for (const bitIndex of range(numbers[0].length)) {
-    const { zeros, ones } = getBitCountsAtIndex(numbers, bitIndex)
+    const {zeros, ones} = getBitCountsAtIndex(numbers, bitIndex)
     if (ones > zeros) {
       gamma += '1'
       epsilon += '0'
@@ -48,12 +48,12 @@ function findNumber(
 }
 
 function getMostCommonBitAtIndex(numbers: string[], index: number) {
-  const { zeros, ones } = getBitCountsAtIndex(numbers, index)
+  const {zeros, ones} = getBitCountsAtIndex(numbers, index)
   return ones >= zeros ? '1' : '0'
 }
 
 function getLeastCommonBitAtIndex(numbers: string[], index: number) {
-  const { zeros, ones } = getBitCountsAtIndex(numbers, index)
+  const {zeros, ones} = getBitCountsAtIndex(numbers, index)
   return ones >= zeros ? '0' : '1'
 }
 
@@ -69,5 +69,5 @@ export function getBitCountsAtIndex(numbers: string[], index: number) {
     }
   }
 
-  return { ones, zeros }
+  return {ones, zeros}
 }

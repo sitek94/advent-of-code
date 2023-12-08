@@ -1,5 +1,5 @@
 // import { createLinePoints, drawGrid, drawLine, partTwo } from './solution';
-import { createLine, exampleRawInput, parseInput, realRawInput } from './input'
+import {createLine, exampleRawInput, parseInput, realRawInput} from './input'
 import {
   createGrid,
   drawHorizontalOrVerticalLine,
@@ -67,9 +67,9 @@ test('drawLine works', () => {
 
 describe('getPoints', () => {
   it('works with horizontal and vertical lines', () => {
-    expect(getPoints([0, 0, 2, 2], { diagonal: false })).toEqual([])
+    expect(getPoints([0, 0, 2, 2], {diagonal: false})).toEqual([])
 
-    expect(getPoints([2, 2, 2, 0], { diagonal: false })).toEqual([
+    expect(getPoints([2, 2, 2, 0], {diagonal: false})).toEqual([
       [2, 0],
       [2, 1],
       [2, 2],
@@ -77,13 +77,13 @@ describe('getPoints', () => {
   })
 
   it('works for diagonal lines', () => {
-    expect(getPoints([0, 0, 2, 2], { diagonal: true })).toEqual([
+    expect(getPoints([0, 0, 2, 2], {diagonal: true})).toEqual([
       [0, 0],
       [1, 1],
       [2, 2],
     ])
 
-    expect(getPoints([2, 2, 0, 0], { diagonal: true })).toEqual([
+    expect(getPoints([2, 2, 0, 0], {diagonal: true})).toEqual([
       [2, 2],
       [1, 1],
       [0, 0],

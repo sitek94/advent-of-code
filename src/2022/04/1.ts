@@ -1,4 +1,4 @@
-import { run } from '~/runner'
+import {run} from '~/runner'
 
 function solve(input: string) {
   let pairs = input.split('\n').map(p => p.split(','))

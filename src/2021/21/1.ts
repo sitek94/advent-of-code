@@ -1,4 +1,4 @@
-import { run } from '~/runner'
+import {run} from '~/runner'
 
 function solve(input: string) {
   let [pos1, pos2] = input.split('\n').map(l => Number(l.split(': ')[1]))
@@ -13,8 +13,8 @@ function solve(input: string) {
   }
 
   const players: [Player, Player] = [
-    { name: '1', pos: pos1, score: 0 },
-    { name: '2', pos: pos2, score: 0 },
+    {name: '1', pos: pos1, score: 0},
+    {name: '2', pos: pos2, score: 0},
   ]
 
   function move(player: Player) {

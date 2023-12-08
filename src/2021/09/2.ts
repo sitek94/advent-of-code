@@ -1,4 +1,4 @@
-import { realInput } from './input'
+import {realInput} from './input'
 
 const input = `2199943210
 3987894921

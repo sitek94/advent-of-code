@@ -1,8 +1,8 @@
-import { run } from '~/runner'
-import { abs } from '../../utils'
-import { PriorityQueue } from '../../utils/priority-queue'
+import {run} from '~/runner'
+import {abs} from '../../utils'
+import {PriorityQueue} from '../../utils/priority-queue'
 
-type Position = { x: number; y: number }
+type Position = {x: number; y: number}
 type Point = {
   id: string
   value: number
@@ -48,10 +48,10 @@ function solve(input: string) {
   const HEIGHT = GRID.length
   const EDGE_WEIGHT = 1
   const DIRECTIONS = [
-    { x: 0, y: -1 },
-    { x: 0, y: 1 },
-    { x: -1, y: 0 },
-    { x: 1, y: 0 },
+    {x: 0, y: -1},
+    {x: 0, y: 1},
+    {x: -1, y: 0},
+    {x: 1, y: 0},
   ]
 
   const heuristic = (point: Point) => manhattanDistance(point, END)
@@ -73,9 +73,9 @@ function solve(input: string) {
   // Add neighbours for each point
   for (let y = 0; y < HEIGHT; y++) {
     for (let x = 0; x < WIDTH; x++) {
-      const point = getPoint({ x, y })
+      const point = getPoint({x, y})
       for (let direction of DIRECTIONS) {
-        const neighbour = getPoint({ x: x + direction.x, y: y + direction.y })
+        const neighbour = getPoint({x: x + direction.x, y: y + direction.y})
         if (isWithinGrid(neighbour) && canMove(point, neighbour)) {
           point.neighbours.push(neighbour)
         }

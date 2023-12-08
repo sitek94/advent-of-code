@@ -1,4 +1,4 @@
-import { run } from '~/runner'
+import {run} from '~/runner'
 
 function solve(input: string) {
   let binary = parseInt(input, 16).toString(2)
@@ -23,7 +23,7 @@ function solve(input: string) {
       if (LENGTH_ID === '0') {
         let subpacket_length = parseInt(binary.slice(i, i + 15), 2)
         i += 15
-        console.log({ subpacket_length })
+        console.log({subpacket_length})
 
         let numbers = []
         let stop = false
@@ -36,7 +36,7 @@ function solve(input: string) {
         //   numbers.push(number);
         //   i += number.length;
         // }
-        console.log({ numbers })
+        console.log({numbers})
       }
     }
     if (i >= binary.length - 1) {
@@ -55,7 +55,7 @@ function solve(input: string) {
       i += 3
       let prefix = binary[i]
       i += 1
-      console.log({ prefix })
+      console.log({prefix})
       let group = binary.slice(i, i + 4)
       groups.push(group)
       i += 4
@@ -63,7 +63,7 @@ function solve(input: string) {
         stop = true
       }
     }
-    console.log({ groups })
+    console.log({groups})
     let number = groups.join('')
     return number
   }

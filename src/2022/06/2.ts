@@ -1,4 +1,4 @@
-import { run } from '~/runner'
+import {run} from '~/runner'
 
 const unique = arr => arr.every((c, i) => arr.lastIndexOf(c) === i)
 

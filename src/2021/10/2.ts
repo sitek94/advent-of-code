@@ -1,4 +1,4 @@
-import { realInput } from './input'
+import {realInput} from './input'
 
 const input = `[({(<(())[]>[[{[]{<()<>>
 [(()[<>])]({[<{<<[]>>(

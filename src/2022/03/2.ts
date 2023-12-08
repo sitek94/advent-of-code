@@ -1,4 +1,4 @@
-import { run } from '~/runner'
+import {run} from '~/runner'
 
 const A_CHAR_CODE = 65
 const a_CHAR_CODE = 97

@@ -1,5 +1,5 @@
-import { command, run, number, option } from 'cmd-ts'
-import { getChallenge } from './get-challenge'
+import {command, run, number, option} from 'cmd-ts'
+import {getChallenge} from './get-challenge'
 
 const cmd = command({
   name: 'generate',
@@ -18,16 +18,9 @@ const cmd = command({
       defaultValue: () => new Date().getFullYear(),
     }),
   },
-  handler: ({ day, year }) => {
+  handler: ({day, year}) => {
     getChallenge(day, year)
   },
 })
 
 run(cmd, process.argv.slice(2))
-
-
-
-
-
-
-

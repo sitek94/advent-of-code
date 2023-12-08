@@ -1,5 +1,5 @@
-import { Line, parseInput } from './input'
-import { abs, max, min } from '../../utils'
+import {Line, parseInput} from './input'
+import {abs, max, min} from '../../utils'
 
 export const solvePartOne = (input: string) =>
   solve(input, drawHorizontalOrVerticalLine)
@@ -26,7 +26,7 @@ export function solve(
  * Creates a drawLine fn that️ MUTATES the grid
  */
 const drawLineFactory = (diagonal: boolean) => (grid: Grid, line: Line) => {
-  const points = getPoints(line, { diagonal })
+  const points = getPoints(line, {diagonal})
   points.forEach(([x, y]) => {
     grid[x][y]++
   })
@@ -37,7 +37,7 @@ export const drawLine = drawLineFactory(true)
 
 type Point = [number, number]
 
-export function getPoints(line: Line, config: { diagonal: boolean }): Point[] {
+export function getPoints(line: Line, config: {diagonal: boolean}): Point[] {
   const [x0, y0, x1, y1] = line
 
   const points: Point[] = []

@@ -1,5 +1,5 @@
 import split from 'just-split'
-import { range, sum } from '../../utils'
+import {range, sum} from '../../utils'
 
 const MARKED = -1
 const BOARD_SIDE = 5

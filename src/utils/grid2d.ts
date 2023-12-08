@@ -41,7 +41,7 @@ export class Grid2d<T = any> {
   forEachPoint(callbackFn: (point: Point<T>) => void) {
     this.forEachRow((row, y) => {
       row.forEach((value, x) => {
-        callbackFn({ x, y, value })
+        callbackFn({x, y, value})
       })
     })
   }
@@ -66,14 +66,14 @@ export class Grid2d<T = any> {
     direction: Direction,
     start: Coords,
     callbackFn: (point: Point<T>) => void,
-    { includeStart = true } = {},
+    {includeStart = true} = {},
   ) {
     let coords = includeStart
       ? start
       : this.getCoordsInDirection(start, direction)
 
     while (this.isWithinGrid(coords)) {
-      callbackFn({ ...coords, value: this.getValue(coords) })
+      callbackFn({...coords, value: this.getValue(coords)})
       coords = this.getCoordsInDirection(coords, direction)
     }
   }
@@ -86,7 +86,7 @@ export class Grid2d<T = any> {
     DIRECTIONS.forEach(direction => {
       const coords = this.getCoordsInDirection(from, direction, distance)
       if (this.isWithinGrid(coords)) {
-        callbackFn({ ...coords, value: this.getValue(coords) })
+        callbackFn({...coords, value: this.getValue(coords)})
       }
     })
   }
@@ -94,25 +94,25 @@ export class Grid2d<T = any> {
   getCoordsInDirection(from: Coords, direction: Direction, distance = 1) {
     switch (direction) {
       case UP:
-        return { x: from.x, y: from.y - distance }
+        return {x: from.x, y: from.y - distance}
       case DOWN:
-        return { x: from.x, y: from.y + distance }
+        return {x: from.x, y: from.y + distance}
       case LEFT:
-        return { x: from.x - distance, y: from.y }
+        return {x: from.x - distance, y: from.y}
       case RIGHT:
-        return { x: from.x + distance, y: from.y }
+        return {x: from.x + distance, y: from.y}
     }
   }
 
-  isPointEdge({ x, y }: Coords) {
+  isPointEdge({x, y}: Coords) {
     return x === 0 || x === this.lastX || y === 0 || y === this.lastY
   }
 
-  isWithinGrid({ x, y }: Coords) {
+  isWithinGrid({x, y}: Coords) {
     return this.grid[y]?.[x] !== undefined
   }
 
-  getValue({ x, y }: Coords) {
+  getValue({x, y}: Coords) {
     return this.grid[y][x]
   }
 

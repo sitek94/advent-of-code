@@ -1,5 +1,5 @@
-import { log } from '../../utils'
-import { run } from '~/runner'
+import {log} from '../../utils'
+import {run} from '~/runner'
 
 function solve(input: string) {
   let score = 0

@@ -1,5 +1,5 @@
 import kleur from 'kleur'
-import { existsSync, statSync, writeFileSync } from 'fs'
+import {existsSync, statSync, writeFileSync} from 'fs'
 
 const AOC_API_URL = 'https://adventofcode.com'
 const AOC_SESSION_KEY = Bun.env.AOC_SESSION_KEY

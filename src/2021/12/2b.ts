@@ -9,7 +9,7 @@
  * it.
  */
 
-import { run } from '~/runner'
+import {run} from '~/runner'
 
 function solve(input) {
   let graph = {}

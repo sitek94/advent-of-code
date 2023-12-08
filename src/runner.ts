@@ -7,9 +7,9 @@
  * https://github.com/caderek/aocrunner
  */
 
-import { stripIndent } from 'common-tags'
+import {stripIndent} from 'common-tags'
 import getCallerFile from 'get-caller-file'
-import { toFixed } from './utils'
+import {toFixed} from './utils'
 import path from 'path'
 import fs from 'fs'
 import kleur from 'kleur'
@@ -75,7 +75,7 @@ async function runSolve(solve: SolveFn, input: string) {
   console.log(`\nSolved in ${toFixed(time)}ms:`)
   console.dir(result)
 
-  return { result, time }
+  return {result, time}
 }
 
 type Test = {
@@ -104,7 +104,7 @@ async function runTests(
   currentDir: string,
 ) {
   for (let i = 0; i < tests.length; i++) {
-    let { name, input, expected, useOriginalInput } = tests[i]
+    let {name, input, expected, useOriginalInput} = tests[i]
     const useTestTxt = !useOriginalInput && !input
 
     if (useTestTxt) {

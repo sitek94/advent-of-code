@@ -1,11 +1,11 @@
-import { run } from '~/runner'
-import { range } from '~/utils'
+import {run} from '~/runner'
+import {range} from '~/utils'
 
 let data = require('fs')
-  .readFileSync(__dirname + '/input.txt', { encoding: 'utf-8' })
+  .readFileSync(__dirname + '/input.txt', {encoding: 'utf-8'})
   .trim()
 
-type Packet = { type: number; version: number }
+type Packet = {type: number; version: number}
 
 function parsePacket(data: string, cb: (p: Packet) => void) {
   let bits = data.split('')
@@ -13,8 +13,8 @@ function parsePacket(data: string, cb: (p: Packet) => void) {
   let version = parseInt(readBits(3), 2)
   let type = parseInt(readBits(3), 2)
 
-  console.log({ type, version })
-  cb({ type, version })
+  console.log({type, version})
+  cb({type, version})
   // Packets with type ID 4 represent a LITERAL VALUE
   if (type === 4) {
     let value = ''
@@ -31,7 +31,7 @@ function parsePacket(data: string, cb: (p: Packet) => void) {
       }
     }
 
-    let packet = { version, type, value: parseInt(value, 2) }
+    let packet = {version, type, value: parseInt(value, 2)}
 
     return packet
 
@@ -92,7 +92,7 @@ function parsePacket(data: string, cb: (p: Packet) => void) {
 
 function solve(input) {
   let binaries = toBinary(input)
-  console.log({ binaries })
+  console.log({binaries})
   let totalVersion = 0
   parsePacket(binaries, p => {
     totalVersion += p.version

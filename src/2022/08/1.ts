@@ -1,5 +1,5 @@
-import { run } from '~/runner'
-import { Direction, Grid2d, Point, DIRECTIONS } from '../../utils/grid2d'
+import {run} from '~/runner'
+import {Direction, Grid2d, Point, DIRECTIONS} from '../../utils/grid2d'
 
 function solve(input: string) {
   const grid = new Grid2d(input.split('\n').map(l => l.split('').map(Number)))
@@ -21,7 +21,7 @@ function solve(input: string) {
     grid.forEachPointInDirection(
       direction,
       point,
-      ({ value }) => {
+      ({value}) => {
         if (point.value <= value) {
           visible = false
         }

@@ -4,7 +4,7 @@ import getCallerFile from 'get-caller-file'
 import util from 'util'
 
 export function range(n: number) {
-  return Array.from({ length: n }, (_, i) => i)
+  return Array.from({length: n}, (_, i) => i)
 }
 
 export function sum(numbers: number[]) {
@@ -43,6 +43,6 @@ export function isArray(x: any): x is any[] {
 
 export const log = (...args: any[]) => {
   console.log(
-    util.inspect(args, { showHidden: false, depth: null, colors: true }),
+    util.inspect(args, {showHidden: false, depth: null, colors: true}),
   )
 }

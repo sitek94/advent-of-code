@@ -1,5 +1,5 @@
-import { run } from '~/runner'
-import { max, min, range } from '../../utils'
+import {run} from '~/runner'
+import {max, min, range} from '../../utils'
 import countBy from 'lodash/countby'
 
 function solve(input: string) {

@@ -136,7 +136,7 @@ function createNode(n: any, parent: Node, depth = 0): Node {
   }
 }
 
-function tryToExplode(node: Node, state: { hasExploded: boolean }) {
+function tryToExplode(node: Node, state: {hasExploded: boolean}) {
   if (state.hasExploded) {
     return true
   }
@@ -158,7 +158,7 @@ function tryToExplode(node: Node, state: { hasExploded: boolean }) {
 }
 
 function log(sth: any) {
-  console.log(util.inspect(sth, { depth: 5, colors: true }))
+  console.log(util.inspect(sth, {depth: 5, colors: true}))
 }
 
 export {}
@@ -177,10 +177,10 @@ function explode(node: Node) {
 }
 const rootNode = createNode(data, null)
 log(rootNode)
-const hasExploded = tryToExplode(rootNode, { hasExploded: false })
+const hasExploded = tryToExplode(rootNode, {hasExploded: false})
 log(rootNode)
-console.log({ hasExploded })
+console.log({hasExploded})
 if (hasExploded) {
-  let again = tryToExplode(rootNode, { hasExploded: false })
-  console.log({ again })
+  let again = tryToExplode(rootNode, {hasExploded: false})
+  console.log({again})
 }

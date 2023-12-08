@@ -1,4 +1,4 @@
-import { run } from '~/runner'
+import {run} from '~/runner'
 
 const CARDS = ['2', '3', '4', '5', '6', '7', '8', '9', 'T', 'J', 'Q', 'K', 'A']
 
@@ -6,19 +6,25 @@ const isFiveOfAKind = (cards: string[]) =>
   cards.every(card => card === cards[0])
 
 const isFourOfAKind = (cards: string[]) => {
-  const cardCounts = cards.reduce((acc, card) => {
-    acc[card] = acc[card] ? acc[card] + 1 : 1
-    return acc
-  }, {} as Record<string, number>)
+  const cardCounts = cards.reduce(
+    (acc, card) => {
+      acc[card] = acc[card] ? acc[card] + 1 : 1
+      return acc
+    },
+    {} as Record<string, number>,
+  )
 
   return Object.values(cardCounts).includes(4)
 }
 
 const isFullHouse = (cards: string[]) => {
-  const cardCounts = cards.reduce((acc, card) => {
-    acc[card] = acc[card] ? acc[card] + 1 : 1
-    return acc
-  }, {} as Record<string, number>)
+  const cardCounts = cards.reduce(
+    (acc, card) => {
+      acc[card] = acc[card] ? acc[card] + 1 : 1
+      return acc
+    },
+    {} as Record<string, number>,
+  )
 
   return (
     Object.values(cardCounts).includes(3) &&
@@ -27,28 +33,37 @@ const isFullHouse = (cards: string[]) => {
 }
 
 const isThreeOfAKind = (cards: string[]) => {
-  const cardCounts = cards.reduce((acc, card) => {
-    acc[card] = acc[card] ? acc[card] + 1 : 1
-    return acc
-  }, {} as Record<string, number>)
+  const cardCounts = cards.reduce(
+    (acc, card) => {
+      acc[card] = acc[card] ? acc[card] + 1 : 1
+      return acc
+    },
+    {} as Record<string, number>,
+  )
 
   return Object.values(cardCounts).includes(3)
 }
 
 const isTwoPairs = (cards: string[]) => {
-  const cardCounts = cards.reduce((acc, card) => {
-    acc[card] = acc[card] ? acc[card] + 1 : 1
-    return acc
-  }, {} as Record<string, number>)
+  const cardCounts = cards.reduce(
+    (acc, card) => {
+      acc[card] = acc[card] ? acc[card] + 1 : 1
+      return acc
+    },
+    {} as Record<string, number>,
+  )
 
   return Object.values(cardCounts).filter(count => count === 2).length === 2
 }
 
 const isPair = (cards: string[]) => {
-  const cardCounts = cards.reduce((acc, card) => {
-    acc[card] = acc[card] ? acc[card] + 1 : 1
-    return acc
-  }, {} as Record<string, number>)
+  const cardCounts = cards.reduce(
+    (acc, card) => {
+      acc[card] = acc[card] ? acc[card] + 1 : 1
+      return acc
+    },
+    {} as Record<string, number>,
+  )
 
   return Object.values(cardCounts).includes(2)
 }
@@ -72,7 +87,7 @@ function solve(input: string) {
     .map(line => {
       const [hand, bid] = line
 
-      return { hand: hand.split(''), bid: +bid }
+      return {hand: hand.split(''), bid: +bid}
     })
 
   console.log(lines)

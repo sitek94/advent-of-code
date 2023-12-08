@@ -1,5 +1,5 @@
-import { partOne, partTwo } from './solution'
-import { exampleRawInput, realRawInput, parseInput } from './input'
+import {partOne, partTwo} from './solution'
+import {exampleRawInput, realRawInput, parseInput} from './input'
 
 const realInput = parseInput(realRawInput)
 const exampleInput = parseInput(exampleRawInput)

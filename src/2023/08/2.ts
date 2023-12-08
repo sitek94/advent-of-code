@@ -1,18 +1,18 @@
-import { lcms } from '~/utils/lcm'
-import { run } from '~/runner'
+import {lcms} from '~/utils/lcm'
+import {run} from '~/runner'
 
 function solve(input: string) {
   const [instructionsRaw, lines] = input.split('\n\n')
   const instructions = instructionsRaw.split('')
 
-  const map = {} as Record<string, { left: string; right: string }>
+  const map = {} as Record<string, {left: string; right: string}>
 
   lines.split('\n').forEach(line => {
     const [key, values] = line.split(' = (')
     const left = values.slice(0, 3)
     const right = values.slice(5, 8)
 
-    map[key] = { left, right }
+    map[key] = {left, right}
   })
 
   let current = Object.keys(map).filter(key => key[2] === 'A')

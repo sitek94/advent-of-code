@@ -1,4 +1,4 @@
-import { run } from '~/runner'
+import {run} from '~/runner'
 
 /**
  *  ⚠️ This solution is super slow, it took ~10 minutes to run. But it's

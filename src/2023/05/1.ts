@@ -1,5 +1,5 @@
-import { log } from '../../utils'
-import { run } from '~/runner'
+import {log} from '../../utils'
+import {run} from '~/runner'
 
 function solve(input: string) {
   const seeds = input.split('\n')[0].split('seeds: ')[1].split(' ').map(Number)
@@ -30,7 +30,7 @@ function solve(input: string) {
     | 'humidity-to-location'
 
   const mapsMap = {} as Record<MapName, (seed: number) => number>
-  const maps = [] as { name: MapName; fn: (seed: number) => number }[]
+  const maps = [] as {name: MapName; fn: (seed: number) => number}[]
 
   input
     .split('\n\n')
@@ -55,7 +55,7 @@ function solve(input: string) {
       }
 
       mapsMap[name] = mapFn
-      maps.push({ name: name as MapName, fn: mapFn })
+      maps.push({name: name as MapName, fn: mapFn})
     })
 
   const findLocation = (seed: number) => {

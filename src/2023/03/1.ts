@@ -1,11 +1,11 @@
-import { run } from '~/runner'
+import {run} from '~/runner'
 import util from 'util'
 
 const isDigit = (c: string) => c >= '0' && c <= '9'
 const isSymbol = (c: string) => c !== undefined && c !== '.'
 const log = (...args: any[]) => {
   console.log(
-    util.inspect(args, { showHidden: false, depth: null, colors: true }),
+    util.inspect(args, {showHidden: false, depth: null, colors: true}),
   )
 }
 
@@ -14,7 +14,7 @@ function solve(input: string) {
 
   type PotentialPart = {
     number: string
-    coords: { x: number; y: number }[]
+    coords: {x: number; y: number}[]
   }
 
   const grid = []
@@ -28,15 +28,15 @@ function solve(input: string) {
     line.split('').forEach((char, x) => {
       if (isDigit(char)) {
         number += char
-        coords.push({ x, y })
+        coords.push({x, y})
       } else if (number.length) {
-        parts.push({ number, coords })
+        parts.push({number, coords})
         number = ''
         coords = []
 
         // Consider last number in line
       } else if (x === line.length - 1 && number.length) {
-        parts.push({ number, coords })
+        parts.push({number, coords})
         number = ''
         coords = []
       }
@@ -45,10 +45,10 @@ function solve(input: string) {
 
   let score = 0
 
-  parts.forEach(({ coords, number }) => {
+  parts.forEach(({coords, number}) => {
     let isValid = false
 
-    coords.forEach(({ x, y }, i) => {
+    coords.forEach(({x, y}, i) => {
       if (isValid) return
 
       // first coord

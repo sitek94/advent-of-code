@@ -1,5 +1,5 @@
-import { getBitCountsAtIndex, partOne, partTwo } from './solution'
-import { exampleRawInput, parseInput, realRawInput } from './input'
+import {getBitCountsAtIndex, partOne, partTwo} from './solution'
+import {exampleRawInput, parseInput, realRawInput} from './input'
 
 const exampleInput = parseInput(exampleRawInput)
 const realInput = parseInput(realRawInput)
@@ -29,7 +29,7 @@ test('getBitCountsAtIndex works', () => {
       '1000',
       '1000',
     ], 0),
-  ).toEqual({ ones: 4, zeros: 0 })
+  ).toEqual({ones: 4, zeros: 0})
 
   expect(
     // prettier-ignore
@@ -39,5 +39,5 @@ test('getBitCountsAtIndex works', () => {
       '0000',
       '0100',
     ], 1),
-  ).toEqual({ ones: 2, zeros: 2 })
+  ).toEqual({ones: 2, zeros: 2})
 })

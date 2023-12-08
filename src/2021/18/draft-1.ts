@@ -1,5 +1,5 @@
-import { run } from '~/runner'
-import { range } from '~/utils'
+import {run} from '~/runner'
+import {range} from '~/utils'
 
 type N = Pair | number
 type Pair = [number | N, number | N]
