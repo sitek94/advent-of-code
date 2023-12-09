@@ -9,10 +9,14 @@ Generate challenge files:
 ```shell
 bun g [day] [year]
 
-# Example
-bun g # Generate today's challenge files
-bun g 12 # Generate day 12 of this year's challenge files
-bun g 8 2019 # Generate day 8 of 2019's challenge files
+# Generate today's challenge files
+bun g
+
+# Generate day 12 of this year's challenge files
+bun g 12
+
+# Generate day 8 of 2019's challenge files
+bun g 8 2019
 ```
 
 Run challenge:
@@ -20,15 +24,37 @@ Run challenge:
 ```shell
 bun <part> [day] [year]
 
-# Example
-bun 1 # Run part 1 of today's challenge
-bun 2 # Run part 2 of day 1 of this year
-bun 1 12 # Run part 1 of day 12 of this year
-bun 2 8 2019 # Run part 2 of day 8 of 2019
+# Run part 1 or 2 of today's challenge
+bun 1
+bun 2
+
+# Run part 1 of day 12 of this year
+bun 1 12
+
+# Run part 2 of day 8 of 2019
+bun 2 8 2019
+```
+
+Use flags:
+
+```shell
+# Use only main input
+bun 1f
+
+# Use only test input
+bun 1t
 ```
 
 Run tests for some utility functions:
 
 ```shell
 bun test
+```
+
+## Even shorter scripts?
+
+Set alias for Bun:
+
+```shell
+alias b="bun"
 ```

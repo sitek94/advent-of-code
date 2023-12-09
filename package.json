@@ -5,6 +5,10 @@
   "scripts": {
     "1": "./scripts/cli.sh 1",
     "2": "./scripts/cli.sh 2",
+    "1f": "./scripts/cli.sh 1f",
+    "1t": "./scripts/cli.sh 1t",
+    "2f": "./scripts/cli.sh 2f",
+    "2t": "./scripts/cli.sh 2t",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "g": "bun ./scripts/day.ts",
     "test": "bun test"

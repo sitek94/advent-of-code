@@ -21,13 +21,6 @@
 # src/<year>/<day>/<part>.ts
 # e.g., src/2023/12/1.ts for the first part of the challenge on the 12th day of 2023.
 
-# Checking input and printing usage
-if [ -z "$1" ] || ([ "$1" -ne 1 ] && [ "$1" -ne 2 ]) || (! [[ $2 =~ ^[0-9]+$ ]] && [ -n "$2" ]) || (! [[ $3 =~ ^[0-9]+$ ]] && [ -n "$3" ]); then
-  echo "Invalid usage. Please follow the format: bun <part> [day] [year]"
-  echo "Refer to the script comments for more details on usage."
-  exit 1
-fi
-
 # Get current day and year
 get_current_date() {
   echo $(date +%Y) $(date +%d)
@@ -35,6 +28,18 @@ get_current_date() {
 
 # Parse command line arguments
 part=$1
+flag=""
+
+if [ "${1: -1}" == "t" ]; then
+  part=${1%t}
+  flag="--test"
+fi
+if [ "${1: -1}" == "f" ]; then
+  part=${1%f}
+  flag="--final"
+fi
+
+
 day=${2:-$(get_current_date | cut -d' ' -f2)}
 year=${3:-$(get_current_date | cut -d' ' -f1)}
 
@@ -50,7 +55,8 @@ file_path="src/$year/$day/$part.ts"
 # Check if file exists and run it
 if [ -f $file_path ]; then
   echo "Running $file_path..."
-  bun $file_path
+  echo ""
+  bun $file_path $flag
 else
   echo "File $file_path does not exist."
 fi
