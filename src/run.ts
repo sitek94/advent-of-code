@@ -1,5 +1,5 @@
-import kleur from 'kleur'
 import {toFixed} from '~/utils'
+import {logger} from './utils/logger'
 
 const args = Bun.argv.slice(2)
 
@@ -39,14 +39,14 @@ const runTests = async ({tests, solve}: {tests: Test[]; solve: SolveFn}) => {
     const testName = `Test ${i + 1}`
 
     if (result === test.expected) {
-      console.log(kleur.green(`${testName} - passed ${time}`))
+      logger.success(`${testName} - passed ${time}`)
     } else {
-      console.log(kleur.red(`${testName} - failed ${time}`))
-      console.log(`\nResult:`)
-      console.dir(result)
-      console.log(`\nExpected:`)
-      console.dir(test.expected)
-      console.log()
+      logger.error(`${testName} - failed ${time}`)
+      logger.log(`\nResult:`)
+      logger.dir(result)
+      logger.log(`\nExpected:`)
+      logger.dir(test.expected)
+      logger.log()
     }
   })
 }

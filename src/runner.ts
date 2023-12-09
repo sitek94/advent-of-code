@@ -12,7 +12,7 @@ import getCallerFile from 'get-caller-file'
 import {toFixed} from './utils'
 import path from 'path'
 import fs from 'fs'
-import kleur from 'kleur'
+import {logger} from './utils/logger'
 
 type Solution = {
   tests?: Test[]
@@ -32,15 +32,13 @@ export function run(solution: Solution, inputFile?: string) {
   let inputFilePath = path.join(currentDir, inputFile || 'input.txt')
 
   if (!fs.existsSync(inputFilePath)) {
-    console.log(
-      kleur.red(
-        stripIndent(`
+    logger.error(
+      stripIndent(`
         There is no "input.txt" file in the solution directory!
         
         Please add the file or specify custom file location
         via the second argument of the \`run\` function.
       `),
-      ),
     )
     return
   }
@@ -125,14 +123,14 @@ async function runTests(
     const testName = `Test ${i + 1}${name ? `, ${name}` : ''}`
 
     if (result === expected) {
-      console.log(kleur.green(`${testName} - passed`))
+      logger.success(`${testName} - passed`)
     } else {
-      console.log(kleur.red(`${testName} - failed`))
-      console.log(`\nResult:`)
-      console.dir(result)
-      console.log(`\nExpected:`)
-      console.dir(expected)
-      console.log()
+      logger.error(`${testName} - failed`)
+      logger.log(`\nResult:`)
+      logger.dir(result)
+      logger.log(`\nExpected:`)
+      logger.dir(expected)
+      logger.log()
     }
   }
 }
