@@ -1,4 +1,4 @@
-import {run} from '~/runner'
+import {run} from '~/run'
 
 const isAllZero = (arr: number[]) => arr.every(n => n === 0)
 
@@ -35,9 +35,12 @@ run({
   solve,
   tests: [
     {
-      input: ``,
+      input: `test.txt`,
       expected: 114,
     },
+    {
+      input: `input.txt`,
+      expected: 2174807968,
+    },
   ],
-  onlyTests: false,
 })

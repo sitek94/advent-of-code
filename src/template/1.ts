@@ -1,4 +1,4 @@
-import {run} from '~/runner'
+import {run} from '~/run'
 
 function solve(input: string) {
   return 'solution'
@@ -8,9 +8,13 @@ run({
   solve,
   tests: [
     {
-      input: ``,
-      expected: 10,
+      input: 'test.txt',
+      expected: '',
+    },
+    {
+      input: 'input.txt',
+      expected: '',
     },
   ],
-  onlyTests: true,
 })
+    

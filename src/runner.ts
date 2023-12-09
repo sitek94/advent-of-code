@@ -22,6 +22,9 @@ type Solution = {
 
 type SolveFn = (input: string) => string | number | void
 
+/**
+ * @deprecated Use `~/run` instead
+ */
 export function run(solution: Solution, inputFile?: string) {
   let currentFile = getCallerFile()
   let currentDir = path.dirname(currentFile)
