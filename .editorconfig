@@ -1,2 +1,4 @@
+# Prevent empty new lines in input files for exercises, so that
+# they format is consistent.
 [*.txt]
     insert_final_newline = false

@@ -38,7 +38,7 @@ bun 2 8 2019
 Use flags:
 
 ```shell
-# Use only main input
+# Use only final input
 bun 1f
 
 # Use only test input
@@ -53,7 +53,7 @@ bun test
 
 ## Even shorter scripts?
 
-Set alias for Bun:
+Set alias for Bun in your shell config file (e.g. `.bashrc` or `.zshrc`):
 
 ```shell
 alias b="bun"
