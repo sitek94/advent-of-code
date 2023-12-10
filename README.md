@@ -38,11 +38,14 @@ bun 2 8 2019
 Use flags:
 
 ```shell
-# Use only final input
+# No flags (default) - uses only test input
+bun 1
+
+# f — final - uses only final input
 bun 1f
 
-# Use only test input
-bun 1t
+# a — all - uses both test and final input
+bun 1a
 ```
 
 Run tests for some utility functions:
