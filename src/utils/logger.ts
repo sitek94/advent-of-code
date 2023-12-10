@@ -15,7 +15,3 @@ export const logger = {
 
   bold: kleur.bold,
 }
-
-logger.warn('This is a warning')
-logger.error('This is a warning')
-logger.success('This is a warning')
