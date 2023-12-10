@@ -1,5 +1,5 @@
 import {lcms} from '~/utils/lcm'
-import {run} from '~/runner'
+import {run} from '~/run'
 
 function solve(input: string) {
   const [instructionsRaw, lines] = input.split('\n\n')
@@ -39,13 +39,12 @@ run({
   solve,
   tests: [
     {
-      input: ``,
+      input: `test2.txt`,
       expected: 6,
     },
     {
-      useOriginalInput: true,
+      input: `input.txt`,
       expected: 21003205388413,
     },
   ],
-  onlyTests: false,
 })

@@ -1,4 +1,4 @@
-import {run} from '~/runner'
+import {run} from '~/run'
 
 function solve(input: string) {
   const [instructions, lines] = input.split('\n\n')
@@ -30,9 +30,12 @@ run({
   solve,
   tests: [
     {
-      useOriginalInput: true,
+      input: 'test.txt',
+      expected: 2,
+    },
+    {
+      input: 'input.txt',
       expected: 19631,
     },
   ],
-  onlyTests: false,
 })

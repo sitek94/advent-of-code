@@ -61,3 +61,8 @@ Set alias for Bun in your shell config file (e.g. `.bashrc` or `.zshrc`):
 ```shell
 alias b="bun"
 ```
+
+## Notes
+
+- 2023: 9 — Least Common Multiple (LCM) + Greatest Common Divisor (GCD)
+- 2023: 10 — Flood Fill + BFS
