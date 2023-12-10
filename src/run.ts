@@ -20,7 +20,7 @@ export const run = async ({
   tests?: Test[]
 }) => {
   if (isTest) {
-    tests = tests.filter(test => test.input === 'test.txt')
+    tests = tests.filter(test => test.input.includes('test'))
   }
   if (isFinal) {
     tests = tests.filter(test => test.input === 'input.txt')
