@@ -66,3 +66,4 @@ alias b="bun"
 
 - 2023: 9 — Least Common Multiple (LCM) + Greatest Common Divisor (GCD)
 - 2023: 10 — Flood Fill + BFS
+- 2023: 11 — Manhattan Distance
