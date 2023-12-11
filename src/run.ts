@@ -6,18 +6,19 @@ const args = Bun.argv.slice(2)
 const isTest = args.includes('--test')
 const isFinal = args.includes('--final')
 
-type SolveFn = (input: string) => string | number | void
-type Test = {
-  input: string
-  expected: string | number
-}
+type SolveFn<TAnswer, TOptions> = (input: string, options: TOptions) => TAnswer
 
-export const run = async ({
+type Test<TAnswer, TOptions> = {
+  input: string
+  expected: TAnswer
+} & TOptions
+
+export const run = async <TAnswer, TOptions>({
   solve,
   tests = [],
 }: {
-  solve: SolveFn
-  tests?: Test[]
+  solve: SolveFn<TAnswer, TOptions>
+  tests: Test<TAnswer, TOptions>[]
 }) => {
   if (isTest) {
     tests = tests.filter(test => test.input.includes('test'))
@@ -29,12 +30,18 @@ export const run = async ({
   await runTests({tests, solve})
 }
 
-const runTests = async ({tests, solve}: {tests: Test[]; solve: SolveFn}) => {
+const runTests = async <TAnswer, TOptions>({
+  tests,
+  solve,
+}: {
+  solve: SolveFn<TAnswer, TOptions>
+  tests: Test<TAnswer, TOptions>[]
+}) => {
   tests.forEach(async (test, i) => {
     const isInputFile = test.input.endsWith('.txt')
     const input = isInputFile ? await readInputFile(test.input) : test.input
 
-    const {result, time} = getRunningTime(() => solve(input))
+    const {result, time} = getRunningTime(() => solve(input, test))
 
     const testName = `Test ${i + 1}`
 
