@@ -1,6 +1,6 @@
 import {run} from '~/run'
 import {manhattanDistance} from '~/utils/manhattan-distance'
-import {abs, max, min} from '~/utils/math'
+import {max, min} from '~/utils/math'
 
 function solve(input: string, {factor}: {factor: number}) {
   const grid = input.split('\n').map(line => line.split(''))
