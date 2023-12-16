@@ -15,6 +15,8 @@
   },
   "prettier": "@sitek94/style-guide/prettier",
   "dependencies": {
+    "@astrojs/svelte": "^5.0.1",
+    "astro": "^4.0.6",
     "just-clone": "^6.2.0",
     "just-group-by": "^2.2.0",
     "just-range": "^4.2.0",
@@ -33,7 +35,7 @@
     "common-tags": "^1.8.2",
     "get-caller-file": "^2.0.5",
     "kleur": "^4.1.5",
-    "prettier": "^3.1.0",
+    "prettier": "^3.1.1",
     "typescript": "^5.3.3"
   }
 }

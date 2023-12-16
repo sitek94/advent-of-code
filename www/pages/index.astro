@@ -1,0 +1,61 @@
+---
+import range from 'just-range'
+import {max} from '~/utils/math'
+
+const maximum = max(1, 2, 3, 4, 5)
+
+const grid = range(5).map(() => range(5).map(() => ''))
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <h1>Astro, max: {maximum}</h1>
+
+    <style>
+      .grid-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 100vh;
+      }
+
+      .grid-row {
+        display: flex;
+      }
+
+      .grid-cell {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 50px;
+        background-color: lightgray;
+        margin: 5px;
+      }
+    </style>
+
+    <div class="grid-container">
+      {
+        grid.map(row => (
+          <div class="grid-row">
+            {row.map(cell => (
+              <div class="cell">
+                <span>{cell}</span>
+              </div>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+
+    <script></script>
+  </body>
+</html>

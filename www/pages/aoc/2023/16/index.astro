@@ -1,0 +1,12 @@
+---
+import Layout from '~/layouts/aoc.astro'
+import fs from 'fs'
+import Vis from './_vis.svelte'
+
+const url = new URL('./_test.txt', import.meta.url)
+const text = fs.readFileSync(url, 'utf-8')
+---
+
+<Layout>
+  <Vis input={text} client:only />
+</Layout>
