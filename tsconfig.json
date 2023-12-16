@@ -1,5 +1,5 @@
 {
-  "include": ["scripts/**/*", "puzzles/**/*", "utils/**/*", "www/**/*", "www"],
+  "include": ["scripts/**/*", "puzzles/**/*", "utils/**/*", "www/**/*"],
   "exclude": ["node_modules", ".astro"],
   "compilerOptions": {
     "lib": ["ESNext"],
@@ -20,12 +20,16 @@
     "types": [
       "bun-types" // add Bun global
     ],
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
+      "~": ["./www"],
+      "~/*": ["./www/*"],
       "~/run": ["puzzles/run.ts"],
       "~/puzzles*": ["puzzles/*"],
       "~/utils*": ["utils/*"],
-      "~/layouts*": ["www/layouts/*"]
+      "~/ui*": ["www/ui/*"],
+      "~/layouts*": ["www/layouts/*"],
+      "~/styles*": ["www/styles/*"]
     }
   }
 }
