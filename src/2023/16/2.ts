@@ -12,9 +12,15 @@ type Destination = '/' | '\\' | '|' | '-' | '.'
 
 function solve(input: string) {
   const grid = input.split('\n').map(line => line.split(''))
-  const start: Point = {x: -1, y: 0}
+  const starts = getStarts(grid)
 
-  return getScore(start, RIGHT, grid)
+  let max = 0
+
+  for (const [start, direction] of starts) {
+    max = Math.max(max, getScore(start, direction, grid))
+  }
+
+  return max
 }
 
 run({
@@ -22,7 +28,7 @@ run({
   tests: [
     {
       input: 'test.txt',
-      expected: 46,
+      expected: 51,
     },
     {
       input: 'input.txt',
@@ -30,6 +36,19 @@ run({
     },
   ],
 })
+
+const getStarts = (grid: string[][]) => {
+  const starts = [] as [Point, Direction][]
+  for (let x = 0; x < grid[0].length; x++) {
+    starts.push([{x, y: -1}, DOWN])
+    starts.push([{x, y: grid.length}, UP])
+  }
+  for (let y = 0; y < grid.length; y++) {
+    starts.push([{x: -1, y}, RIGHT])
+    starts.push([{x: grid[0].length, y}, LEFT])
+  }
+  return starts
+}
 
 const getScore = (start: Point, direction: Direction, grid: string[][]) => {
   const visited = new Map<string, boolean>()
