@@ -7,8 +7,8 @@ export function getChallenge(day: number, year: number) {
   let yearStr = String(year)
   let dayStr = `${String(day).padStart(2, '0')}`
 
-  let templateDir = path.join('src', 'template')
-  let dayDir = path.join('src', yearStr, dayStr)
+  let templateDir = path.join('puzzles', 'template')
+  let dayDir = path.join('puzzles', yearStr, dayStr)
 
   // Create directory if doesn't exist
   if (!fs.existsSync(dayDir)) {

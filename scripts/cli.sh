@@ -18,8 +18,8 @@
 # bun 2 15 2022 - Runs the second part of the challenge on the 15th day of 2022.
 
 # File Path Format:
-# src/<year>/<day>/<part>.ts
-# e.g., src/2023/12/1.ts for the first part of the challenge on the 12th day of 2023.
+# puzzles/<year>/<day>/<part>.ts
+# e.g., puzzles/2023/12/1.ts for the first part of the challenge on the 12th day of 2023.
 
 # Get current day and year
 get_current_date() {
@@ -50,7 +50,7 @@ day=$(echo $day | sed 's/^0*//')
 day=$(printf "%02d" $day)
 
 # Construct file path
-file_path="src/$year/$day/$part.ts"
+file_path="puzzles/$year/$day/$part.ts"
 
 # Check if file exists and run it
 if [ -f $file_path ]; then

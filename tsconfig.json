@@ -1,4 +1,6 @@
 {
+  "include": ["scripts/**/*", "puzzles/**/*", "utils/**/*", "www/**/*", "www"],
+  "exclude": ["node_modules", ".astro"],
   "compilerOptions": {
     "lib": ["ESNext"],
     "module": "esnext",
@@ -18,10 +20,12 @@
     "types": [
       "bun-types" // add Bun global
     ],
-
     "baseUrl": "./",
     "paths": {
-      "~/*": ["./src/*"]
+      "~/run": ["puzzles/run.ts"],
+      "~/puzzles*": ["puzzles/*"],
+      "~/utils*": ["utils/*"],
+      "~/layouts*": ["www/layouts/*"]
     }
   }
 }
