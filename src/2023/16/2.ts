@@ -32,7 +32,7 @@ run({
     },
     {
       input: 'input.txt',
-      expected: 7632,
+      expected: 8023,
     },
   ],
 })
