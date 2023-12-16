@@ -9,9 +9,13 @@
     "1f": "./scripts/cli.sh 1f",
     "2a": "./scripts/cli.sh 2",
     "2f": "./scripts/cli.sh 2f",
+    "build": "astro build",
+    "dev": "astro dev",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "g": "bun ./scripts/day.ts",
     "gui": "bunx shadcn-ui@latest add",
+    "preview": "astro preview",
+    "start": "astro dev",
     "test": "bun test"
   },
   "prettier": "@sitek94/style-guide/prettier",
