@@ -1,0 +1,10 @@
+---
+import MainLayout from '~/layouts/main.astro'
+
+import testInput from './_test.txt?raw'
+import Vis from './_vis.svelte'
+---
+
+<MainLayout>
+  <Vis input={testInput} client:only />
+</MainLayout>

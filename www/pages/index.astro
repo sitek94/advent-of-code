@@ -1,14 +1,58 @@
 ---
+import unique from 'just-unique'
 import MainLayout from '~/layouts/main.astro'
+import {Button} from '~/ui/button'
 import * as Typography from '~/ui/typography'
+
+const puzzles = (await Astro.glob('./**/*.astro')).map(({url}) => {
+  if (!url) {
+    throw new Error('No URL found')
+  }
+
+  const segments = url.split('/')
+  const year = segments.at(-2)!
+  const day = segments.at(-1)!
+
+  return {
+    url,
+    year,
+    day,
+  }
+})
+
+const years = unique(puzzles.map(({year}) => year))
 ---
 
 <MainLayout>
-  <header class="max-w-prose mx-auto mt-8">
-    <Typography.H1 className="mb-4">Advent of Code 🎄</Typography.H1>
-    <Typography.Lead>
-      Welcome to my Advent of Code playground. I use this website to visualize
-      some challenges and algorithms I've been working on.
-    </Typography.Lead>
-  </header>
+  <div class="max-w-prose mx-auto">
+    <header class="my-8">
+      <Typography.H1 className="mb-4">Advent of Code 🎄</Typography.H1>
+      <Typography.Lead>
+        Welcome to my Advent of Code playground. I use this website to visualize
+        some challenges and algorithms I've been working on.
+      </Typography.Lead>
+    </header>
+    <main>
+      {
+        years.map(year => {
+          const yearPuzzles = puzzles.filter(puzzle => puzzle.year === year)
+
+          return (
+            <section>
+              <Typography.H2>{year}</Typography.H2>
+              <Typography.List>
+                {yearPuzzles.map(puzzle => (
+                  <Typography.ListItem>
+                    <Button variant="link" asChild>
+                      <a href={puzzle.url}>Day {puzzle.day}</a>
+                    </Button>
+                  </Typography.ListItem>
+                ))}
+              </Typography.List>
+            </section>
+          )
+        })
+      }
+    </main>
+  </div>
 </MainLayout>

@@ -35,3 +35,11 @@ export function Lead({className, children}: TypographyProps) {
     <p className={cn('text-xl text-muted-foreground', className)}>{children}</p>
   )
 }
+
+export function List({className, children}: TypographyProps) {
+  return <ul className="my-6 ml-6 list-disc [&>li]:mt-2">{children}</ul>
+}
+
+export function ListItem({className, children}: TypographyProps) {
+  return <li className={className}>{children}</li>
+}
