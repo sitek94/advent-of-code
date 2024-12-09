@@ -7,6 +7,10 @@ export function range(n: number) {
   return Array.from({length: n}, (_, i) => i)
 }
 
+export function repeat<T>(value: T, n: number) {
+  return Array.from({length: n}, () => value)
+}
+
 export function sum(numbers: number[]) {
   return numbers.reduce((a, b) => a + b, 0)
 }

@@ -46,7 +46,7 @@ run({
     },
     {
       input: 'input.txt',
-      expected: 100,
+      expected: 6301895872542,
     },
   ],
 })

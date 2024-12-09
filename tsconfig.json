@@ -26,7 +26,7 @@
       "~/*": ["./www/*"],
       "~/run": ["puzzles/run.ts"],
       "~/puzzles*": ["puzzles/*"],
-      "~/utils*": ["utils/*"],
+      "~/utils/*": ["utils/*"],
       "~/ui*": ["www/ui/*"],
       "~/layouts*": ["www/layouts/*"],
       "~/styles*": ["www/styles/*"]

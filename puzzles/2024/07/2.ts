@@ -6,7 +6,6 @@ function solve(input: string) {
   let score = 0
 
   for (const line of lines) {
-    console.log(line)
     const [testValue, ...numbers] = line
       .split(': ')
       .map(p => p.split(' '))
@@ -27,11 +26,11 @@ run({
   tests: [
     {
       input: 'test.txt',
-      expected: 100,
+      expected: 11387,
     },
     {
       input: 'input.txt',
-      expected: 100,
+      expected: 286580387663654,
     },
   ],
 })
