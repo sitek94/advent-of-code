@@ -1,29 +1,29 @@
 import {run} from '~/run'
 
 function solve(input: string) {
-  let newString = ''
+  const disk: number[] = []
 
-  let id = 0
+  let fileId = 0
 
   input
     .split('')
     .map(Number)
-    .forEach((n, i) => {
+    .forEach((length, i) => {
       let isFile = i % 2 === 0
-      newString += `${isFile ? id : '.'}`.repeat(n)
-      if (isFile) id++
+      for (let j = 0; j < length; j++) {
+        disk.push(isFile ? fileId : -1)
+      }
+      if (isFile) fileId++
     })
 
-  const arr = newString.split('')
-  console.log(arr.join(''))
   let first = 0
-  let last = arr.length - 1
+  let last = disk.length - 1
 
   while (first !== last) {
-    if (arr[first] === '.') {
-      if (arr[last] !== '.') {
-        arr[first] = arr[last]
-        arr[last] = '.'
+    if (disk[first] === -1) {
+      if (disk[last] !== -1) {
+        disk[first] = disk[last]
+        disk[last] = -1
       }
       last--
     } else {
@@ -31,7 +31,7 @@ function solve(input: string) {
     }
   }
 
-  const final = arr.filter(i => i !== '.').map(Number)
+  const final = disk.filter(i => i !== -1)
   const checksum = final.reduce((acc, n, i) => acc + n * i, 0)
 
   return checksum
