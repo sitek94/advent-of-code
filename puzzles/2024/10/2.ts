@@ -75,11 +75,11 @@ run({
   tests: [
     {
       input: 'test.txt',
-      expected: 100,
+      expected: 81,
     },
     {
       input: 'input.txt',
-      expected: 100,
+      expected: 1764,
     },
   ],
 })
