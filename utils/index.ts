@@ -45,8 +45,12 @@ export function isArray(x: any): x is any[] {
   return Array.isArray(x)
 }
 
-export const log = (...args: any[]) => {
+export function log(...args: any[]) {
   console.log(
     util.inspect(args, {showHidden: false, depth: null, colors: true}),
   )
+}
+
+export function printGrid(grid: (string | number)[][]) {
+  console.log(grid.map(row => row.join('')).join('\n'))
 }
