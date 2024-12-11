@@ -54,3 +54,11 @@ export function log(...args: any[]) {
 export function printGrid(grid: (string | number)[][]) {
   console.log(grid.map(row => row.join('')).join('\n'))
 }
+
+export function isEven(n: number) {
+  return n % 2 === 0
+}
+
+export function isOdd(n: number) {
+  return n % 2 !== 0
+}
