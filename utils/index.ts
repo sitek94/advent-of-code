@@ -62,3 +62,7 @@ export function isEven(n: number) {
 export function isOdd(n: number) {
   return n % 2 !== 0
 }
+
+export function isInteger(n: number) {
+  return Number.isInteger(n)
+}

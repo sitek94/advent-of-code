@@ -7,14 +7,7 @@ function solve(input: string) {
 run({
   solve,
   tests: [
-    {
-      input: 'test.txt',
-      expected: 100,
-    },
-    {
-      input: 'input.txt',
-      expected: 100,
-    },
+    {input: 'test.txt', expected: 100},
+    {input: 'input.txt', expected: 100},
   ],
 })
-    
