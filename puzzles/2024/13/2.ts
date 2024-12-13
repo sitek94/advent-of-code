@@ -7,7 +7,14 @@ function solve(input: string) {
   let score = 0
 
   for (const [[ax, ay], [bx, by], [prizeX, prizeY]] of machines) {
-    const [solutions] = findSolutions(ax, bx, ay, by, prizeX, prizeY)
+    const [solutions] = findSolutions(
+      ax,
+      bx,
+      ay,
+      by,
+      prizeX + 10000000000000,
+      prizeY + 10000000000000,
+    )
     if (solutions?.length) {
       const [a, b] = solutions
 
@@ -21,8 +28,8 @@ function solve(input: string) {
 run({
   solve,
   tests: [
-    {input: 'test.txt', expected: 480},
-    {input: 'input.txt', expected: 32026},
+    {input: 'test.txt', expected: 875318608908},
+    {input: 'input.txt', expected: 89013607072065},
   ],
 })
 
@@ -35,19 +42,16 @@ function findSolutions(
   prizeY: number,
 ) {
   const solutions = [] as [number, number][]
-  // a * ax + b * bx = prizeX
-  // a * ay + b * by = prizeY
-  // a,b > 0 && is integer
-  range(100).forEach(i => {
-    let a = i + 1
-    let b = (prizeX - a * ax) / bx
-    if (isInteger(b) && b > 0) {
-      const isOk = a * ay + b * by === prizeY
-      if (isOk) {
-        solutions.push([a, b])
-      }
+
+  const D = ax * by - ay * bx
+  if (D !== 0) {
+    const a = (prizeX * by - prizeY * bx) / D
+    const b = (prizeY * ax - prizeX * ay) / D
+    if (isInteger(a) && isInteger(b) && a > 0 && b > 0) {
+      solutions.push([a, b])
     }
-  })
+  }
+
   return solutions
 }
 
