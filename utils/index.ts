@@ -66,3 +66,10 @@ export function isOdd(n: number) {
 export function isInteger(n: number) {
   return Number.isInteger(n)
 }
+/**
+ * Returns a positive modulo result, useful for wrapping values within a range
+ * (like screen coordinates or circular motion)
+ */
+export function modulo(value: number, range: number) {
+  return ((value % range) + range) % range
+}
