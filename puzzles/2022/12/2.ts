@@ -1,6 +1,6 @@
-import {run} from '~/runner'
-import {abs} from '../../../utils'
-import {PriorityQueue} from '../../../utils/priority-queue'
+import {run} from '~/run'
+import {abs} from '~/utils/index'
+import {PriorityQueue} from '~/utils/priority-queue'
 
 type Position = {x: number; y: number}
 type Point = {
@@ -94,9 +94,7 @@ function solve(input: string) {
     START.fScore = heuristic(START)
     START.gScore = 0
 
-    const openList = new PriorityQueue(
-      (a: Point, b: Point) => a.fScore < b.fScore,
-    )
+    const openList = new PriorityQueue([START], (a, b) => a.fScore < b.fScore)
 
     openList.enqueue(START)
 
@@ -151,11 +149,5 @@ function solve(input: string) {
 
 run({
   solve,
-  tests: [
-    {
-      expected: 454,
-      useOriginalInput: true,
-    },
-  ],
-  // onlyTests: true,
+  tests: [{expected: 454, input: 'input.txt'}],
 })

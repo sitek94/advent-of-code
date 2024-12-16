@@ -1,4 +1,4 @@
-import {run} from '~/runner'
+import {run} from '~/run'
 import {abs} from '../../../utils'
 import {PriorityQueue} from '../../../utils/priority-queue'
 
@@ -91,10 +91,9 @@ function solve(input: string) {
     START.gScore = 0
 
     const openList = new PriorityQueue(
+      [START],
       (a: Point, b: Point) => a.fScore < b.fScore,
     )
-
-    openList.enqueue(START)
 
     while (!openList.isEmpty()) {
       const current = openList.dequeue()
@@ -127,11 +126,5 @@ function solve(input: string) {
 
 run({
   solve,
-  tests: [
-    {
-      expected: 456,
-      useOriginalInput: true,
-    },
-  ],
-  // onlyTests: true,
+  tests: [{expected: 456, input: 'input.txt'}],
 })

@@ -1,7 +1,10 @@
 export class PriorityQueue<T> {
-  private collection: T[] = []
+  // private collection: T[] = []
 
-  constructor(private compare: (a: T, b: T) => boolean = (a, b) => a < b) {}
+  constructor(
+    private collection: T[] = [],
+    private compare: (a: T, b: T) => boolean = (a, b) => a < b,
+  ) {}
 
   enqueue(item: T) {
     let added = false
