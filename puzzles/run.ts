@@ -41,7 +41,8 @@ const runTests = async <TAnswer, TOptions>({
   solve: SolveFn<TAnswer, TOptions>
   tests: Test<TAnswer, TOptions>[]
 }) => {
-  tests.forEach(async (test, i) => {
+  for (let i = 0; i < tests.length; i++) {
+    const test = tests[i]
     const isInputFile = test.input.endsWith('.txt')
     const input = isInputFile ? await readInputFile(test.input) : test.input
 
@@ -59,7 +60,7 @@ const runTests = async <TAnswer, TOptions>({
       logger.dir(test.expected)
       logger.log()
     }
-  })
+  }
 }
 
 const getRunningTime = (fn: () => any) => {
