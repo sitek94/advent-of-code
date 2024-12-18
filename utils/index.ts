@@ -3,6 +3,8 @@ import path from 'path'
 import getCallerFile from 'get-caller-file'
 import util from 'util'
 
+export {default as unique} from 'just-unique'
+
 export function range(n: number) {
   return Array.from({length: n}, (_, i) => i)
 }
@@ -51,8 +53,12 @@ export function log(...args: any[]) {
   )
 }
 
-export function printGrid(grid: (string | number)[][]) {
-  console.log(grid.map(row => row.join('')).join('\n'))
+export function printGrid<T>(
+  grid: T[][],
+  serialize: (value: T) => string = String,
+) {
+  console.log(grid.map(row => row.map(serialize).join('')).join('\n'))
+  console.log()
 }
 
 export function isEven(n: number) {

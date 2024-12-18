@@ -1,6 +1,6 @@
 import {isNumber} from '../../../utils'
 import util from 'util'
-import {run} from '~/runner'
+import {run} from '~/run'
 
 type Node = {
   left: Node | null
@@ -209,5 +209,4 @@ run({
       expected: 4140,
     },
   ],
-  onlyTests: true,
 })
