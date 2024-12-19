@@ -15,7 +15,7 @@ run({
   solve,
   tests: [
     {input: 'test.txt', expected: 22, size: 7, bytes: 12},
-    {input: 'input.txt', expected: 70, size: 71, bytes: 1024},
+    {input: 'input.txt', expected: 334, size: 71, bytes: 1024},
   ],
 })
 
