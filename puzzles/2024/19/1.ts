@@ -18,7 +18,7 @@ run({
   solve,
   tests: [
     {input: 'test.txt', expected: 6},
-    {input: 'input.txt', expected: 100},
+    {input: 'input.txt', expected: 226},
   ],
 })
 
