@@ -61,6 +61,13 @@ export function printGrid<T>(
   console.log()
 }
 
+export function transformGrid<T>(
+  grid: T[][],
+  transform: (value: {x: number; y: number; value: T}) => string = String,
+) {
+  return grid.map((row, y) => row.map((value, x) => transform({value, x, y})))
+}
+
 export function isEven(n: number) {
   return n % 2 === 0
 }
@@ -79,3 +86,4 @@ export function isInteger(n: number) {
 export function modulo(value: number, range: number) {
   return ((value % range) + range) % range
 }
+
