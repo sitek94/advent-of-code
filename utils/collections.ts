@@ -49,5 +49,6 @@ export function createQueue<T>(initialValue: T[]) {
     isEmpty: () => q.length === 0,
     dequeue: () => q.shift(),
     enqueue: (item: T) => q.push(item),
+    size: () => q.length,
   }
 }
