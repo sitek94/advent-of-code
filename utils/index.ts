@@ -17,6 +17,10 @@ export function sum(numbers: number[]) {
   return numbers.reduce((a, b) => a + b, 0)
 }
 
+export function multiply(numbers: number[]) {
+  return numbers.reduce((a, b) => a * b, 1)
+}
+
 // d3-shape
 // https://github.com/d3/d3-shape/blob/main/src/math.js
 export const max = Math.max
@@ -86,4 +90,3 @@ export function isInteger(n: number) {
 export function modulo(value: number, range: number) {
   return ((value % range) + range) % range
 }
-
